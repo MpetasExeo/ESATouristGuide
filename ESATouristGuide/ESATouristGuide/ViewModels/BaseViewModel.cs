@@ -12,7 +12,7 @@ using Command = MvvmHelpers.Commands.Command;
 
 namespace ESATouristGuide.ViewModels
 {
-    public abstract class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged,IDisposable
     {
         /// <summary>
         /// The property changed.
@@ -27,6 +27,8 @@ namespace ESATouristGuide.ViewModels
         }
 
         string title = string.Empty;
+        private bool disposedValue;
+
         public string Title
         {
             get { return title; }
@@ -39,31 +41,12 @@ namespace ESATouristGuide.ViewModels
 
         public BaseViewModel()
         {
-            SkeletonCommand = new Command(async ( x ) =>
-            {
-                IsBusy = true;
-                await Task.Delay(4000).ConfigureAwait(false);
-                IsBusy = false;
-            });
-
+           
             BackCommand = new Command(( x ) =>
             {
                 Shell.Current.SendBackButtonPressed();
             });
         }
-
-        //protected bool SetProperty<T>(ref T backingStore, T value,
-        //    [CallerMemberName] string propertyName = "",
-        //    Action onChanged = null)
-        //{
-        //    if (EqualityComparer<T>.Default.Equals(backingStore, value))
-        //        return false;
-
-        //    backingStore = value;
-        //    onChanged?.Invoke();
-        //    OnPropertyChanged(propertyName);
-        //    return true;
-        //}
 
         public virtual void OnNavigated( object parameter )
         {
@@ -156,6 +139,35 @@ namespace ESATouristGuide.ViewModels
             property = value;
             RaisePropertyChanged(propertyName);
             return true;
+        }
+
+        protected virtual void Dispose( bool disposing )
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~BaseViewModel()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

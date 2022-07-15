@@ -15,8 +15,8 @@
     <ContentPage.Content>
         <Grid
             BackgroundColor="{StaticResource Primary}"
-            HorizontalOptions="Fill"
             ColumnDefinitions="0.075*,0.85*,0.075*"
+            HorizontalOptions="Fill"
             RowDefinitions="3*,4*,2*,2*"
             VerticalOptions="Fill">
 
@@ -48,21 +48,21 @@
             <Frame
                 Grid.Row="1"
                 Grid.Column="1"
+                Padding="0"
                 BackgroundColor="{StaticResource Secondary}"
                 BorderColor="{StaticResource Secondary}"
+                CornerRadius="12"
+                HasShadow="True"
                 HorizontalOptions="Fill"
-                Padding="3"
                 VerticalOptions="Fill">
                 <Image
                     Aspect="AspectFill"
-                    Source="i1.jpg"
                     HorizontalOptions="Fill"
-                    />
+                    Source="i1.jpg" />
             </Frame>
 
             <StackLayout
                 Grid.Row="2"
-                
                 Grid.Column="1"
                 HorizontalOptions="Center"
                 Orientation="Vertical"
@@ -80,21 +80,20 @@
 
             <StackLayout
                 Grid.Row="3"
-                
                 Grid.Column="1"
                 HorizontalOptions="Fill"
                 Orientation="Vertical"
                 Spacing="12"
                 VerticalOptions="Center">
                 <Button
+                    xct:CornerRadiusEffect.CornerRadius="16"
                     BackgroundColor="{StaticResource Background}"
+                    Command="{Binding StartAppCommand}"
                     FontSize="16"
                     HorizontalOptions="Fill"
                     Text="Εκκίνηση"
-                    Command="{Binding StartAppCommand}"
                     TextColor="{StaticResource Primary}"
-                    VerticalOptions="Center"
-                    xct:CornerRadiusEffect.CornerRadius="16" />
+                    VerticalOptions="Center" />
             </StackLayout>
 
         </Grid>

@@ -30,10 +30,10 @@ namespace ESATouristGuide.Helpers
             IEnvironment e = DependencyService.Get<IEnvironment>();
             if (Application.Current.RequestedTheme == OSAppTheme.Dark)
             {
-                e?.SetStatusBarColor(Color.FromHex("#0D1117") , false);
+                e?.SetStatusBarColor(Color.FromHex("#15181f") , false);
                 if (nav != null)
                 {
-                    nav.BarBackgroundColor = Color.FromHex("#0D1117");
+                    nav.BarBackgroundColor = Color.FromHex("#15181f");
                     nav.BarTextColor = Color.FromHex("#d2a8ff");
                 }
 
@@ -41,11 +41,11 @@ namespace ESATouristGuide.Helpers
             else
             {
 
-                e?.SetStatusBarColor(Color.FromHex("#ffffff") , true);
+                e?.SetStatusBarColor(Color.FromHex("#004080") , true);
                 if (nav != null)
                 {
-                    nav.BarBackgroundColor = Color.FromHex("#ffffff");
-                    nav.BarTextColor = Color.FromHex("#0E5DAB");
+                    nav.BarBackgroundColor = Color.FromHex("#004080");
+                    nav.BarTextColor = Color.FromHex("#ffffff");
                 }
             }
         }

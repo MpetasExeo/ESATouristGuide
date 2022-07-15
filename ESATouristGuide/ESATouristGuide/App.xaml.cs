@@ -19,7 +19,7 @@ namespace ESATouristGuide
             DevExpress.XamarinForms.Editors.Initializer.Init();
             DevExpress.XamarinForms.Navigation.Initializer.Init();
 
-            if (RequiredChecks.HasInternetConnection())
+            if (!RequiredChecks.HasInternetConnection())
             {
                 MainPage = new LandingPage();
             }
