@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="XFTemplateApp.UIControls.HomePageView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customViews="clr-namespace:Sharpnado.TaskLoaderView;assembly=Sharpnado.TaskLoaderView"
+    xmlns:fontAwesome="clr-namespace:XFTemplateApp.Fonts"
+    xmlns:helpers="clr-namespace:XFTemplateApp.Helpers"
+    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:XFTemplateApp.Resources"
+    xmlns:vm="clr-namespace:XFTemplateApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
+                                      Light={StaticResource Primary}}">
+
+
+    <ContentView.BindingContext>
+        <vm:HomePageViewViewModel />
+    </ContentView.BindingContext>
+
+    <customViews:TaskLoaderView
+        x:Name="RelativeParent"
+        HorizontalOptions="FillAndExpand"
+        TaskLoaderNotifier="{Binding LoaderNotifier}"
+        VerticalOptions="FillAndExpand">
+
+        <customViews:TaskLoaderView.EmptyView>
+            <Label Text="isloading " />
+        </customViews:TaskLoaderView.EmptyView>
+
+        <customViews:TaskLoaderView.LoadingView>
+            <lottie:AnimationView
+                x:Name="LoadingLottie"
+                AbsoluteLayout.LayoutBounds="0.5, 0.4, 180, 180"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Animation="purple_loader.json"
+                AutoPlay="True"
+                HorizontalOptions="FillAndExpand"
+                RepeatMode="Infinite"
+                VerticalOptions="FillAndExpand" />
+        </customViews:TaskLoaderView.LoadingView>
+
+        <Grid
+            Margin="0"
+            Padding="12,0"
+            HorizontalOptions="Fill"
+            RowDefinitions="Auto,*"
+            RowSpacing="4"
+            VerticalOptions="Fill">
+
+            <Grid
+                Grid.Row="0"
+                Padding="18"
+                xct:CornerRadiusEffect.CornerRadius="8"
+                BackgroundColor="#20A798"
+                HorizontalOptions="Center"
+                RowDefinitions="Auto,Auto"
+                RowSpacing="24"
+                VerticalOptions="Center">
+                <xct:AvatarView
+                    Grid.Row="0"
+                    Aspect="AspectFill"
+                    HorizontalOptions="Center"
+                    Size="128"
+                    Source="exeo.jpg"
+                    Text="Goofy"
+                    VerticalOptions="Center" />
+
+                <Label
+                    Grid.Row="1"
+                    FontAttributes="Bold"
+                    FontFamily="InterBold"
+                    FontSize="22"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Welcome to Exeo sample app !"
+                    TextColor="WhiteSmoke"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
+
+            </Grid>
+
+            <FlexLayout
+                Grid.Row="1"
+                AlignContent="SpaceAround"
+                AlignItems="Stretch"
+                Direction="Column"
+                HorizontalOptions="FillAndExpand"
+                JustifyContent="SpaceEvenly"
+                VerticalOptions="FillAndExpand">
+                <StackLayout
+                    Padding="24,0"
+                    HorizontalOptions="Fill"
+                    Spacing="32"
+                    VerticalOptions="Center">
+                    <Button
+                        xct:CornerRadiusEffect.CornerRadius="8"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
+                                                          Light={StaticResource PurpleDark}}"
+                        Command="{Binding Command1}"
+                        FontAttributes="Bold"
+                        FontFamily="Roboto"
+                        FontSize="22"
+                        HorizontalOptions="Fill"
+                        Text="Map page"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="1"
+                    Padding="24,0"
+                    HorizontalOptions="Fill"
+                    Spacing="32"
+                    VerticalOptions="Center">
+                    <Button
+                        xct:CornerRadiusEffect.CornerRadius="8"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
+                                                          Light={StaticResource PurpleDark}}"
+                        Command="{Binding Command2}"
+                        FontAttributes="Bold"
+                        FontFamily="Roboto"
+                        FontSize="22"
+                        HorizontalOptions="Fill"
+                        Text="CollectionView Page"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="2"
+                    Padding="24,0"
+                    HorizontalOptions="Fill"
+                    Spacing="32"
+                    VerticalOptions="Center">
+                    <Button
+                        xct:CornerRadiusEffect.CornerRadius="8"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
+                                                          Light={StaticResource PurpleDark}}"
+                        Command="{Binding Command3}"
+                        FontAttributes="Bold"
+                        FontFamily="Roboto"
+                        FontSize="22"
+                        HorizontalOptions="Fill"
+                        Text="Playground Page"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="3"
+                    Padding="24,0"
+                    HorizontalOptions="Fill"
+                    Spacing="32"
+                    VerticalOptions="Center">
+                    <Button
+                        xct:CornerRadiusEffect.CornerRadius="8"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
+                                                          Light={StaticResource PurpleDark}}"
+                        Command="{Binding Command5}"
+                        FontAttributes="Bold"
+                        FontFamily="Roboto"
+                        FontSize="22"
+                        HorizontalOptions="Fill"
+                        Text="Startup Checks on click"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="4"
+                    Padding="24,0"
+                    HorizontalOptions="Fill"
+                    Spacing="32"
+                    VerticalOptions="Center">
+                    <Button
+                        xct:CornerRadiusEffect.CornerRadius="8"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
+                                                          Light={StaticResource PurpleDark}}"
+                        Command="{Binding Command4}"
+                        FontAttributes="Bold"
+                        FontFamily="Roboto"
+                        FontSize="22"
+                        HorizontalOptions="Fill"
+                        Text="Item details Page"
+                        VerticalOptions="Center" />
+                </StackLayout>
+            </FlexLayout>
+
+        </Grid>
+
+
+    </customViews:TaskLoaderView>
+</ContentView>

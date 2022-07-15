@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="XFTemplateApp.UIControls.CollectionViewCard"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:uicontrols="clr-namespace:XFTemplateApp.UIControls"
+    xmlns:vm="clr-namespace:XFTemplateApp.ViewModels"
+    xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.Effects;assembly=Xamarin.CommunityToolkit"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+    Shell.NavBarIsVisible="False"
+    x:DataType="uicontrols:CollectionViewCard">
+    <ContentView.Content>
+        <pv:PancakeView
+            x:Name="POITapAction"
+            CornerRadius="1"
+            Padding="0">
+            <pv:PancakeView.Shadow>
+                <pv:DropShadow
+                    Offset="10,10"
+                    Color="#000000"
+                    BlurRadius="10"
+                    Opacity="0.3" />
+            </pv:PancakeView.Shadow>
+
+            <Grid
+                HeightRequest="360"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Image
+                    x:Name="POIImageUri"
+                    Grid.RowSpan="3"
+                    Aspect="AspectFill"
+                    Source="{Binding POIImage}" />
+               
+
+                <pv:PancakeView
+                    Grid.Row="2"
+                    BackgroundGradientEndPoint="1,0"
+                    BackgroundGradientStartPoint="1,1"
+                    CornerRadius="1"
+                    HorizontalOptions="FillAndExpand"
+                    Padding="2,0,2,0"
+                    TranslationY="0"
+                    VerticalOptions="Fill">
+                    <pv:PancakeView.BackgroundGradientStops>
+                        <pv:GradientStopCollection>
+                            <pv:GradientStop Offset="0" Color="#cc0f0f0f" />
+                            <pv:GradientStop Offset="1" Color="#600f0f0f" />
+                        </pv:GradientStopCollection>
+                    </pv:PancakeView.BackgroundGradientStops>
+
+                    <Grid
+                        Grid.Row="1"
+                        ColumnDefinitions="*,Auto"
+                        Padding="16,12"
+                        RowDefinitions="*,*"
+                        RowSpacing="8">
+
+
+                        <Label
+                            x:Name="POIDistanceFromUserLabel"
+                            Grid.Column="1"
+                            Margin="0"
+                            FontFamily="Inter"
+                            FontSize="12"
+                            HorizontalOptions="StartAndExpand"
+                            Padding="0"
+                            Text="{Binding POIDistance}"
+                            TextColor="WhiteSmoke"
+                            VerticalOptions="Start" />
+                        <Label
+                            x:Name="POIRegionLabel"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            FontFamily="Inter"
+                            FontSize="Subtitle"
+                            Text="{Binding POIRegion}"
+                            TextColor="WhiteSmoke"
+                            VerticalOptions="Start" />
+
+                        <Label
+                            x:Name="POINameLabel"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            FontFamily="InterBold"
+                            FontSize="Title"
+                            Text="{Binding POIName}"
+                            TextColor="WhiteSmoke"
+                            VerticalOptions="Start" />
+                    </Grid>
+
+
+                </pv:PancakeView>
+            </Grid>
+
+        </pv:PancakeView>
+    </ContentView.Content>
+</ContentView>

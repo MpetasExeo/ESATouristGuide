@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XFTemplateApp.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fontAwesome="clr-namespace:XFTemplateApp.Fonts"
+    xmlns:helpers="clr-namespace:XFTemplateApp.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:XFTemplateApp.Resources"
+    xmlns:sharpnado="clr-namespace:Sharpnado.TaskLoaderView;assembly=Sharpnado.TaskLoaderView"
+    xmlns:ui="clr-namespace:XFTemplateApp.UIControls"
+    xmlns:vm="clr-namespace:XFTemplateApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
+                                      Light={StaticResource Primary}}"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <vm:HomePageViewViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView
+        BackgroundColor="Transparent"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+
+        <ui:HomePageView />
+    </ScrollView>
+
+</ContentPage>

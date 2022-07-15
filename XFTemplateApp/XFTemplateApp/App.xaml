@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="XFTemplateApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="Primary">#ffffff</Color>
+            <Color x:Key="PrimaryDark">#0D1117</Color>
+            <Color x:Key="MenuSelected">#00347b</Color>
+            <Color x:Key="MenuSelectedDark">#202020</Color>
+            <Color x:Key="PrimaryOpacityDark">#00202020</Color>
+            <Color x:Key="PrimaryOpacity">#00005555</Color>
+            <Color x:Key="SubtitleText">#8C8C8C</Color>
+            <Color x:Key="SubtitleTextDark">#8C8C8C</Color>
+            <Color x:Key="ContrastText">#000</Color>
+            <Color x:Key="ContrastTextDark">#fff</Color>
+            <Color x:Key="Blue">#0E5DAB</Color>
+            <Color x:Key="BlueDark">#0E5DAB</Color>
+            <Color x:Key="MenuIcon">#568add</Color>
+            <Color x:Key="MenuIconDark">#8cbaff</Color>
+            <Color x:Key="LightBlue">#18A7E0</Color>
+            <Color x:Key="LightBlueDark">#18A7E0</Color>
+            <Color x:Key="BrightBlue">#3DDCFF</Color>
+            <Color x:Key="BrightBlueDark">#3DDCFF</Color>
+            <Color x:Key="Grey">#a0a0a0</Color>
+            <Color x:Key="GreyDark">#a0a0a0</Color>
+            <Color x:Key="PurpleLight">#d2a8ff</Color>
+            <Color x:Key="ExeoGreen">#0B4849</Color>
+            <Color x:Key="ExeoRed">#DC3141</Color>
+            <Color x:Key="ExeoLightGreen">#20A798</Color>
+            <Color x:Key="PurpleDark">#512da8</Color>
+            <Color x:Key="TransparentPurpleLight">#9ABBABE0</Color>
+            <Color x:Key="TransparentPurpleDark">#9a512da8</Color>
+            <Color x:Key="Background">#12140C</Color>
+            <Color x:Key="Accent">#BFE05F</Color>
+            <Color x:Key="BackgroundGradientStart">#23241e</Color>
+            <Color x:Key="BodyText">#797A76</Color>
+            <Color x:Key="LoadingGrey">#F6F8FA</Color>
+            <Color x:Key="LoadingGreyDark">#30363d</Color>
+            <Color x:Key="ButtonGreyDark">#80c4d4c4</Color>
+            <Color x:Key="ButtonGrey">#80c4c4c4</Color>
+            <Color x:Key="LightGrey">#AAAAAA</Color>
+            <Color x:Key="LightGreyDark">#252525</Color>
+            <Color x:Key="DisabledGrey">#DFDFDF</Color>
+            <Color x:Key="DisabledGreyDark">#202020</Color>
+            <Color x:Key="PrimaryText">#0E5DAB</Color>
+            <Color x:Key="PrimaryTextDark">#C9D1D9</Color>
+            <Color x:Key="SecondaryText">#18A7E0</Color>
+            <Color x:Key="SecondaryTextDark">#18A7E0</Color>
+            <Color x:Key="TransparentColor">Transparent</Color>
+            <Color x:Key="TransparentColorDark">Transparent</Color>
+
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#332196F3" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

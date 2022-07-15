@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XFTemplateApp.Views.PlaygroundPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dxcv="clr-namespace:DevExpress.XamarinForms.CollectionView;assembly=DevExpress.XamarinForms.CollectionView"
+    xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
+    xmlns:dxn="clr-namespace:DevExpress.XamarinForms.Navigation;assembly=DevExpress.XamarinForms.Navigation"
+    xmlns:models="clr-namespace:XFTemplateApp.Models"
+    xmlns:vm="clr-namespace:XFTemplateApp.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+    x:DataType="vm:PlaygroundPageViewModel">
+
+    <ContentPage.Resources>
+        <Style
+            x:Key="ChipStyle"
+            ApplyToDerivedTypes="True"
+            TargetType="dxe:ChoiceChipGroup">
+            <Style.Setters>
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BoxMode" Value="Outlined" />
+                <Setter Property="BoxMode" Value="Outlined" />
+                <Setter Property="ChipBackgroundColor" Value="Transparent" />
+                <Setter Property="ChipBorderColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleDark}}" />
+                <Setter Property="ChipFontAttributes" Value="Bold" />
+                <Setter Property="ChipFontFamily" Value="RobotoBold" />
+                <Setter Property="ChipFontSize" Value="14" />
+                <Setter Property="ChipPadding" Value="8,4.94427191" />
+                <Setter Property="ChipPressedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TransparentPurpleDark}, Light={StaticResource TransparentPurpleLight}}" />
+                <Setter Property="ChipPressedTextColor" Value="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}" />
+                <Setter Property="ChipSelectedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TransparentPurpleLight}, Light={StaticResource TransparentPurpleDark}}" />
+                <Setter Property="ChipSelectedBorderColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleDark}}" />
+                <Setter Property="ChipSelectedTextColor" Value="White" />
+                <Setter Property="ChipTextColor" Value="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}" />
+                <Setter Property="IsMultiline" Value="False" />
+            </Style.Setters>
+        </Style>
+
+        <Style
+            x:Key="SettingsChip"
+            ApplyToDerivedTypes="True"
+            TargetType="dxe:Chip">
+            <Style.Setters>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}" />
+                <Setter Property="BorderColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleDark}}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="RobotoBold" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="8,4.94427191" />
+                <Setter Property="PressedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleLight}}" />
+                <Setter Property="PressedTextColor" Value="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}" />
+                <Setter Property="SelectedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleDark}}" />
+                <Setter Property="SelectedBorderColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleDark}}" />
+                <Setter Property="SelectedTextColor" Value="White" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}" />
+            </Style.Setters>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:PlaygroundPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+
+        <!--<dxn:DrawerView
+            BackgroundColor="#000000"
+            DrawerBackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
+                                                    Light={StaticResource Primary}}"
+            DrawerContentMinHeight="270"
+            DrawerFooterHeight="0"
+            DrawerMinHeight="300"
+            DrawerPosition="Bottom"
+            DrawerShadowColor="#ac0D1117"
+            DrawerShadowHeight="2"
+            IsDrawerOpened="{Binding IsDrawerOpen, Mode=TwoWay}"
+            IsDrawerShadowVisible="True"
+            IsScrimEnabled="True"
+            ScrimColor="{AppThemeBinding Dark={StaticResource TransparentPurpleLight},
+                                         Light={StaticResource TransparentPurpleDark}}">
+            <dxn:DrawerView.DrawerHeaderContent>
+                <BoxView
+                    Margin="0,8"
+                    xct:CornerRadiusEffect.CornerRadius="4"
+                    BackgroundColor="DimGray"
+                    HeightRequest="6"
+                    HorizontalOptions="Center"
+                    WidthRequest="48" />
+            </dxn:DrawerView.DrawerHeaderContent>
+            <dxn:DrawerView.DrawerContent>
+                <Grid
+
+                    ColumnDefinitions="*,*"
+                    RowDefinitions="50,280"
+                    VerticalOptions="Start">
+                    <dxe:ChoiceChipGroup
+                        x:Name="verticalchoiceChipGroup"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        ChipCheckIconColor="Transparent"
+                        ChipPressedCheckIconColor="Transparent"
+                        ChipUseRippleEffect="True"
+                        DisplayMember="Text"
+                        HorizontalOptions="Center"
+                        IconMember="Image"
+                        IsMultiline="True"
+                        Style="{StaticResource ChipStyle}"
+                        VerticalOptions="Start">
+                        <dxe:Chip
+                            IsEnabled="True"
+                            IsSelected="{Binding BasicCategoriesEnabled}"
+                            TapCommand="{Binding BasicCategoriesSelectedCommand}"
+                            TapCommandParameter="{Binding .}"
+                            Text="Where to go" />
+                        <dxe:Chip
+                            IsVisible="{Binding SecondaryOptionsEnabled}"
+                            TapCommand="{Binding SecondaryCategoriesSelectedCommand}"
+                            TapCommandParameter="{Binding .}"
+                            Text="What to do" />
+                    </dxe:ChoiceChipGroup>
+
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2">
+                        <ScrollView>
+                            <StackLayout>
+                                <dxe:FilterChipGroup
+                                    x:Name="vertdasdaicalchoiceChipGroup"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="1"
+                                    ChipCheckIconColor="Transparent"
+                                    ChipPressedCheckIconColor="Transparent"
+                                    ChipUseRippleEffect="True"
+                                    DisplayMember="Text"
+                                    HorizontalOptions="Center"
+                                    IconMember="Image"
+                                    IsEnabled="True"
+                                    IsMultiline="True"
+                                    IsVisible="{Binding BasicCategoriesVisible}"
+                                    ItemsSource="{Binding Categories}"
+                                    SelectedIndexes="{Binding SelectedIndexes, Mode=TwoWay}"
+                                    SelectionChangedCommand="{Binding BasicCategoriesChangedCommand}"
+                                    Style="{StaticResource ChipStyle}"
+                                    VerticalOptions="Start" />
+                                <dxcv:DXCollectionView
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Margin="8,4.94427191"
+                                    IsEnabled="{Binding SecondaryOptionsEnabled}"
+                                    IsVisible="{Binding SecondaryCategoriesVisible}"
+                                    ItemSpacing="4"
+                                    ItemsSource="{Binding Categories}"
+                                    SelectionMode="None"
+                                    VerticalOptions="Start">
+                                    <dxcv:DXCollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Category">
+                                            <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+                                                <BoxView
+                                                    BackgroundColor="{Binding Color}"
+                                                    CornerRadius="24"
+                                                    HeightRequest="10"
+                                                    HorizontalOptions="Center"
+                                                    TranslationX="46"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="10" />
+                                                <dxe:CheckEdit
+                                                    Margin="0,0,0,0"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight},
+                                                                                    Light={StaticResource PurpleDark}}"
+                                                    CheckBoxIndent="24"
+                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight},
+                                                                                           Light={StaticResource PurpleDark}}"
+                                                    HorizontalOptions="Center"
+                                                    IsChecked="True"
+                                                    Label="{Binding Text}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
+                                                                                 Light={StaticResource PrimaryText}}"
+                                                    LabelFontAttributes="Bold"
+                                                    LabelFontFamily="RobotoBold"
+                                                    LabelFontSize="16"
+                                                    LabelHorizontalAlignment="Start"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </dxcv:DXCollectionView.ItemTemplate>
+                                </dxcv:DXCollectionView>
+                            </StackLayout>
+                        </ScrollView>
+                    </Grid>
+                </Grid>
+
+            </dxn:DrawerView.DrawerContent>
+            <dxn:DrawerView.MainContent>
+
+                -->        <!--<StackLayout>
+                    <dxe:Chip
+                        Margin="4"
+                        Padding="8"
+                        CornerRadius="10,10,2,2"
+                        HeightRequest="48"
+                        HorizontalOptions="Center"
+                        IsEnabled="True"
+                        IsSelected="{Binding BasicCategoriesEnabled}"
+                        MinimumWidthRequest="196"
+                        Style="{StaticResource SettingsChip}"
+                        TapCommand="{Binding BasicCategoriesSelectedCommand}"
+                        TapCommandParameter="{Binding .}"
+                        Text="GreekGree"
+                        VerticalOptions="Center" />
+                </StackLayout>-->
+        <!--<dxe:Chip
+                    IsVisible="{Binding SecondaryOptionsEnabled}"
+                    Style="{StaticResource SettingsChip}"
+                    TapCommand="{Binding SecondaryCategoriesSelectedCommand}"
+                    TapCommandParameter="{Binding .}"
+                    Text="What to do" />-->        <!--
+
+
+                <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto">
+                    <dxe:ChoiceChipGroup
+                        x:Name="choiceChipGroup"
+                        ChipCheckIconColor="Transparent"
+                        ChipPressedCheckIconColor="Transparent"
+                        ChipUseRippleEffect="True"
+                        DisplayMember="Text"
+                        IconMember="Image"
+                        HorizontalOptions="Center"
+                        ItemsSource="{Binding Categories}"
+                        Style="{StaticResource ChipStyle}" />
+                    <dxe:SimpleButton
+                        Grid.Row="1"
+                        HorizontalContentAlignment="Center"
+                        BackgroundColor="DarkSlateGray"
+                        Command="{Binding OpenDrawerCommand}"
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        Text="Open drawer" />
+                </Grid>
+
+                -->        <!--<CarouselView
+                x:Name="Carousel"
+                Grid.Row="0"
+                HorizontalOptions="FillAndExpand"
+                ItemsSource="{Binding Images}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="models:CustomImage">
+                        <Image
+                            Aspect="AspectFill"
+                            HorizontalOptions="FillAndExpand"
+                            Source="{Binding ImageUrl}"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="420" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>-->
+        <!--<StackLayout Padding="16,64">
+                <pv:PancakeView
+                    CornerRadius="20"
+                    xct:TouchEffect.Command="{Binding NavigateToDetails}"
+                    xct:TouchEffect.CommandParameter="{Binding .}"
+                    xct:TouchEffect.PressedAnimationDuration="100"
+                    xct:TouchEffect.PressedAnimationEasing="Linear"
+                    xct:TouchEffect.PressedOpacity="0.9">
+                    <pv:PancakeView.Shadow>
+                        <pv:DropShadow
+                            Offset="10,10"
+                            Color="#000000"
+                            BlurRadius="10"
+                            Opacity="0.3" />
+                    </pv:PancakeView.Shadow>
+
+                    <Grid HeightRequest="360">
+                        <Grid.RowDefinitions>
+
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Image
+                            Grid.RowSpan="3"
+                            Aspect="AspectFill"
+                            Source="i1.jpg" />
+
+                        <Grid
+                            Grid.Row="0"
+                            BackgroundColor="#300f0f0f"
+                            ColumnDefinitions="Auto,Auto"
+                            ColumnSpacing="8"
+                            HorizontalOptions="End"
+                            Padding="8"
+                            VerticalOptions="Fill"
+                            xct:CornerRadiusEffect.CornerRadius="4">
+                            <ffimageloadingsvg:SvgCachedImage
+                                Grid.Column="0"
+                                Aspect="AspectFit"
+                                BackgroundColor="Transparent"
+                                HeightRequest="28"
+                                HorizontalOptions="Start"
+                                Source="resource://XFTemplateApp.Resources.SVGs.distancemarker.svg">
+                                <ffimageloadingsvg:SvgCachedImage.Transformations>
+
+                                    <fftransformations:TintTransformation EnableSolidColor="true" HexColor="#9a512da8" />
+
+                                </ffimageloadingsvg:SvgCachedImage.Transformations>
+                            </ffimageloadingsvg:SvgCachedImage>
+
+                            <Label
+                                Grid.Column="1"
+                                Margin="0"
+                                FontFamily="Inter"
+                                FontSize="15"
+                                HorizontalOptions="StartAndExpand"
+                                Padding="0"
+                                Text="23 χλμ"
+                                TextColor="WhiteSmoke"
+                                VerticalOptions="Center" />
+
+                        </Grid>
+
+                        <pv:PancakeView
+                            Grid.Row="2"
+                            BackgroundGradientEndPoint="1,0"
+                            BackgroundGradientStartPoint="1,1"
+                            CornerRadius="4"
+                            HorizontalOptions="FillAndExpand"
+                            Padding="2,0,2,0"
+                            TranslationY="0"
+                            VerticalOptions="Fill">
+                            <pv:PancakeView.BackgroundGradientStops>
+                                <pv:GradientStopCollection>
+                                    <pv:GradientStop Offset="0" Color="#cc0f0f0f" />
+                                    <pv:GradientStop Offset="1" Color="#600f0f0f" />
+                                </pv:GradientStopCollection>
+                            </pv:PancakeView.BackgroundGradientStops>
+
+                            <Grid
+                                Grid.Row="1"
+                                Padding="16,12"
+                                RowDefinitions="Auto,*"
+                                RowSpacing="8">
+                                <Label
+                                    Grid.Row="0"
+                                    FontFamily="Inter"
+                                    FontSize="Subtitle"
+                                    Text="Makoni"
+                                    TextColor="WhiteSmoke"
+                                    VerticalOptions="Start" />
+
+
+                                <Label
+                                    Grid.Row="1"
+                                    FontFamily="InterBold"
+                                    FontSize="Title"
+                                    Text="Thessaloniki"
+                                    TextColor="WhiteSmoke"
+                                    VerticalOptions="Center" />
+                            </Grid>
+
+
+                        </pv:PancakeView>
+                    </Grid>
+
+                </pv:PancakeView>
+            </StackLayout>-->
+        <!--</Grid>-->        <!--
+
+
+            </dxn:DrawerView.MainContent>
+        </dxn:DrawerView>-->
+
+        <dxn:TabView>
+            <dxn:TabViewItem HeaderIcon="ic_mail.png" HeaderText="Mail">
+                <dxn:TabViewItem.Content>
+                    <Grid>
+                        <ScrollView>
+                            <StackLayout>
+                                <dxcv:DXCollectionView
+                                    IsEnabled="True"
+                                    IsVisible="true "
+                                    ItemSpacing="4"
+                                    ItemsSource="{Binding Categories}"
+                                    SelectionMode="None"
+                                    VerticalOptions="Start">
+                                    <dxcv:DXCollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:Category">
+                                            <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+                                                <BoxView
+                                                    BackgroundColor="{Binding Color}"
+                                                    CornerRadius="24"
+                                                    HeightRequest="10"
+                                                    HorizontalOptions="Center"
+                                                    TranslationX="46"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="10" />
+                                                <dxe:CheckEdit
+                                                    Margin="0,0,0,0"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight},
+                                                                                    Light={StaticResource PurpleDark}}"
+                                                    CheckBoxIndent="24"
+                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight},
+                                                                                           Light={StaticResource PurpleDark}}"
+                                                    HorizontalOptions="Center"
+                                                    IsChecked="True"
+                                                    Label="{Binding Text}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
+                                                                                 Light={StaticResource PrimaryText}}"
+                                                    LabelFontAttributes="Bold"
+                                                    LabelFontFamily="RobotoBold"
+                                                    LabelFontSize="16"
+                                                    LabelHorizontalAlignment="Start"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </dxcv:DXCollectionView.ItemTemplate>
+                                </dxcv:DXCollectionView>
+                            </StackLayout>
+                        </ScrollView>
+                    </Grid>
+                </dxn:TabViewItem.Content>
+            </dxn:TabViewItem>
+        </dxn:TabView>
+
+    </ContentPage.Content>
+</ContentPage>
