@@ -1,4 +1,6 @@
-﻿namespace ESATouristGuide.Models
+﻿using ESATouristGuide.Resources;
+
+namespace ESATouristGuide.Models
 {
     public static class StandardToastMessages
     {

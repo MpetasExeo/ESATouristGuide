@@ -1,15 +1,15 @@
 ﻿using Xamarin.Forms;
 
-using XFTemplateApp.Views;
+using ESATouristGuide.Views;
 
-namespace XFTemplateApp
+namespace ESATouristGuide
 {
     public partial class AppShell : Xamarin.Forms.Shell
     {
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(GoogleMapsPage) , typeof(GoogleMapsPage));
+            //Routing.RegisterRoute(nameof(GoogleMapsPage) , typeof(GoogleMapsPage));
         }
 
     }

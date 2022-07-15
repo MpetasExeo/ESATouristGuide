@@ -1,4 +1,6 @@
 ﻿
+using ESATouristGuide.Resources;
+
 using System;
 
 namespace ESATouristGuide.Helpers

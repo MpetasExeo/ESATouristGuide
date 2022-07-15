@@ -9,7 +9,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 
-using XFTemplateApp.Views;
+using ESATouristGuide.Views;
 
 namespace ESATouristGuide.Services
 {

@@ -1,5 +1,6 @@
 ﻿using ESATouristGuide.Interfaces;
 using ESATouristGuide.Models;
+using ESATouristGuide.Resources;
 
 using Newtonsoft.Json;
 

@@ -4,10 +4,10 @@ using ESATouristGuide.Interfaces;
 
 using Xamarin.Forms;
 
-using XFTemplateApp.Droid.Helpers;
+using ESATouristGuide.Droid.Helpers;
 
 [assembly: Dependency(typeof(GpsEnabledService))]
-namespace XFTemplateApp.Droid.Helpers
+namespace ESATouristGuide.Droid.Helpers
 {
     public class GpsEnabledService : IGPSEnabled
     {

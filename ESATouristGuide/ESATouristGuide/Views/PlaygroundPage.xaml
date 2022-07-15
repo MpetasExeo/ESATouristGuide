@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="XFTemplateApp.Views.PlaygroundPage"
+    x:Class="ESATouristGuide.Views.PlaygroundPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:dxcv="clr-namespace:DevExpress.XamarinForms.CollectionView;assembly=DevExpress.XamarinForms.CollectionView"
     xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
     xmlns:dxn="clr-namespace:DevExpress.XamarinForms.Navigation;assembly=DevExpress.XamarinForms.Navigation"
-    xmlns:models="clr-namespace:XFTemplateApp.Models"
-    xmlns:vm="clr-namespace:XFTemplateApp.ViewModels"
+    xmlns:models="clr-namespace:ESATouristGuide.Models"
+    xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
     x:DataType="vm:PlaygroundPageViewModel">
 
     <ContentPage.Resources>
@@ -22,17 +23,17 @@
                 <Setter Property="BoxMode" Value="Outlined" />
                 <Setter Property="BoxMode" Value="Outlined" />
                 <Setter Property="ChipBackgroundColor" Value="Transparent" />
-                <Setter Property="ChipBorderColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleDark}}" />
+                <Setter Property="ChipBorderColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
                 <Setter Property="ChipFontAttributes" Value="Bold" />
                 <Setter Property="ChipFontFamily" Value="RobotoBold" />
                 <Setter Property="ChipFontSize" Value="14" />
                 <Setter Property="ChipPadding" Value="8,4.94427191" />
-                <Setter Property="ChipPressedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TransparentPurpleDark}, Light={StaticResource TransparentPurpleLight}}" />
-                <Setter Property="ChipPressedTextColor" Value="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}" />
-                <Setter Property="ChipSelectedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TransparentPurpleLight}, Light={StaticResource TransparentPurpleDark}}" />
-                <Setter Property="ChipSelectedBorderColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleDark}}" />
+                <Setter Property="ChipPressedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark}, Light={StaticResource TransparentBackground}}" />
+                <Setter Property="ChipPressedTextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
+                <Setter Property="ChipSelectedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TransparentBackground}, Light={StaticResource TransparentBackgroundDark}}" />
+                <Setter Property="ChipSelectedBorderColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
                 <Setter Property="ChipSelectedTextColor" Value="White" />
-                <Setter Property="ChipTextColor" Value="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}" />
+                <Setter Property="ChipTextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
                 <Setter Property="IsMultiline" Value="False" />
             </Style.Setters>
         </Style>
@@ -42,18 +43,18 @@
             ApplyToDerivedTypes="True"
             TargetType="dxe:Chip">
             <Style.Setters>
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}" />
-                <Setter Property="BorderColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleDark}}" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}" />
+                <Setter Property="BorderColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="FontFamily" Value="RobotoBold" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="Padding" Value="8,4.94427191" />
-                <Setter Property="PressedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleLight}}" />
-                <Setter Property="PressedTextColor" Value="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}" />
-                <Setter Property="SelectedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleDark}}" />
-                <Setter Property="SelectedBorderColor" Value="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleDark}}" />
+                <Setter Property="PressedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
+                <Setter Property="PressedTextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
+                <Setter Property="SelectedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
+                <Setter Property="SelectedBorderColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
                 <Setter Property="SelectedTextColor" Value="White" />
-                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
             </Style.Setters>
         </Style>
     </ContentPage.Resources>
@@ -66,8 +67,8 @@
 
         <!--<dxn:DrawerView
             BackgroundColor="#000000"
-            DrawerBackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
-                                                    Light={StaticResource Primary}}"
+            DrawerBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                    Light={StaticResource Background}}"
             DrawerContentMinHeight="270"
             DrawerFooterHeight="0"
             DrawerMinHeight="300"
@@ -170,16 +171,16 @@
                                                     WidthRequest="10" />
                                                 <dxe:CheckEdit
                                                     Margin="0,0,0,0"
-                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight},
-                                                                                    Light={StaticResource PurpleDark}}"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource Primary},
+                                                                                    Light={StaticResource DarkPrimary}}"
                                                     CheckBoxIndent="24"
-                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight},
-                                                                                           Light={StaticResource PurpleDark}}"
+                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource Primary},
+                                                                                           Light={StaticResource DarkPrimary}}"
                                                     HorizontalOptions="Center"
                                                     IsChecked="True"
                                                     Label="{Binding Text}"
-                                                    LabelColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                                 Light={StaticResource PrimaryText}}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                                 Light={StaticResource Primary}}"
                                                     LabelFontAttributes="Bold"
                                                     LabelFontFamily="RobotoBold"
                                                     LabelFontSize="16"
@@ -197,7 +198,8 @@
             </dxn:DrawerView.DrawerContent>
             <dxn:DrawerView.MainContent>
 
-                -->        <!--<StackLayout>
+                -->
+        <!--<StackLayout>
                     <dxe:Chip
                         Margin="4"
                         Padding="8"
@@ -218,7 +220,8 @@
                     Style="{StaticResource SettingsChip}"
                     TapCommand="{Binding SecondaryCategoriesSelectedCommand}"
                     TapCommandParameter="{Binding .}"
-                    Text="What to do" />-->        <!--
+                    Text="What to do" />-->
+        <!--
 
 
                 <Grid ColumnDefinitions="*" RowDefinitions="Auto,Auto">
@@ -242,7 +245,8 @@
                         Text="Open drawer" />
                 </Grid>
 
-                -->        <!--<CarouselView
+                -->
+        <!--<CarouselView
                 x:Name="Carousel"
                 Grid.Row="0"
                 HorizontalOptions="FillAndExpand"
@@ -302,7 +306,7 @@
                                 BackgroundColor="Transparent"
                                 HeightRequest="28"
                                 HorizontalOptions="Start"
-                                Source="resource://XFTemplateApp.Resources.SVGs.distancemarker.svg">
+                                Source="resource://ESATouristGuide.Resources.SVGs.distancemarker.svg">
                                 <ffimageloadingsvg:SvgCachedImage.Transformations>
 
                                     <fftransformations:TintTransformation EnableSolidColor="true" HexColor="#9a512da8" />
@@ -368,13 +372,14 @@
 
                 </pv:PancakeView>
             </StackLayout>-->
-        <!--</Grid>-->        <!--
+        <!--</Grid>-->
+        <!--
 
 
             </dxn:DrawerView.MainContent>
         </dxn:DrawerView>-->
 
-        <dxn:TabView>
+        <!--<dxn:TabView>
             <dxn:TabViewItem HeaderIcon="ic_mail.png" HeaderText="Mail">
                 <dxn:TabViewItem.Content>
                     <Grid>
@@ -400,16 +405,16 @@
                                                     WidthRequest="10" />
                                                 <dxe:CheckEdit
                                                     Margin="0,0,0,0"
-                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight},
-                                                                                    Light={StaticResource PurpleDark}}"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource Primary},
+                                                                                    Light={StaticResource DarkPrimary}}"
                                                     CheckBoxIndent="24"
-                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight},
-                                                                                           Light={StaticResource PurpleDark}}"
+                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource Primary},
+                                                                                           Light={StaticResource DarkPrimary}}"
                                                     HorizontalOptions="Center"
                                                     IsChecked="True"
                                                     Label="{Binding Text}"
-                                                    LabelColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                                 Light={StaticResource PrimaryText}}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                                 Light={StaticResource Primary}}"
                                                     LabelFontAttributes="Bold"
                                                     LabelFontFamily="RobotoBold"
                                                     LabelFontSize="16"
@@ -424,7 +429,93 @@
                     </Grid>
                 </dxn:TabViewItem.Content>
             </dxn:TabViewItem>
-        </dxn:TabView>
+        </dxn:TabView>-->
+
+        <Grid
+            BackgroundColor="{StaticResource Primary}"
+            HorizontalOptions="Fill"
+            ColumnDefinitions="0.075*,0.85*,0.075*"
+            RowDefinitions="3*,4*,2*,2*"
+            VerticalOptions="Fill">
+
+            <StackLayout
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                Orientation="Vertical"
+                Spacing="12"
+                VerticalOptions="Center">
+                <Label
+                    FontSize="32"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Ψηφιακός Οδηγός"
+                    TextColor="{StaticResource Accent}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Αλεξανδρούπολης"
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
+            </StackLayout>
+
+            <Frame
+                Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource Secondary}"
+                BorderColor="{StaticResource Secondary}"
+                HorizontalOptions="Fill"
+                Padding="3"
+                VerticalOptions="Fill">
+                <Image
+                    Aspect="AspectFill"
+                    Source="i1.jpg"
+                    HorizontalOptions="Fill"
+                    />
+            </Frame>
+
+            <StackLayout
+                Grid.Row="2"
+                
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                Orientation="Vertical"
+                Spacing="12"
+                VerticalOptions="Center">
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Ανακαλύψτε την  Αλεξανδρούπολη μέσα από την Επαυξημένη Πραγματικότητα"
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="3"
+                
+                Grid.Column="1"
+                HorizontalOptions="Fill"
+                Orientation="Vertical"
+                Spacing="12"
+                VerticalOptions="Center">
+                <Button
+                    BackgroundColor="{StaticResource Background}"
+                    FontSize="16"
+                    HorizontalOptions="Fill"
+                    Text="Εκκίνηση"
+                    
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="Center"
+                    xct:CornerRadiusEffect.CornerRadius="16" />
+            </StackLayout>
+
+        </Grid>
 
     </ContentPage.Content>
 </ContentPage>

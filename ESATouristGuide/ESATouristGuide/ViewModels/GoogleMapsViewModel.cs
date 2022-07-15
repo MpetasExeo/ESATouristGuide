@@ -1,6 +1,7 @@
 ﻿
 using ESATouristGuide.Interfaces;
 using ESATouristGuide.Models;
+using ESATouristGuide.Services;
 
 using MvvmHelpers;
 using MvvmHelpers.Commands;

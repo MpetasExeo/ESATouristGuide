@@ -1,4 +1,6 @@
 ﻿
+using ESATouristGuide.Resources;
+
 using System.Collections.Generic;
 
 namespace ESATouristGuide.Models

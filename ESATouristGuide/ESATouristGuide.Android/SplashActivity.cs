@@ -4,7 +4,7 @@ using Android.OS;
 
 using AndroidX.AppCompat.App;
 
-namespace XFTemplateApp.Droid
+namespace ESATouristGuide.Droid
 {
     [Activity(Label = "SplashActivity" , Icon = "@mipmap/ic_launcher" ,
         Theme = "@style/SplashTheme" ,

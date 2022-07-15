@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 using Xamarin.Forms;
 
-using XFTemplateApp.Views;
+using ESATouristGuide.Views;
 
 namespace ESATouristGuide.ViewModels
 {

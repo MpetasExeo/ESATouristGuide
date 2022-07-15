@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace XFTemplateApp.UIControls
+namespace ESATouristGuide.UIControls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePageView : ContentView

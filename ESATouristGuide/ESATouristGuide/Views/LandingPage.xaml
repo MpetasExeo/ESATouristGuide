@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="XFTemplateApp.Views.LandingPage"
+    x:Class="ESATouristGuide.Views.LandingPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:vm="clr-namespace:XFTemplateApp.ViewModels"
+    xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.Effects;assembly=Xamarin.CommunityToolkit"
     x:DataType="vm:LandingPageViewModel">
 
@@ -14,37 +14,87 @@
 
     <ContentPage.Content>
         <Grid
-            Padding="0"
-            BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
-                                              Light={StaticResource PrimaryDark}}"
-            HorizontalOptions="FillAndExpand"
-            RowDefinitions="85*,15*"
-            VerticalOptions="FillAndExpand">
-            <Image
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Aspect="Fill"
-                HorizontalOptions="FillAndExpand"
-                Source="i1.jpg" />
+            BackgroundColor="{StaticResource Primary}"
+            HorizontalOptions="Fill"
+            ColumnDefinitions="0.075*,0.85*,0.075*"
+            RowDefinitions="3*,4*,2*,2*"
+            VerticalOptions="Fill">
 
             <StackLayout
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                Orientation="Vertical"
+                Spacing="12"
+                VerticalOptions="Center">
+                <Label
+                    FontSize="32"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Ψηφιακός Οδηγός"
+                    TextColor="{StaticResource Accent}"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Αλεξανδρούπολης"
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
+            </StackLayout>
+
+            <Frame
                 Grid.Row="1"
-                Padding="8"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource Secondary}"
+                BorderColor="{StaticResource Secondary}"
                 HorizontalOptions="Fill"
-                Spacing="32"
-                VerticalOptions="End">
+                Padding="3"
+                VerticalOptions="Fill">
+                <Image
+                    Aspect="AspectFill"
+                    Source="i1.jpg"
+                    HorizontalOptions="Fill"
+                    />
+            </Frame>
+
+            <StackLayout
+                Grid.Row="2"
+                
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                Orientation="Vertical"
+                Spacing="12"
+                VerticalOptions="Center">
+                <Label
+                    FontSize="16"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="Ανακαλύψτε την  Αλεξανδρούπολη μέσα από την Επαυξημένη Πραγματικότητα"
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="3"
+                
+                Grid.Column="1"
+                HorizontalOptions="Fill"
+                Orientation="Vertical"
+                Spacing="12"
+                VerticalOptions="Center">
                 <Button
-                    Padding="12,8"
-                    xct:CornerRadiusEffect.CornerRadius="8"
-                    BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
-                                                      Light={StaticResource PurpleDark}}"
+                    BackgroundColor="{StaticResource Background}"
+                    FontSize="16"
+                    HorizontalOptions="Fill"
+                    Text="Εκκίνηση"
                     Command="{Binding StartAppCommand}"
-                    FontAttributes="Bold"
-                    FontFamily="Roboto"
-                    FontSize="18"
-                    HorizontalOptions="End"
-                    Text="Continue"
-                    VerticalOptions="Center" />
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="Center"
+                    xct:CornerRadiusEffect.CornerRadius="16" />
             </StackLayout>
 
         </Grid>

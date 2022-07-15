@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
@@ -7,11 +8,12 @@ using FFImageLoading.Forms.Platform;
 
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps.Android;
+using ESATouristGuide;
 
-[assembly: Dependency(typeof(XFTemplateApp.Droid.Models.Enviroment))]
-namespace XFTemplateApp.Droid
+[assembly: Dependency(typeof(ESATouristGuide.Droid.Models.Enviroment))]
+namespace ESATouristGuide.Droid
 {
-    [Activity(Label = "XFTemplateApp" , Icon = "@mipmap/icon" , Theme = "@style/MainTheme" , MainLauncher = false , ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
+    [Activity(Label = "ESATouristGuide" , Icon = "@mipmap/icon" , Theme = "@style/MainTheme" , MainLauncher = false , ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
 

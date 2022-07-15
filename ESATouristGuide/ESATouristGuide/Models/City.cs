@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-using XFTemplateApp.Views;
+using ESATouristGuide.Views;
+using ESATouristGuide.Resources;
 
 namespace ESATouristGuide.Models
 {

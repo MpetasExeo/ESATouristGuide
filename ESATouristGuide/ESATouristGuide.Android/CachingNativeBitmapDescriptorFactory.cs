@@ -6,7 +6,7 @@ using Xamarin.Forms.GoogleMaps.Android.Factories;
 using AndroidBitmapDescriptor = Android.Gms.Maps.Model.BitmapDescriptor;
 using AndroidBitmapDescriptorFactory = Android.Gms.Maps.Model.BitmapDescriptorFactory;
 
-namespace XFTemplateApp.Droid
+namespace ESATouristGuide.Droid
 {
     public sealed class CachingNativeBitmapDescriptorFactory : IBitmapDescriptorFactory
     {
@@ -32,7 +32,7 @@ namespace XFTemplateApp.Droid
                         iconId = Resource.Drawable.place;
                         break;
                     default:
-                        iconId = Resource.Drawable.region36;
+                        iconId = Resource.Drawable.place;
                         break;
                 }
 

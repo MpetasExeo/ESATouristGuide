@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace XFTemplateApp.iOS
+namespace ESATouristGuide.iOS
 {
     public class Application
     {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Essentials;
 
-namespace XFTemplateApp.Droid.Models
+namespace ESATouristGuide.Droid.Models
 {
     public class Enviroment : IEnvironment
     {

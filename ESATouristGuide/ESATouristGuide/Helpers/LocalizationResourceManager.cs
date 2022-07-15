@@ -1,4 +1,6 @@
 ﻿
+using ESATouristGuide.Resources;
+
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;

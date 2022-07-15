@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="XFTemplateApp.Views.SettingsPage"
+    x:Class="ESATouristGuide.Views.SettingsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:fontAwesome="clr-namespace:XFTemplateApp.Fonts"
-    xmlns:helpers="clr-namespace:XFTemplateApp.Helpers"
+    xmlns:fontAwesome="clr-namespace:ESATouristGuide.Fonts"
+    xmlns:helpers="clr-namespace:ESATouristGuide.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:resources="clr-namespace:XFTemplateApp.Resources"
+    xmlns:resources="clr-namespace:ESATouristGuide.Resources"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
-                                      Light={StaticResource Primary}}"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                      Light={StaticResource Background}}"
     Visual="Material">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,7 +19,7 @@
             <Style x:Key="CoffeeCard" TargetType="Frame">
                 <Setter Property="HasShadow" Value="{OnPlatform Android=true, iOS=false, Default=true}" />
                 <Setter Property="CornerRadius" Value="6" />
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource LoadingGreyDark}, Light={StaticResource LoadingGrey}}" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}" />
             </Style>
 
             <Color x:Key="LightRadioButtonColor">#BDC2C6</Color>
@@ -28,16 +28,17 @@
             <ControlTemplate x:Key="ThemeRadioTemplate">
                 <Frame
                     Padding="0"
-                    BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
-                                                      Light={StaticResource LoadingGrey}}"
-                    BorderColor="{AppThemeBinding Dark={StaticResource PurpleLight},
-                                                  Light={StaticResource LightRadioButtonColor}}"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundDark},
+                                                      Light={StaticResource Background}}"
+                    BorderColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                  Light={StaticResource Background}}"
                     CornerRadius="8"
                     HasShadow="{OnPlatform iOS=false,
                                            Android=true}"
                     HeightRequest="96"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
+                    x:Name="Check"
                     WidthRequest="96">
                     <Grid Margin="4" WidthRequest="96">
                         <Grid
@@ -45,59 +46,55 @@
                             HorizontalOptions="End"
                             VerticalOptions="Start"
                             WidthRequest="20">
-                            <Ellipse
-                                x:Name="FillUncheck"
-                                Fill="#a0afea"
-                                HeightRequest="18"
-                                HorizontalOptions="Center"
-                                Stroke="#2E2545"
-                                StrokeThickness="2"
-                                VerticalOptions="Center"
-                                WidthRequest="18" />
-                            <Ellipse
-                                x:Name="FillCheck"
-                                Fill="#F1C307"
-                                HeightRequest="18"
-                                HorizontalOptions="Center"
-                                Stroke="#a0afea"
-                                StrokeThickness="2"
-                                VerticalOptions="Center"
-                                WidthRequest="18" />
-                            <Ellipse
-                                x:Name="Check"
-                                BackgroundColor="Transparent"
-                                Fill="#F1C307"
-                                HeightRequest="10"
-                                HorizontalOptions="Center"
-                                Stroke="#F1C307"
-                                StrokeThickness="0"
-                                VerticalOptions="Center"
-                                WidthRequest="10" />
-                        </Grid>
-                        <ContentPresenter />
+                       </Grid>
+                        <ContentPresenter >
+                            <ContentPresenter.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="HorizontalOptions" Value="Center"/>
+                                    <Setter Property="VerticalOptions" Value="Center"/>
+                                    <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                                    <Setter Property="VerticalTextAlignment" Value="Center"/>
+                                    <Setter Property="FontSize" Value="18"/>
+
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                         Binding="{Binding Path=IsChecked,
+                                                           Source={x:RelativeSource AncestorType={x:Type RadioButton}}}"
+                                         Value="True">
+                                            <Setter Property="TextColor" Value="White"/>
+                                            <Setter Property="FontAttributes" Value="Bold"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label"
+                                         Binding="{Binding Path=IsChecked,
+                                                           Source={x:RelativeSource AncestorType={x:Type RadioButton}}}"
+                                         Value="False">
+                                            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                    Light={StaticResource Primary}}"/>
+                                            <Setter Property="FontAttributes" Value="None"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentPresenter.Resources>
+                        </ContentPresenter>
                     </Grid>
-                    <!--<VisualStateManager.VisualStateGroups>
+                    <VisualStateManager.VisualStateGroups>
                         <VisualStateGroupList>
                             <VisualStateGroup x:Name="CheckedStates">
                                 <VisualState x:Name="Checked">
                                     <VisualState.Setters>
-                                        <Setter Property="BorderColor" Value="#df6e57" />
-                                        <Setter TargetName="Check" Property="Opacity" Value="1" />
-                                        <Setter TargetName="FillCheck" Property="Opacity" Value="1" />
-                                        <Setter TargetName="FillUncheck" Property="Opacity" Value="0" />
+                                        <Setter TargetName="Check" Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkAccent},
+                                                      Light={StaticResource Accent}}"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Unchecked">
                                     <VisualState.Setters>
-                                        <Setter Property="BorderColor" Value="#F3F2F1" />
-                                        <Setter TargetName="Check" Property="Opacity" Value="0" />
-                                        <Setter TargetName="FillCheck" Property="Opacity" Value="0" />
-                                        <Setter TargetName="FillUncheck" Property="Opacity" Value="1" />
-                                    </VisualState.Setters>
+                                        <Setter TargetName="Check" Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                                                      Light={StaticResource Secondary}}"/>
+                                 </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>-->
+                    </VisualStateManager.VisualStateGroups>
                 </Frame>
             </ControlTemplate>
 
@@ -128,16 +125,16 @@
                     FontFamily="FASolid"
                     FontSize="22"
                     Text="{x:Static fontAwesome:FontAwesomeIcons.Cogs}"
-                    TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                Light={StaticResource PrimaryText}}"
+                    TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                Light={StaticResource Primary}}"
                     VerticalOptions="Center" />
                 <Label
                     FontAttributes="Bold"
                     FontFamily="InterBold"
                     FontSize="22"
                     Text="{helpers:Translate Settings}"
-                    TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                Light={StaticResource PrimaryText}}"
+                    TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                Light={StaticResource Primary}}"
                     VerticalOptions="Center" />
             </StackLayout>
 
@@ -154,12 +151,12 @@
                     FontFamily="InterBold"
                     FontSize="22"
                     Text="{helpers:Translate Theme}"
-                    TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                Light={StaticResource PrimaryText}}" />
+                    TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                Light={StaticResource Primary}}" />
 
                 <Frame
-                    xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource PurpleLight},
-                                                             Light={StaticResource BlueDark}}"
+                    xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                                                             Light={StaticResource Secondary}}"
                     xct:ShadowEffect.OffsetX="0"
                     xct:ShadowEffect.OffsetY="0.5"
                     xct:ShadowEffect.Opacity="1"
@@ -179,25 +176,21 @@
                             Value="System">
                             <RadioButton.Content>
                                 <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                    <Label
-                                        FontFamily="FASolid"
-                                        FontSize="20"
-                                        HorizontalOptions="Center"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{x:Static fontAwesome:FontAwesomeIcons.UserCog}"
-                                        TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                    Light={StaticResource PrimaryText}}"
-                                        VerticalOptions="Start"
-                                        VerticalTextAlignment="Start" />
+                                   <Label
+                                        FontFamily="FASolid"                                        
+                                        Text="{x:Static fontAwesome:FontAwesomeIcons.UserCog}"/>
                                     <Label
                                         FontSize="12"
+                                        x:Name="Labels"
                                         HorizontalOptions="Center"
                                         HorizontalTextAlignment="Center"
                                         Text="{helpers:Translate SystemDefaultMode}"
-                                        TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                    Light={StaticResource PrimaryText}}"
+                                        TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                    Light={StaticResource Primary}}"
                                         VerticalOptions="Start"
-                                        VerticalTextAlignment="Start" />
+                                        VerticalTextAlignment="Start" >
+                                        
+                                    </Label>
                                 </StackLayout>
                             </RadioButton.Content>
                         </RadioButton>
@@ -209,22 +202,15 @@
                             <RadioButton.Content>
                                 <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                                     <Label
-                                        FontFamily="FASolid"
-                                        FontSize="20"
-                                        HorizontalOptions="Center"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{x:Static fontAwesome:FontAwesomeIcons.Sun}"
-                                        TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                    Light={StaticResource PrimaryText}}"
-                                        VerticalOptions="Center"
-                                        VerticalTextAlignment="Center" />
+                                        FontFamily="FASolid"                                        
+                                        Text="{x:Static fontAwesome:FontAwesomeIcons.Sun}"/>
                                     <Label
                                         FontSize="12"
                                         HorizontalOptions="Center"
                                         HorizontalTextAlignment="Center"
                                         Text="{helpers:Translate Light}"
-                                        TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                    Light={StaticResource PrimaryText}}"
+                                        TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                    Light={StaticResource Primary}}"
                                         VerticalOptions="Start"
                                         VerticalTextAlignment="Start" />
                                 </StackLayout>
@@ -238,20 +224,12 @@
                             <RadioButton.Content>
                                 <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                                     <Label
-                                        FontFamily="FASolid"
-                                        FontSize="20"
-                                        HorizontalOptions="Center"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{x:Static fontAwesome:FontAwesomeIcons.Moon}"
-                                        TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                    Light={StaticResource PrimaryText}}"
-                                        VerticalOptions="Start"
-                                        VerticalTextAlignment="Start" />
+                                        FontFamily="FASolid"                                        
+                                        Text="{x:Static fontAwesome:FontAwesomeIcons.Moon}"/>
                                     <Label
                                         FontSize="12"
-                                        Text="{helpers:Translate Dark}"
-                                        TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                    Light={StaticResource PrimaryText}}" />
+                                         Text="{helpers:Translate Dark}"
+                                        />
                                 </StackLayout>
                             </RadioButton.Content>
                         </RadioButton>
@@ -268,12 +246,12 @@
                     FontFamily="InterBold"
                     FontSize="22"
                     Text="{helpers:Translate Language}"
-                    TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                Light={StaticResource PrimaryText}}" />
+                    TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                Light={StaticResource Primary}}" />
 
                 <Frame
-                    xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource PurpleLight},
-                                                             Light={StaticResource BlueDark}}"
+                    xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                             Light={StaticResource Background}}"
                     xct:ShadowEffect.OffsetX="0"
                     xct:ShadowEffect.OffsetY="0.5"
                     xct:ShadowEffect.Opacity="1"
@@ -292,21 +270,13 @@
                             Value="Greek">
                             <RadioButton.Content>
                                 <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                    <!--<Label
-                                        FontFamily="FASolid"
-                                        FontSize="20"
-                                        HorizontalOptions="Center"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{x:Static fontAwesome:FontAwesomeIcons.Flag}"
-                                        VerticalOptions="Center"
-                                        VerticalTextAlignment="Center" />-->
-                                    <Label
+                              <Label
                                         FontSize="Small"
                                         HorizontalOptions="Center"
                                         HorizontalTextAlignment="Center"
                                         Text="{helpers:Translate Greek}"
-                                        TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                    Light={StaticResource PrimaryText}}"
+                                        TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                    Light={StaticResource Primary}}"
                                         VerticalOptions="Center"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
@@ -319,21 +289,13 @@
                             Value="English">
                             <RadioButton.Content>
                                 <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                    <!--<Label
-                                        FontFamily="FASolid"
-                                        FontSize="20"
-                                        HorizontalOptions="Center"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{x:Static fontAwesome:FontAwesomeIcons.Flag}"
-                                        VerticalOptions="Center"
-                                        VerticalTextAlignment="Center" />-->
-                                    <Label
+                                   <Label
                                         FontSize="Small"
                                         HorizontalOptions="Center"
                                         HorizontalTextAlignment="Center"
                                         Text="{helpers:Translate English}"
-                                        TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                    Light={StaticResource PrimaryText}}"
+                                        TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                    Light={StaticResource Primary}}"
                                         VerticalOptions="Center"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>
@@ -346,21 +308,13 @@
                             Value="Deutsch">
                             <RadioButton.Content>
                                 <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                    <!--<Label
-                                        FontFamily="FASolid"
-                                        FontSize="20"
-                                        HorizontalOptions="Center"
-                                        HorizontalTextAlignment="Center"
-                                        Text="{x:Static fontAwesome:FontAwesomeIcons.Moon}"
-                                        VerticalOptions="Center"
-                                        VerticalTextAlignment="Center" />-->
-                                    <Label
+                               <Label
                                         FontSize="Small"
                                         HorizontalOptions="Center"
                                         HorizontalTextAlignment="Center"
                                         Text="{helpers:Translate Deutsch}"
-                                        TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                    Light={StaticResource PrimaryText}}"
+                                        TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                    Light={StaticResource Primary}}"
                                         VerticalOptions="Center"
                                         VerticalTextAlignment="Center" />
                                 </StackLayout>

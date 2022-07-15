@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="XFTemplateApp.Views.CollectionViewPage"
+    x:Class="ESATouristGuide.Views.CollectionViewPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customViews="clr-namespace:Sharpnado.TaskLoaderView;assembly=Sharpnado.TaskLoaderView"
@@ -10,17 +10,17 @@
     xmlns:dxui="http://dips.xamarin.ui.com"
     xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-    xmlns:fontAwesome="clr-namespace:XFTemplateApp.Fonts"
-    xmlns:helpers="clr-namespace:XFTemplateApp.Helpers"
+    xmlns:fontAwesome="clr-namespace:ESATouristGuide.Fonts"
+    xmlns:helpers="clr-namespace:ESATouristGuide.Helpers"
     xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
-    xmlns:models="clr-namespace:XFTemplateApp.Models"
+    xmlns:models="clr-namespace:ESATouristGuide.Models"
     xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:UIElements="clr-namespace:XFTemplateApp.UIControls"
-    xmlns:vm="clr-namespace:XFTemplateApp.ViewModels"
+    xmlns:UIElements="clr-namespace:ESATouristGuide.UIControls"
+    xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.Effects;assembly=Xamarin.CommunityToolkit"
     xmlns:xct1="http://xamarin.com/schemas/2020/toolkit"
-    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
     Shell.NavBarIsVisible="False"
     x:DataType="vm:CollectionViewViewModel">
     <ContentPage.Resources>
@@ -51,7 +51,7 @@
             <Style x:Key="PageSubHeader" TargetType="Label">
                 <Setter Property="FontFamily" Value="SemiBoldFont" />
                 <Setter Property="FontSize" Value="16" />
-                <Setter Property="TextColor" Value="{StaticResource BodyText}" />
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
             </Style>
 
             <Style x:Key="SectionHeader" TargetType="Label">
@@ -62,7 +62,7 @@
             <Style x:Key="SectionDetail" TargetType="Label">
                 <Setter Property="FontFamily" Value="SemiBoldFont" />
                 <Setter Property="FontSize" Value="12" />
-                <Setter Property="TextColor" Value="{StaticResource BodyText}" />
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -93,22 +93,20 @@
         
         <dxn:DrawerView
             BackgroundColor="#000000"
-            DrawerBackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+            DrawerBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
             DrawerContentMinHeight="270"
             DrawerFooterHeight="0"
             DrawerMinHeight="300"
             DrawerPosition="Bottom"
-            DrawerShadowColor="#ac0D1117"
-            DrawerShadowHeight="2"
             IsDrawerOpened="{Binding IsDrawerOpen, Mode=TwoWay}"
             IsDrawerShadowVisible="True"
             IsScrimEnabled="True"
-            ScrimColor="{AppThemeBinding Dark={StaticResource TransparentPurpleLight}, Light={StaticResource TransparentPurpleDark}}">
+            ScrimColor="{AppThemeBinding Dark={StaticResource PrimaryOpacityDark}, Light={StaticResource PrimaryOpacity}}">
         
             <dxn:DrawerView.DrawerHeaderContent>
                 <BoxView
                     Margin="0,8"
-                    BackgroundColor="DimGray"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark}, Light={StaticResource TransparentBackground}}"
                     HeightRequest="6"
                     HorizontalOptions="Center"
                     WidthRequest="48"
@@ -117,20 +115,20 @@
             
             <dxn:DrawerView.DrawerContent>
                 <dxn:TabView
-                    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
-                    HeaderPanelBackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
+                    HeaderPanelBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
                     HeaderPanelIndent="8"
                     HeaderPanelItemSpacing="16"
-                    ItemHeaderTextColor="{AppThemeBinding Dark={StaticResource PurpleDark}, Light={StaticResource PurpleLight}}"
-                    SelectedItemHeaderBackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
-                    SelectedItemHeaderTextColor="{AppThemeBinding Dark={StaticResource PurpleLight}, Light={StaticResource PurpleDark}}"
-                    SelectedItemIndicatorColor="{AppThemeBinding Dark={StaticResource PurpleLight}, Light={StaticResource PurpleDark}}">
+                    ItemHeaderTextColor="{AppThemeBinding Dark={StaticResource DarkTextPale}, Light={StaticResource TextPale}}"
+                    SelectedItemHeaderBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
+                    SelectedItemHeaderTextColor="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}"
+                    SelectedItemIndicatorColor="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}">
 
                     <dxn:TabViewItem HeaderText="Τοποθεσίες">
                         <dxn:TabViewItem.Content>
                             <Grid
                                 Margin="12"
-                                BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
                                 Padding="4">
                                 <dxcv:DXCollectionView
                                     IsEnabled="True"
@@ -155,13 +153,13 @@
                                                     WidthRequest="10" />
                                                 <dxe:CheckEdit
                                                     Margin="0,0,0,0"
-                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight}, Light={StaticResource PurpleDark}}"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}"
                                                     CheckBoxIndent="24"
-                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight}, Light={StaticResource PurpleDark}}"
+                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}"
                                                     HorizontalOptions="Center"
                                                     IsChecked="True"
                                                     Label="{Binding Text}"
-                                                    LabelColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                                                     LabelFontAttributes="Bold"
                                                     LabelFontFamily="RobotoBold"
                                                     LabelFontSize="16"
@@ -178,7 +176,7 @@
                         <dxn:TabViewItem.Content>
                             <Grid
                                 Margin="12"
-                                BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
                                 Padding="4">
                                 <dxcv:DXCollectionView
                                     IsEnabled="True"
@@ -203,13 +201,13 @@
                                                     WidthRequest="10" />
                                                 <dxe:CheckEdit
                                                     Margin="0,0,0,0"
-                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight}, Light={StaticResource PurpleDark}}"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource Primary}, Light={StaticResource DarkPrimary}}"
                                                     CheckBoxIndent="24"
-                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight}, Light={StaticResource PurpleDark}}"
+                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource Primary}, Light={StaticResource DarkPrimary}}"
                                                     HorizontalOptions="Center"
                                                     IsChecked="True"
                                                     Label="{Binding Text}"
-                                                    LabelColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                                                     LabelFontAttributes="Bold"
                                                     LabelFontFamily="RobotoBold"
                                                     LabelFontSize="16"
@@ -226,7 +224,7 @@
                         <dxn:TabViewItem.Content>
                             <Grid
                                 Margin="12"
-                                BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
                                 Padding="4">
                                 <dxcv:DXCollectionView
                                     IsEnabled="True"
@@ -251,13 +249,13 @@
                                                     WidthRequest="10" />
                                                 <dxe:CheckEdit
                                                     Margin="0,0,0,0"
-                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight}, Light={StaticResource PurpleDark}}"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource Primary}, Light={StaticResource DarkPrimary}}"
                                                     CheckBoxIndent="24"
-                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight}, Light={StaticResource PurpleDark}}"
+                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource Primary}, Light={StaticResource DarkPrimary}}"
                                                     HorizontalOptions="Center"
                                                     IsChecked="True"
                                                     Label="{Binding Text}"
-                                                    LabelColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                                                     LabelFontAttributes="Bold"
                                                     LabelFontFamily="RobotoBold"
                                                     LabelFontSize="16"
@@ -289,7 +287,7 @@
                         Grid.RowSpan="2"
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Primary}}"
                         ItemSpacing="4"
                         ItemsSource="{Binding Cities}">
                         <dxcv:DXCollectionView.ItemTemplate>
@@ -309,12 +307,13 @@
                     </dxcv:DXCollectionView>
 
                     <FlexLayout
+                      
                         Grid.Column="0"
                         Direction="Row"
                         Padding="10">
                         <Frame
-                            BackgroundColor="#1D000000"
-                            CornerRadius="16"
+                            BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark}, Light={StaticResource TransparentBackground}}"
+                            CornerRadius="8"
                             FlexLayout.Shrink="0"
                             HeightRequest="32"
                             Padding="0"
@@ -327,7 +326,7 @@
                                 HorizontalOptions="Center"
                                 HorizontalTextAlignment="Center"
                                 Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowLeft}"
-                                TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}"
+                                 TextColor="#E2E2E2"
                                 VerticalOptions="Center"
                                 VerticalTextAlignment="Center" />
                         </Frame>
@@ -338,8 +337,8 @@
                         Direction="Row"
                         Padding="10">
                         <Frame
-                            BackgroundColor="#1D000000"
-                            CornerRadius="24"
+                             BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark}, Light={StaticResource TransparentBackground}}"
+                            CornerRadius="8"
                             FlexLayout.Shrink="0"
                             HeightRequest="32"
                             Padding="0"
@@ -349,12 +348,12 @@
                                 BackgroundColor="Transparent"
                                 FontFamily="FASolid"
                                 FontSize="18"
-                                HorizontalOptions="Fill"
+                                HorizontalOptions="Center"
                                 HorizontalTextAlignment="Center"
                                 Padding="0"
                                 Text="{x:Static fontAwesome:FontAwesomeIcons.Filter}"
-                                TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}"
-                                VerticalOptions="Fill"
+                                TextColor="#E2E2E2"
+                                VerticalOptions="Center"
                                 VerticalTextAlignment="Center" />
                         </Frame>
                     </FlexLayout>
@@ -450,16 +449,16 @@
                                                     WidthRequest="10" />
                                                 <dxe:CheckEdit
                                                     Margin="0,0,0,0"
-                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight},
-                                                                                    Light={StaticResource PurpleDark}}"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource Primary},
+                                                                                    Light={StaticResource DarkPrimary}}"
                                                     CheckBoxIndent="24"
-                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource PurpleLight},
-                                                                                           Light={StaticResource PurpleDark}}"
+                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource Primary},
+                                                                                           Light={StaticResource DarkPrimary}}"
                                                     HorizontalOptions="Center"
                                                     IsChecked="True"
                                                     Label="{Binding Text}"
-                                                    LabelColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                                 Light={StaticResource PrimaryText}}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                                 Light={StaticResource Primary}}"
                                                     LabelFontAttributes="Bold"
                                                     LabelFontFamily="RobotoBold"
                                                     LabelFontSize="16"
@@ -482,16 +481,16 @@
                     x:Name="SheetBehavior"
                     VerticalContentAlignment="Fit"
                     CloseOnOverlayTapped="True"
-                    ContentColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
-                    HandleColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}"
-                    HeaderColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+                    ContentColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Primary}}"
+                    HandleColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
+                    HeaderColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Primary}}"
                     InterceptDragGesture="True"
                     IsBusy="False"
                     IsDraggable="False"
                     IsOpen="False"
                     Position="1"
                     SheetOpeningStrategy="FitContent"
-                    TitleSeparatorColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}" />
+                    TitleSeparatorColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Primary}}" />
 
             </dxui:ModalityLayout.Behaviors>
 
@@ -513,7 +512,7 @@
                     Grid.ColumnSpan="3"
                     Grid.RowSpan="2"
                    
-                    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark}, Light={StaticResource Primary}}"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Primary}}"
                     ItemSpacing="4"
                     ItemsSource="{Binding Cities}">
                     <dxcv:DXCollectionView.ItemTemplate>
@@ -550,7 +549,7 @@
                             HorizontalOptions="Center"
                             HorizontalTextAlignment="Center"
                             Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowLeft}"
-                            TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}"
+                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                             VerticalOptions="Center"
                             VerticalTextAlignment="Center" />
                     </Frame>
@@ -573,7 +572,7 @@
                             HorizontalOptions="Fill"
                             HorizontalTextAlignment="Center"
                             Text="{x:Static fontAwesome:FontAwesomeIcons.Filter}"
-                            TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark}, Light={StaticResource PrimaryText}}"
+                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                             VerticalOptions="Fill"
                             VerticalTextAlignment="Center" />
                     </Frame>

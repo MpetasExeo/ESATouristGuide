@@ -4,9 +4,9 @@ using ESATouristGuide.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-using XFTemplateApp.Views;
+using ESATouristGuide.Views;
 
-namespace XFTemplateApp
+namespace ESATouristGuide
 {
     public partial class App : Application
     {
@@ -19,7 +19,7 @@ namespace XFTemplateApp
             DevExpress.XamarinForms.Editors.Initializer.Init();
             DevExpress.XamarinForms.Navigation.Initializer.Init();
 
-            if (!RequiredChecks.HasInternetConnection())
+            if (RequiredChecks.HasInternetConnection())
             {
                 MainPage = new LandingPage();
             }

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="XFTemplateApp.Views.GoogleMapsPage"
+    x:Class="ESATouristGuide.Views.GoogleMapsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:anim="clr-namespace:Xamanimation;assembly=Xamanimation"
     xmlns:dxui="http://dips.xamarin.ui.com"
-    xmlns:fontAwesome="clr-namespace:XFTemplateApp.Fonts"
-    xmlns:helpers="clr-namespace:XFTemplateApp.Helpers"
+    xmlns:fontAwesome="clr-namespace:ESATouristGuide.Fonts"
+    xmlns:helpers="clr-namespace:ESATouristGuide.Helpers"
     xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
     xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:vm="clr-namespace:XFTemplateApp.ViewModels"
+    xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:DataType="vm:GoogleMapsViewModel"
     Shell.NavBarIsVisible="False">
@@ -26,32 +26,32 @@
                     x:Name="SheetBehavior"
                     VerticalContentAlignment="Fit"
                     CloseOnOverlayTapped="True"
-                    ContentColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
-                                                   Light={StaticResource Primary}}"
-                    HandleColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                  Light={StaticResource PrimaryText}}"
-                    HeaderColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
+                    ContentColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                   Light={StaticResource Background}}"
+                    HandleColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
                                                   Light={StaticResource Primary}}"
+                    HeaderColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                  Light={StaticResource Background}}"
                     InterceptDragGesture="True"
                     IsBusy="False"
                     IsDraggable="False"
                     IsOpen="{Binding HasSelectedPlace}"
                     Position="1"
                     SheetOpeningStrategy="FitContent"
-                    TitleSeparatorColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
-                                                          Light={StaticResource Primary}}">
+                    TitleSeparatorColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                          Light={StaticResource Background}}">
                     <dxui:SheetBehavior.SheetContentTemplate>
                         <DataTemplate>
                             <pv:PancakeView
                                 Padding="8,0,8,12"
-                                BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
-                                                                  Light={StaticResource Primary}}"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                  Light={StaticResource Background}}"
                                 CornerRadius="8"
                                 HeightRequest="232"
                                 VerticalOptions="Start">
                                 <Grid
-                                    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
-                                                                      Light={StaticResource Primary}}"
+                                    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                      Light={StaticResource Background}}"
                                     ColumnDefinitions="1*,1.25*"
                                     ColumnSpacing="8"
                                     RowDefinitions="216"
@@ -85,17 +85,23 @@
                                                 HorizontalOptions="Start"
                                                 HorizontalTextAlignment="Center"
                                                 Text="{Binding SelectedPlace.CityCity}"
-                                                TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                            Light={StaticResource PrimaryText}}"
+                                                TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                            Light={StaticResource Primary}}"
                                                 VerticalOptions="Center" />
+                                            <Frame Padding="0" CornerRadius="8"  Background="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                                                                             Light={StaticResource Secondary}}"
+                                                 xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                             Light={StaticResource DarkBackground}}"
+                                                xct:ShadowEffect.OffsetX="0"
+                                                xct:ShadowEffect.OffsetY="0"
+                                                xct:ShadowEffect.Opacity=".725"
+                                                xct:ShadowEffect.Radius="2"
+                                                HorizontalOptions="Start" Grid.Column="1">
                                             <StackLayout
-                                                Grid.Column="1"
-                                                xct:CornerRadiusEffect.CornerRadius="8"
+                                               
                                                 xct:StateLayout.AnimateStateChanges="True"
                                                 xct:StateLayout.CurrentState="{Binding TemperaturesState}"
-                                                Background="{AppThemeBinding Dark={StaticResource PurpleLight},
-                                                                             Light={StaticResource PurpleLight}}"
-                                                HorizontalOptions="Start"
+                                               
                                                 Orientation="Horizontal"
                                                 Spacing="0">
                                                 <xct:StateLayout.StateViews>
@@ -124,7 +130,7 @@
                                                             </StackLayout.Triggers>
                                                             <BoxView
                                                                 BackgroundColor="{AppThemeBinding Dark=#15181f,
-                                                                                                  Light={StaticResource LoadingGrey}}"
+                                                                                                  Light=#15181f}"
                                                                 HeightRequest="48"
                                                                 HorizontalOptions="Fill"
                                                                 VerticalOptions="Fill"
@@ -150,6 +156,7 @@
                                                     VerticalOptions="Center" />
 
                                             </StackLayout>
+                                            </Frame>
                                         </Grid>
 
 
@@ -158,8 +165,8 @@
                                             FontFamily="InterBold"
                                             FontSize="12"
                                             Text="{Binding SelectedPlace.AdminName, Mode=OneWay}"
-                                            TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                        Light={StaticResource PrimaryText}}"
+                                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                        Light={StaticResource Primary}}"
                                             VerticalOptions="Start" />
 
 
@@ -173,10 +180,10 @@
                                             xct:ShadowEffect.Radius="2"
                                             xct:TouchEffect.AnimationDuration="150"
                                             xct:TouchEffect.CommandParameter="{Binding SelectedPlace}"
-                                            xct:TouchEffect.PressedBackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryText},
+                                            xct:TouchEffect.PressedBackgroundColor="{AppThemeBinding Dark={StaticResource Primary},
                                                                                                      Light=#eaeaea}"
-                                            BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
-                                                                              Light={StaticResource Primary}}"
+                                            BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                              Light={StaticResource Background}}"
                                             CornerRadius="16"
                                             HasShadow="True"
                                             HorizontalOptions="Start"
@@ -199,8 +206,8 @@
                                                     FontSize="16"
                                                     HorizontalOptions="Start"
                                                     Text="{x:Static fontAwesome:FontAwesomeIcons.Info}"
-                                                    TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                                Light={StaticResource PrimaryText}}"
+                                                    TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                                Light={StaticResource Primary}}"
                                                     VerticalOptions="Center" />
                                                 <Label
                                                     Margin="0,0,12,0"
@@ -208,8 +215,8 @@
                                                     FontSize="12"
                                                     HorizontalOptions="Start"
                                                     Text="See More"
-                                                    TextColor="{AppThemeBinding Dark={StaticResource PrimaryTextDark},
-                                                                                Light={StaticResource PrimaryText}}"
+                                                    TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                                Light={StaticResource Primary}}"
                                                     VerticalOptions="Center" />
 
 
@@ -247,28 +254,6 @@
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand" />
 
-                <!--<StackLayout
-                    Grid.Row="0"
-                    Margin="12"
-                    HeightRequest="48"
-                    HorizontalOptions="End"
-                    Spacing="32"
-                    VerticalOptions="Center">
-                    <Button
-                        Padding="16"
-                        xct:CornerRadiusEffect.CornerRadius="24"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentPurpleDark},
-                                                          Light={StaticResource TransparentPurpleDark}}"
-                        Command="{Binding GetCitiesCommand}"
-                        FontAttributes="Bold"
-                        FontFamily="RobotoBold"
-                        FontSize="20"
-                        HorizontalOptions="Fill"
-                        Text="Get cities"
-                        TextColor="{StaticResource ContrastTextDark}"
-                        VerticalOptions="Center" />
-                </StackLayout>-->
-
                 <FlexLayout
                     Grid.Row="0"
                     Grid.Column="0"
@@ -281,43 +266,53 @@
                     VerticalOptions="Start">
                     <FlexLayout.Background>
                         <LinearGradientBrush EndPoint="0,1">
-                            <GradientStop Offset="0.1" Color="#3F522DA8" />
-                            <GradientStop Offset="1.0" Color="#009F96D6" />
+                            <GradientStop Offset="0" Color="#4F1d1f21" />
+                            <GradientStop Offset=".8" Color="#001d1f21" />
                         </LinearGradientBrush>
                     </FlexLayout.Background>
 
                     <Frame
-                        Padding="8"
-                        xct:TouchEffect.Command="{Binding BackCommand}"
-                        BackgroundColor="#59522DA8"
-                        CornerRadius="4"
-                        FlexLayout.Shrink="0">
+                            BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark}, Light={StaticResource TransparentBackground}}"
+                            CornerRadius="8"
+                            FlexLayout.Shrink="0"
+                            HeightRequest="32"
+                            Padding="0"
+                            WidthRequest="32"
+                            xct:TouchEffect.Command="{Binding BackCommand}">
                         <Label
-                            BackgroundColor="Transparent"
-                            FontFamily="FASolid"
-                            FontSize="20"
-                            HorizontalOptions="Start"
-                            Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowLeft}"
-                            TextColor="{AppThemeBinding Dark=#e2e2e2,
-                                                        Light=#e2e2e2}"
-                            VerticalOptions="Center" />
+                                BackgroundColor="Transparent"
+                                FontFamily="FASolid"
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowLeft}"
+                                 TextColor="#E2E2E2"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center" />
                     </Frame>
                     <BoxView FlexLayout.Grow="1" />
 
                     <Frame
-                        Padding="8"
+                        HeightRequest="32"
+                            Padding="0"
+                            WidthRequest="32"
                         xct:TouchEffect.Command="{Binding BackCommand}"
-                        BackgroundColor="#59522DA8"
-                        CornerRadius="4"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark},
+                                                          Light={StaticResource TransparentBackground}}"
+                        CornerRadius="8"
                         FlexLayout.Shrink="0">
                         <Label
                             BackgroundColor="Transparent"
                             FontFamily="FASolid"
                             FontSize="20"
+                            
+                                HorizontalTextAlignment="Center"
                             HorizontalOptions="Center"
                             Text="{x:Static fontAwesome:FontAwesomeIcons.Filter}"
                             TextColor="{AppThemeBinding Dark=#e2e2e2,
                                                         Light=#e2e2e2}"
+                            
+                                VerticalTextAlignment="Center"
                             VerticalOptions="Center" />
                     </Frame>
 

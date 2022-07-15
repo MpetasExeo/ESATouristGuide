@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentView
-    x:Class="XFTemplateApp.UIControls.HomePageView"
+    x:Class="ESATouristGuide.UIControls.HomePageView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customViews="clr-namespace:Sharpnado.TaskLoaderView;assembly=Sharpnado.TaskLoaderView"
-    xmlns:fontAwesome="clr-namespace:XFTemplateApp.Fonts"
-    xmlns:helpers="clr-namespace:XFTemplateApp.Helpers"
+    xmlns:fontAwesome="clr-namespace:ESATouristGuide.Fonts"
+    xmlns:helpers="clr-namespace:ESATouristGuide.Helpers"
     xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:resources="clr-namespace:XFTemplateApp.Resources"
-    xmlns:vm="clr-namespace:XFTemplateApp.ViewModels"
+    xmlns:resources="clr-namespace:ESATouristGuide.Resources"
+    xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryDark},
-                                      Light={StaticResource Primary}}">
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                      Light={StaticResource Background}}">
 
 
     <ContentView.BindingContext>
@@ -25,7 +25,7 @@
         TaskLoaderNotifier="{Binding LoaderNotifier}"
         VerticalOptions="FillAndExpand">
 
-        <customViews:TaskLoaderView.EmptyView>
+        <!--<customViews:TaskLoaderView.EmptyView>
             <Label Text="isloading " />
         </customViews:TaskLoaderView.EmptyView>
 
@@ -39,7 +39,7 @@
                 HorizontalOptions="FillAndExpand"
                 RepeatMode="Infinite"
                 VerticalOptions="FillAndExpand" />
-        </customViews:TaskLoaderView.LoadingView>
+        </customViews:TaskLoaderView.LoadingView>-->
 
         <Grid
             Margin="0"
@@ -96,8 +96,8 @@
                     VerticalOptions="Center">
                     <Button
                         xct:CornerRadiusEffect.CornerRadius="8"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
-                                                          Light={StaticResource PurpleDark}}"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                                                          Light={StaticResource Primary}}"
                         Command="{Binding Command1}"
                         FontAttributes="Bold"
                         FontFamily="Roboto"
@@ -115,8 +115,8 @@
                     VerticalOptions="Center">
                     <Button
                         xct:CornerRadiusEffect.CornerRadius="8"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
-                                                          Light={StaticResource PurpleDark}}"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                                                          Light={StaticResource Primary}}"
                         Command="{Binding Command2}"
                         FontAttributes="Bold"
                         FontFamily="Roboto"
@@ -134,8 +134,8 @@
                     VerticalOptions="Center">
                     <Button
                         xct:CornerRadiusEffect.CornerRadius="8"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
-                                                          Light={StaticResource PurpleDark}}"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                                                          Light={StaticResource Primary}}"
                         Command="{Binding Command3}"
                         FontAttributes="Bold"
                         FontFamily="Roboto"
@@ -153,8 +153,8 @@
                     VerticalOptions="Center">
                     <Button
                         xct:CornerRadiusEffect.CornerRadius="8"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
-                                                          Light={StaticResource PurpleDark}}"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                                                          Light={StaticResource Primary}}"
                         Command="{Binding Command5}"
                         FontAttributes="Bold"
                         FontFamily="Roboto"
@@ -172,8 +172,8 @@
                     VerticalOptions="Center">
                     <Button
                         xct:CornerRadiusEffect.CornerRadius="8"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource PurpleDark},
-                                                          Light={StaticResource PurpleDark}}"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary },
+                                                          Light={StaticResource Primary}}"
                         Command="{Binding Command4}"
                         FontAttributes="Bold"
                         FontFamily="Roboto"
