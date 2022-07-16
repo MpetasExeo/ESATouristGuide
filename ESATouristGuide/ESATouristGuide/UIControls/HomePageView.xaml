@@ -113,18 +113,41 @@
                     HorizontalOptions="Fill"
                     Spacing="32"
                     VerticalOptions="Center">
-                    <Button
-                        xct:CornerRadiusEffect.CornerRadius="8"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                    <Frame
+                        Padding="12"
+                        xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                 Light={StaticResource Accent}}"
+                        xct:ShadowEffect.OffsetX="0"
+                        xct:ShadowEffect.OffsetY="0"
+                        xct:ShadowEffect.Opacity="1"
+                        xct:ShadowEffect.Radius="2"
+                        xct:TouchEffect.Command="{Binding Command2}"
+                        xct:TouchEffect.NativeAnimation="True"
+                        xct:TouchEffect.PressedAnimationDuration="340"
+                        xct:TouchEffect.PressedAnimationEasing="SinInOut"
+                        xct:TouchEffect.PressedBackgroundColor="{AppThemeBinding Dark={StaticResource DarkAccent},
+                                                                                 Light={StaticResource Accent}}"
+                        xct:TouchEffect.PressedOpacity="0.85"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource Primary},
                                                           Light={StaticResource Primary}}"
-                        Command="{Binding Command2}"
-                        FontAttributes="Bold"
-                        FontFamily="Roboto"
-                        FontSize="22"
-                        HorizontalOptions="Fill"
-                        Text="CollectionView Page"
-                        VerticalOptions="Center" />
+                        CornerRadius="8"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        <Label
+                            xct:TouchEffect.Command="{Binding Command2}"
+                            FontAttributes="Bold"
+                            FontFamily="RobotoBold"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            Text="CollectionView Page"
+                            TextColor="{AppThemeBinding Dark=White,
+                                                        Light=White}"
+                            VerticalOptions="Center" />
+                    </Frame>
                 </StackLayout>
+
+
 
                 <StackLayout
                     Grid.Row="2"
@@ -172,7 +195,7 @@
                     VerticalOptions="Center">
                     <Button
                         xct:CornerRadiusEffect.CornerRadius="8"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary },
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
                                                           Light={StaticResource Primary}}"
                         Command="{Binding Command4}"
                         FontAttributes="Bold"

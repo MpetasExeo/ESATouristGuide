@@ -91,6 +91,7 @@ namespace ESATouristGuide.ViewModels
         }
 
         public ICommand OpenDrawerCommand { get; set; }
+        void OpenDrawer() { IsDrawerOpen = true; }
 
         bool isLoaded;
 
@@ -107,7 +108,6 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        void OpenDrawer( object obj ) { IsDrawerOpen = true; }
 
         private void PopulateCitiesList()
         {

@@ -13,14 +13,14 @@
             <Color x:Key="DarkBackground">#15181f</Color>
 
             <Color x:Key="Primary">#004080</Color>
-            <Color x:Key="DarkPrimary">#aaaaaa</Color>
+            <Color x:Key="DarkPrimary">#FFC4C4C4</Color>
 
             <Color x:Key="BackgroundDark">#001b53</Color>
             <Color x:Key="DarkBackgroundDark">#00002b</Color>
 
             <Color x:Key="Secondary">#F5F3F0</Color>
             <Color x:Key="DarkSecondary">#3b3e46</Color>
-            
+
             <Color x:Key="Accent">#0493CC</Color>
             <Color x:Key="DarkAccent">#0078cb</Color>
 
@@ -42,8 +42,8 @@
             <Color x:Key="MenuSelected">#00347b</Color>
             <Color x:Key="MenuSelectedDark">#202020</Color>
 
-            <Color x:Key="TransparentBackground">#5f001b53</Color>
-            <Color x:Key="TransparentBackgroundDark">#5f00002b</Color>
+            <Color x:Key="TransparentBackground">#5f0078cb</Color>
+            <Color x:Key="TransparentBackgroundDark">#5f0493CC</Color>
 
             <Color x:Key="PrimaryOpacityDark">#a81d1f21</Color>
             <Color x:Key="PrimaryOpacity">#a8ffffff</Color>

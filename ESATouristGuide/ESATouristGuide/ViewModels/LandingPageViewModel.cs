@@ -6,8 +6,6 @@ using System.Windows.Input;
 
 using Xamarin.Forms;
 
-using ESATouristGuide;
-
 using Command = MvvmHelpers.Commands.Command;
 
 namespace ESATouristGuide.ViewModels
@@ -20,7 +18,7 @@ namespace ESATouristGuide.ViewModels
         }
 
         public ICommand StartAppCommand { get; set; }
-        void StartApplication( object obj )
+        void StartApplication( )
         {
             if (RequiredChecks.HasInternetConnection())
             {

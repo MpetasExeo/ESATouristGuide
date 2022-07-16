@@ -10,13 +10,18 @@ using Sharpnado.TaskLoaderView;
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.CommunityToolkit.UI.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
+
+using Command = MvvmHelpers.Commands.Command;
+using Map = Xamarin.Forms.GoogleMaps.Map;
 
 namespace ESATouristGuide.ViewModels
 {
@@ -28,12 +33,60 @@ namespace ESATouristGuide.ViewModels
         public ICommand GetCitiesCommand { get; set; }
         public Map GoogleMap { get; set; } = new Map();
         public ObservableRangeCollection<Pin> Pins { get; set; } = new ObservableRangeCollection<Pin>();
+
+
+        public ICommand NavToDetailsCommand { get; set; }
+        bool mapLoaded;
+        public bool MapLoaded
+        {
+            get => mapLoaded;
+            set
+            {
+                SetAndRaise(ref mapLoaded , value);
+                Task.Run(async () => await AfterInitializationTask());
+            }
+        }
+
+        bool constructorFinished;
+        public bool ConstructorFinished
+        {
+            get => constructorFinished;
+            set
+            {
+                SetAndRaise(ref constructorFinished , value);
+                Task.Run(() => Load());
+            }
+        }
+
+        bool filtersClicked;
+
+        public bool FiltersClicked
+        {
+            get => filtersClicked;
+            set
+            {
+                if (value)
+                {
+                    HasSelectedPlace = !value;
+                    IsDrawerOpen = value;
+                }
+                SetAndRaise(ref filtersClicked , value);
+              
+            }
+        }
+
         bool hasSelectedPlace;
+
         public bool HasSelectedPlace
         {
             get => hasSelectedPlace;
             set
             {
+                if (value)
+                {
+                    FiltersClicked = !value;
+                    IsDrawerOpen = value;
+                }
                 SetAndRaise(ref hasSelectedPlace , value);
             }
         }
@@ -46,7 +99,8 @@ namespace ESATouristGuide.ViewModels
                 SetAndRaise(ref selectedPlace , value);
             }
         }
-        Temperatures selectedPlaceTemperature;
+
+        readonly Temperatures selectedPlaceTemperature;
         public Temperatures SelectedPlaceTemperature
         {
             get => selectedPlaceTemperature;
@@ -68,28 +122,12 @@ namespace ESATouristGuide.ViewModels
 
         public GoogleMapsViewModel()
         {
-            PropertiesAndMapInit();
+            ServicesAndPropertiesInit();
             UICommandsInit();
 
-
-            Load();
+            ConstructorFinished = true;
         }
 
-
-
-        public ICommand NavToDetailsCommand { get; set; }
-        bool mapLoaded;
-        public bool MapLoaded
-        {
-            get => mapLoaded;
-            set
-            {
-                SetAndRaise(ref mapLoaded , value);
-                Task.Run(async () => await AfterInitializationTask());
-            }
-
-
-        }
         async Task NavigateToDetails( City city )
         {
             await city.NavigateToDetailsAsync();
@@ -97,15 +135,63 @@ namespace ESATouristGuide.ViewModels
 
         private async Task InitializationTask()
         {
+            if (MapLoaded)
+            {
+                DefineMapStyle();
+                return;
+            }
+
+            List<Task> tasks = new List<Task>
+            {
+
+                // task => Init map 
+                MapInitialization()
+            };
+
+            //περιμένω να Init map 
+            await Task.WhenAll(tasks).ConfigureAwait(true);
+
+            //ο χάρτης φόρτωσε
             MapLoaded = true;
         }
 
-        private async Task AfterInitializationTask()
+        void DefineMapStyle()
         {
+            var assembly = typeof(GoogleMapsViewModel).GetTypeInfo().Assembly;
+
+            OSAppTheme currentTheme = Application.Current.RequestedTheme;
+
+            var assemblyStream = System.String.Empty;
+
+            if (currentTheme == OSAppTheme.Light)
+            {
+                assemblyStream = "ESATouristGuide.Json.travelstyle.json";
+
+            }
+            else
+            {
+                assemblyStream = "ESATouristGuide.Json.darkstyle.json";
+            }
+
+            var stream = assembly.GetManifestResourceStream(assemblyStream);
+
+            string styleFile;
+            using (var reader = new System.IO.StreamReader(stream))
+            {
+                styleFile = reader.ReadToEnd();
+            }
+
+            GoogleMap.MapStyle = MapStyle.FromJson(styleFile);
+        }
+
+        private async Task AfterInitializationTask()
+        { 
             List<Task> tasks = new List<Task>
             {
                 GetCitiesAsync()
             };
+
+            UICommandsInit();
 
             await Task.WhenAll(tasks);
         }
@@ -119,20 +205,57 @@ namespace ESATouristGuide.ViewModels
         {
             GoogleMap.PinClicked += GoogleMap_PinClicked;
             NavToDetailsCommand = new AsyncCommand<City>(NavigateToDetails);
+            OpenFiltersDrawerCommand = new Command(OpenFiltersDrawer);
         }
 
-        void PropertiesAndMapInit()
+
+        public List<Category> Categories { get; set; } = new List<Category>();/*= Models.Categories.CategoriesList;*/
+
+        bool isDrawerOpen;
+
+        public bool IsDrawerOpen
+        {
+            get { return isDrawerOpen; }
+            set
+            {
+                if (value)
+                {
+                    SetAndRaise(ref hasSelectedPlace , !value);
+                }
+                SetAndRaise(ref isDrawerOpen , value);
+               
+            }
+        }
+
+        public ICommand OpenFiltersDrawerCommand { get; set; }
+        void OpenFiltersDrawer() { FiltersClicked = true; }
+
+        void ServicesAndPropertiesInit()
         {
             GreekCitiesService = new GreekCitiesService();
             WeatherService = new WeatherService();
-            CameraPosition cameraPosition = new CameraPosition(new Position(40.57444939059151 , 22.995289142328364) , 13);
-            GoogleMap.InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-            GoogleMap.UiSettings.MyLocationButtonEnabled = true;
+            Categories = Models.Categories.CategoriesList;
+        }
+
+        private async Task MapInitialization()
+        {
+            await Task.Run(() =>
+            {
+                GoogleMap = new Xamarin.Forms.GoogleMaps.Map
+                {
+                    MyLocationEnabled = true ,
+                };
+                DefineMapStyle();
+                GoogleMap.UiSettings.MyLocationButtonEnabled = true;
+                CameraPosition cameraPosition = new CameraPosition(new Position(40.57444939059151 , 22.995289142328364) , 13);
+                GoogleMap.InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+                GoogleMap.UiSettings.MyLocationButtonEnabled = false;
+            }).ConfigureAwait(true);
         }
 
         #region Pin Clicked 
 
-        private void GoogleMap_PinClicked( object sender , PinClickedEventArgs e ) => ThreadPool.QueueUserWorkItem(o => PinSelected(e));
+        private void GoogleMap_PinClicked( object sender , PinClickedEventArgs e ) => PinSelected(e);
 
         private void GetSelectedPlaceTemperature( double lat , double lon )
         {

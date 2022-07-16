@@ -3,15 +3,18 @@
     x:Class="ESATouristGuide.Views.PlaygroundPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:UIElements="clr-namespace:ESATouristGuide.UIControls"
     xmlns:dxcv="clr-namespace:DevExpress.XamarinForms.CollectionView;assembly=DevExpress.XamarinForms.CollectionView"
     xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
     xmlns:dxn="clr-namespace:DevExpress.XamarinForms.Navigation;assembly=DevExpress.XamarinForms.Navigation"
+    xmlns:fontAwesome="clr-namespace:ESATouristGuide.Fonts"
     xmlns:models="clr-namespace:ESATouristGuide.Models"
     xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    Shell.NavBarIsVisible="False"
-    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
-    x:DataType="vm:PlaygroundPageViewModel">
+    x:DataType="vm:PlaygroundPageViewModel"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                      Light={StaticResource Background}}"
+    Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <Style
@@ -198,7 +201,7 @@
             </dxn:DrawerView.DrawerContent>
             <dxn:DrawerView.MainContent>
 
-                -->
+        -->
         <!--<StackLayout>
                     <dxe:Chip
                         Margin="4"
@@ -245,7 +248,7 @@
                         Text="Open drawer" />
                 </Grid>
 
-                -->
+        -->
         <!--<CarouselView
                 x:Name="Carousel"
                 Grid.Row="0"
@@ -431,7 +434,7 @@
             </dxn:TabViewItem>
         </dxn:TabView>-->
 
-        <Grid
+        <!--<Grid
             BackgroundColor="{StaticResource Primary}"
             HorizontalOptions="Fill"
             ColumnDefinitions="0.075*,0.85*,0.075*"
@@ -480,7 +483,7 @@
 
             <StackLayout
                 Grid.Row="2"
-                
+
                 Grid.Column="1"
                 HorizontalOptions="Center"
                 Orientation="Vertical"
@@ -498,7 +501,7 @@
 
             <StackLayout
                 Grid.Row="3"
-                
+
                 Grid.Column="1"
                 HorizontalOptions="Fill"
                 Orientation="Vertical"
@@ -509,11 +512,109 @@
                     FontSize="16"
                     HorizontalOptions="Fill"
                     Text="Εκκίνηση"
-                    
+
                     TextColor="{StaticResource Primary}"
                     VerticalOptions="Center"
                     xct:CornerRadiusEffect.CornerRadius="16" />
             </StackLayout>
+
+        </Grid>-->
+
+        <Grid
+            Padding="0,0,0,0"
+            ColumnDefinitions="68,*,68"
+            HorizontalOptions="Fill"
+            RowDefinitions="76,*"
+            RowSpacing="0"
+            VerticalOptions="Fill">
+
+
+            <!--<dxcv:DXCollectionView
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                  Light={StaticResource Primary}}"
+                ItemSpacing="4"
+                ItemsSource="{Binding Cities}">
+                <dxcv:DXCollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:City">
+                        <UIElements:CollectionViewCard
+                            xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CollectionViewViewModel}}, Path=NavToDetailsCommand}"
+                            xct:TouchEffect.CommandParameter="{Binding .}"
+                            xct:TouchEffect.PressedAnimationDuration="100"
+                            xct:TouchEffect.PressedAnimationEasing="Linear"
+                            xct:TouchEffect.PressedOpacity="0.9"
+                            POIDistance="{Binding DistanceFromUser}"
+                            POIImage="{Binding ImageUrl}"
+                            POIName="{Binding CityCity}"
+                            POIRegion="{Binding Country}" />
+                    </DataTemplate>
+                </dxcv:DXCollectionView.ItemTemplate>
+            </dxcv:DXCollectionView>-->
+
+            <FlexLayout
+                Grid.Column="0"
+                AlignContent="Center"
+                AlignItems="Center"
+                Direction="Row"
+                FlexLayout.AlignSelf="Start"
+                JustifyContent="Center">
+                <Frame
+                    Padding="0"
+                    xct:TouchEffect.Command="{Binding BackCommand}"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark},
+                                                      Light={StaticResource TransparentBackground}}"
+                    CornerRadius="12"
+                    FlexLayout.AlignSelf="Center"
+                    FlexLayout.Shrink="0"
+                    HeightRequest="48"
+                    WidthRequest="48">
+                    <Label
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        FontFamily="FASolid"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowLeft}"
+                        TextColor="#E2E2E2"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+                </Frame>
+            </FlexLayout>
+
+            <FlexLayout
+                Grid.Column="2"
+                AlignContent="Center"
+                AlignItems="Center"
+                Direction="Row"
+                FlexLayout.AlignSelf="Start"
+                JustifyContent="Center">
+                <Frame
+                    Padding="0"
+                    xct:TouchEffect.Command="{Binding OpenDrawerCommand}"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark},
+                                                      Light={StaticResource TransparentBackground}}"
+                    CornerRadius="12"
+                    FlexLayout.AlignSelf="Center"
+                    FlexLayout.Shrink="0"
+                    HeightRequest="48"
+                    WidthRequest="48">
+                    <Label
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        FontFamily="FASolid"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static fontAwesome:FontAwesomeIcons.Filter}"
+                        TextColor="#E2E2E2"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+                </Frame>
+            </FlexLayout>
 
         </Grid>
 

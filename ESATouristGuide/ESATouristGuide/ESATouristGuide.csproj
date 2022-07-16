@@ -14,7 +14,9 @@
     <None Remove="Fonts\RobotoSlab.ttf" />
     <None Remove="Fonts\RobotoSlabBold.ttf" />
     <None Remove="greekcities.json" />
+    <None Remove="Json\darkstyle.json" />
     <None Remove="Json\greekcities.json" />
+    <None Remove="Json\travelstyle.json" />
     <None Remove="Resources\SVGs\distancemarker.svg" />
   </ItemGroup>
 
@@ -25,9 +27,11 @@
     <EmbeddedResource Include="Fonts\InterBold.ttf" />
     <EmbeddedResource Include="Fonts\RobotoSlab.ttf" />
     <EmbeddedResource Include="Fonts\RobotoSlabBold.ttf" />
+    <EmbeddedResource Include="Json\darkstyle.json" />
     <EmbeddedResource Include="Json\greekcities.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Json\travelstyle.json" />
     <EmbeddedResource Include="Resources\SVGs\distancemarker.svg" />
     <Page Include="greekcities.json" />
   </ItemGroup>
