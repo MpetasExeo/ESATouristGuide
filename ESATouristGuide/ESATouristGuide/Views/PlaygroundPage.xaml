@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:UIElements="clr-namespace:ESATouristGuide.UIControls"
+    xmlns:anim="clr-namespace:Xamanimation;assembly=Xamanimation"
     xmlns:dxcv="clr-namespace:DevExpress.XamarinForms.CollectionView;assembly=DevExpress.XamarinForms.CollectionView"
     xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
     xmlns:dxn="clr-namespace:DevExpress.XamarinForms.Navigation;assembly=DevExpress.XamarinForms.Navigation"
@@ -520,7 +521,7 @@
 
         </Grid>-->
 
-        <Grid
+        <!--<Grid
             Padding="0,0,0,0"
             ColumnDefinitions="68,*,68"
             HorizontalOptions="Fill"
@@ -529,7 +530,8 @@
             VerticalOptions="Fill">
 
 
-            <!--<dxcv:DXCollectionView
+        -->
+        <!--<dxcv:DXCollectionView
                 Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="0"
@@ -553,6 +555,7 @@
                     </DataTemplate>
                 </dxcv:DXCollectionView.ItemTemplate>
             </dxcv:DXCollectionView>-->
+        <!--
 
             <FlexLayout
                 Grid.Column="0"
@@ -616,7 +619,133 @@
                 </Frame>
             </FlexLayout>
 
+        </Grid>-->
+
+
+        <Grid
+            Padding="8"
+            BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                              Light={StaticResource Background}}"
+            ColumnDefinitions="1.518033988749894*,1*"
+            ColumnSpacing="8"
+            RowDefinitions="*"
+            RowSpacing="0"
+            VerticalOptions="Fill">
+
+            <StackLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                Padding="8">
+                <Frame
+                    Padding="0"
+                    xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource Background},
+                                                             Light={StaticResource DarkBackground}}"
+                    xct:ShadowEffect.OffsetX="0"
+                    xct:ShadowEffect.OffsetY="0"
+                    xct:ShadowEffect.Opacity=".725"
+                    xct:ShadowEffect.Radius="2"
+                    CornerRadius="12"
+                    IsVisible="True "
+                    VerticalOptions="FillAndExpand">
+
+                    <Grid
+                        BackgroundColor="Red"
+                        ColumnDefinitions="*,66"
+                        HorizontalOptions="Fill"
+                        RowDefinitions="66,*"
+                        VerticalOptions="Fill">
+
+
+                        <Image
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Aspect="AspectFill"
+                            Source="i1.jpg"
+                            VerticalOptions="Fill" />
+
+                        <Frame
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Padding="0"
+                            xct:CornerRadiusEffect.CornerRadius="8,0,8,0"
+                            BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark},
+                                                              Light={StaticResource TransparentBackground}}"
+                            HorizontalOptions="Fill">
+                            <StackLayout
+                                HorizontalOptions="End"
+                                Orientation="Horizontal"
+                                Spacing="0">
+                                <!--
+                                    xct:StateLayout.AnimateStateChanges="True"
+                                    xct:StateLayout.CurrentState="{Binding TemperaturesState}"
+                                -->
+                                <!--<xct:StateLayout.StateViews>
+                                    <xct:StateView StateKey="Loading">
+                                        <StackLayout x:Name="CurrentTemp">
+                                            <StackLayout.Resources>
+                                                <anim:StoryBoard x:Key="LoadingDetails" Target="{x:Reference CurrentTemp}">
+                                                    <anim:FadeToAnimation Opacity="0.5" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="1" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="0.5" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="1" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="0.5" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="1" Duration="500" />
+                                                </anim:StoryBoard>
+                                            </StackLayout.Resources>
+                                            <StackLayout.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding IsBusy}"
+                                                    TargetType="StackLayout"
+                                                    Value="true">
+                                                    <DataTrigger.EnterActions>
+                                                        <anim:BeginAnimation Animation="{StaticResource LoadingDetails}" />
+                                                    </DataTrigger.EnterActions>
+
+                                                </DataTrigger>
+                                            </StackLayout.Triggers>
+                                            <BoxView
+                                                BackgroundColor="{AppThemeBinding Dark=#15181f,
+                                                                                  Light=#15181f}"
+                                                HeightRequest="48"
+                                                HorizontalOptions="Fill"
+                                                VerticalOptions="Fill"
+                                                WidthRequest="96" />
+                                        </StackLayout>
+                                    </xct:StateView>
+                                </xct:StateLayout.StateViews>-->
+                                <Image
+                                    x:Name="weatherImage"
+                                    Aspect="AspectFit"
+                                    HeightRequest="24"
+                                    HorizontalOptions="End"
+                                    Source="i1.jpg"
+                                    VerticalOptions="CenterAndExpand" />
+                                <Label
+                                    FontFamily="InterBold"
+                                    FontSize="12"
+                                    HorizontalOptions="StartAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="32C"
+                                    TranslationX="-4"
+                                    VerticalOptions="Center" />
+
+                            </StackLayout>
+                        </Frame>
+
+
+                    </Grid>
+
+
+                </Frame>
+            </StackLayout>
+
+
+
         </Grid>
+
+
 
     </ContentPage.Content>
 </ContentPage>
