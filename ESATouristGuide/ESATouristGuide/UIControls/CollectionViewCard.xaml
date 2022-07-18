@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:helpers="clr-namespace:ESATouristGuide.Helpers"
     xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:uicontrols="clr-namespace:ESATouristGuide.UIControls"
     xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
@@ -41,7 +42,7 @@
                     Grid.RowSpan="3"
                     Aspect="AspectFill"
                     Source="{Binding POIImage}" />
-               
+
 
                 <pv:PancakeView
                     Grid.Row="2"
@@ -66,18 +67,34 @@
                         RowDefinitions="*,*"
                         RowSpacing="8">
 
-
-                        <Label
-                            x:Name="POIDistanceFromUserLabel"
+                        <StackLayout
                             Grid.Column="1"
                             Margin="0"
-                            FontFamily="Inter"
-                            FontSize="12"
-                            HorizontalOptions="StartAndExpand"
-                            Padding="0"
-                            Text="{Binding POIDistance}"
-                            TextColor="WhiteSmoke"
-                            VerticalOptions="Start" />
+                            Orientation="Horizontal"
+                            Spacing="0"
+                            Padding="0">
+
+                            <Label
+                                x:Name="POIDistanceFromUserLabel"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HorizontalOptions="StartAndExpand"
+                                Padding="0"
+                                Text="{Binding POIDistance}"
+                                TextColor="WhiteSmoke"
+                                VerticalOptions="Start" />
+                            <Label
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HorizontalOptions="StartAndExpand"
+                                Padding="0"
+                                Text="{helpers:Translate KilometersShort}"
+                                TextColor="WhiteSmoke"
+                                VerticalOptions="Start" />
+
+
+                        </StackLayout>
+
                         <Label
                             x:Name="POIRegionLabel"
                             Grid.Row="0"

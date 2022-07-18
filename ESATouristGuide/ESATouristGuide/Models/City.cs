@@ -1,6 +1,10 @@
 ﻿using ESATouristGuide.Helpers;
 using ESATouristGuide.Interfaces;
+using ESATouristGuide.Resources;
+
 using ESATouristGuide.ViewModels;
+
+using ESATouristGuide.Views;
 
 using Newtonsoft.Json;
 
@@ -9,9 +13,6 @@ using System.Threading.Tasks;
 
 using Xamarin.Essentials;
 using Xamarin.Forms;
-
-using ESATouristGuide.Views;
-using ESATouristGuide.Resources;
 
 namespace ESATouristGuide.Models
 {
@@ -40,14 +41,15 @@ namespace ESATouristGuide.Models
 
         public Temperatures Temperatures { get; set; }
         public Uri ImageUrl { get; set; }
-        public string DistanceFromUser
+        public double DistanceFromUser
         {
             get
             {
-                return $"{CalculateDistanceFromUser(Lat , Lng)} {AppResources.KilometersShort}";
+                return CalculateDistanceFromUser(Lat , Lng);
             }
         }
 
+        public Category Category { get; set; }
 
         public async Task NavigateToDetailsAsync()
         {
@@ -82,9 +84,9 @@ namespace ESATouristGuide.Models
         }
 
 
-        public string CalculateDistanceFromUser( double latitude , double longitude )
+        public double CalculateDistanceFromUser(double latitude , double longitude)
         {
-            return Math.Round(Location.CalculateDistance(Settings.Position.Latitude , Settings.Position.Longitude , latitude , longitude , DistanceUnits.Kilometers) , 1).ToString();
+            return Math.Round(Location.CalculateDistance(Settings.Position.Latitude , Settings.Position.Longitude , latitude , longitude , DistanceUnits.Kilometers) , 1);
         }
 
     }

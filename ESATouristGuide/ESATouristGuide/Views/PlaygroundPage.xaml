@@ -3,19 +3,18 @@
     x:Class="ESATouristGuide.Views.PlaygroundPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:UIElements="clr-namespace:ESATouristGuide.UIControls"
     xmlns:anim="clr-namespace:Xamanimation;assembly=Xamanimation"
     xmlns:dxcv="clr-namespace:DevExpress.XamarinForms.CollectionView;assembly=DevExpress.XamarinForms.CollectionView"
     xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
     xmlns:dxn="clr-namespace:DevExpress.XamarinForms.Navigation;assembly=DevExpress.XamarinForms.Navigation"
     xmlns:fontAwesome="clr-namespace:ESATouristGuide.Fonts"
     xmlns:models="clr-namespace:ESATouristGuide.Models"
+    xmlns:UIElements="clr-namespace:ESATouristGuide.UIControls"
     xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    x:DataType="vm:PlaygroundPageViewModel"
-    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
-                                      Light={StaticResource Background}}"
-    Shell.NavBarIsVisible="False">
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
+    Shell.NavBarIsVisible="False"
+    x:DataType="vm:PlaygroundPageViewModel">
 
     <ContentPage.Resources>
         <Style
@@ -622,7 +621,7 @@
         </Grid>-->
 
 
-        <Grid
+        <!--<Grid
             Padding="8"
             BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
                                               Light={StaticResource Background}}"
@@ -677,11 +676,12 @@
                                 HorizontalOptions="End"
                                 Orientation="Horizontal"
                                 Spacing="0">
-                                <!--
+                                -->
+        <!--
                                     xct:StateLayout.AnimateStateChanges="True"
                                     xct:StateLayout.CurrentState="{Binding TemperaturesState}"
                                 -->
-                                <!--<xct:StateLayout.StateViews>
+        <!--<xct:StateLayout.StateViews>
                                     <xct:StateView StateKey="Loading">
                                         <StackLayout x:Name="CurrentTemp">
                                             <StackLayout.Resources>
@@ -714,7 +714,7 @@
                                                 WidthRequest="96" />
                                         </StackLayout>
                                     </xct:StateView>
-                                </xct:StateLayout.StateViews>-->
+                                </xct:StateLayout.StateViews>-->        <!--
                                 <Image
                                     x:Name="weatherImage"
                                     Aspect="AspectFit"
@@ -743,8 +743,58 @@
 
 
 
+        </Grid>-->
+
+        <Grid
+            ColumnDefinitions="*,Auto"
+            HeightRequest="48"
+            RowDefinitions="48"
+            VerticalOptions="Center">
+            <BoxView
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                
+                BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark}, Light={StaticResource TransparentBackground}}"
+                FlexLayout.Grow="0"
+                HeightRequest="8"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="40"
+                xct:CornerRadiusEffect.CornerRadius="4" />
+
+            <StackLayout
+                Grid.Column="1"
+                Margin="16,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+               
+                    <Label
+                        FontFamily="FASolid"
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="{x:Static fontAwesome:FontAwesomeIcons.Check}"
+                        TextColor="{AppThemeBinding Dark={StaticResource DarkSuccess}, Light={StaticResource Success}}"
+                        VerticalOptions="Center" />
+                          </StackLayout>
+
         </Grid>
 
+        <!--<FlexLayout  Padding="4"
+                        AlignContent="Center"
+                        AlignItems="Center"
+                        Direction="Row"
+                     JustifyContent="SpaceAround"
+                        FlexLayout.AlignSelf="Stretch"
+                        HeightRequest="40"
+                        VerticalOptions="Center">
+            <FlexLayout AlignContent="Center" AlignItems="Center" JustifyContent="SpaceAround" Direction="Row" FlexLayout.Grow="1" >
+             
+            </FlexLayout>
+         
+
+            
+        </FlexLayout>-->
 
 
     </ContentPage.Content>
