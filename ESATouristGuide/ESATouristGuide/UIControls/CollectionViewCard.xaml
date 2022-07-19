@@ -5,25 +5,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:helpers="clr-namespace:ESATouristGuide.Helpers"
     xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:uicontrols="clr-namespace:ESATouristGuide.UIControls"
     xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.Effects;assembly=Xamarin.CommunityToolkit"
-    x:DataType="uicontrols:CollectionViewCard"
-    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
-                                      Light={StaticResource Background}}"
-    Shell.NavBarIsVisible="False">
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
+    Shell.NavBarIsVisible="False"
+    x:DataType="uicontrols:CollectionViewCard">
     <ContentView.Content>
         <pv:PancakeView
             x:Name="POITapAction"
-            Padding="0"
-            CornerRadius="1">
+            CornerRadius="1"
+            Padding="0">
             <pv:PancakeView.Shadow>
                 <pv:DropShadow
-                    BlurRadius="10"
-                    Opacity="0.3"
                     Offset="10,10"
-                    Color="#000000" />
+                    Color="#000000"
+                    BlurRadius="10"
+                    Opacity="0.3" />
             </pv:PancakeView.Shadow>
 
             <Grid
@@ -46,11 +46,11 @@
 
                 <pv:PancakeView
                     Grid.Row="2"
-                    Padding="2,0,2,0"
                     BackgroundGradientEndPoint="1,0"
                     BackgroundGradientStartPoint="1,1"
                     CornerRadius="1"
                     HorizontalOptions="FillAndExpand"
+                    Padding="2,0,2,0"
                     TranslationY="0"
                     VerticalOptions="Fill">
                     <pv:PancakeView.BackgroundGradientStops>
@@ -62,23 +62,39 @@
 
                     <Grid
                         Grid.Row="1"
-                        Padding="16,12,16,4"
                         ColumnDefinitions="*,Auto"
-                        RowDefinitions="40,40"
+                        Padding="16,12"
+                        RowDefinitions="*,*"
                         RowSpacing="8">
 
-
-                        <Label
-                            x:Name="POIDistanceFromUserLabel"
+                        <StackLayout
                             Grid.Column="1"
                             Margin="0"
-                            Padding="0"
-                            FontFamily="Inter"
-                            FontSize="12"
-                            HorizontalOptions="StartAndExpand"
-                            Text="{Binding POIDistance}"
-                            TextColor="WhiteSmoke"
-                            VerticalOptions="Start" />
+                            Orientation="Horizontal"
+                            Spacing="0"
+                            Padding="0">
+
+                            <Label
+                                x:Name="POIDistanceFromUserLabel"
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HorizontalOptions="StartAndExpand"
+                                Padding="0"
+                                Text="{Binding POIDistance}"
+                                TextColor="WhiteSmoke"
+                                VerticalOptions="Start" />
+                            <Label
+                                FontFamily="Inter"
+                                FontSize="12"
+                                HorizontalOptions="StartAndExpand"
+                                Padding="0"
+                                Text="{helpers:Translate KilometersShort}"
+                                TextColor="WhiteSmoke"
+                                VerticalOptions="Start" />
+
+
+                        </StackLayout>
+
                         <Label
                             x:Name="POIRegionLabel"
                             Grid.Row="0"
@@ -93,10 +109,8 @@
                             x:Name="POINameLabel"
                             Grid.Row="1"
                             Grid.Column="0"
-                            Grid.ColumnSpan="2"
                             FontFamily="InterBold"
                             FontSize="Title"
-                            HorizontalOptions="StartAndExpand"
                             Text="{Binding POIName}"
                             TextColor="WhiteSmoke"
                             VerticalOptions="Start" />

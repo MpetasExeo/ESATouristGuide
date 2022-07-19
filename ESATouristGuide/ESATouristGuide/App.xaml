@@ -27,8 +27,8 @@
             <Color x:Key="Danger">#ed412f</Color>
             <Color x:Key="DarkDanger">#e74c3c</Color>
 
-            <Color x:Key="Success">#048785</Color>
-            <Color x:Key="DarkSuccess">#4fb7b5</Color>
+            <Color x:Key="Success">#FF048762</Color>
+            <Color x:Key="DarkSuccess">#FF4FB893</Color>
 
             <Color x:Key="Warning">#fee15f</Color>
             <Color x:Key="DarkWarning">#e49706</Color>

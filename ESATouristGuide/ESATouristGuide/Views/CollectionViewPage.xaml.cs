@@ -1,4 +1,6 @@
 ﻿
+using ESATouristGuide.ViewModels;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +13,17 @@ namespace ESATouristGuide.Views
         public CollectionViewPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            var vm = this.BindingContext as CollectionViewViewModel;
+            if (!vm.IsLoaded)
+            {
+                vm.IsLoaded = true;
+            }
+            //vm.Load();
         }
     }
 }

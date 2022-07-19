@@ -10,5 +10,6 @@ namespace ESATouristGuide.Models
         public string Text { get; set; }
 
         public string Color { get; set; }
+        public bool IsSelected { get; set; } = true;
     }
 }

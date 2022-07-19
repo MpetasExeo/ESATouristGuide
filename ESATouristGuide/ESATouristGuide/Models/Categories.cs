@@ -7,16 +7,20 @@ namespace ESATouristGuide.Models
 {
     public static class Categories
     {
-        private static readonly List<Category> categoriesList = new List<Category>
+        private static readonly List<Category> _categoriesList = new List<Category>
         {
-            new Category { Color = "#abcf2e", Text = AppResources.PlacesToGo, Image = "place.png" },
-            new Category { Color = "#abcf2e", Text = AppResources.SeaAndSun, Image = "seaandsun.png" },
-            new Category { Color = "#abcf2e", Text = AppResources.Gastronomy, Image = "gastronomy.png" },
-            new Category { Color = "#abcf2e", Text = AppResources.ArtLife, Image = "place.png" },
-            new Category { Color = "#abcf2e", Text = AppResources.Outdoor, Image = "outdoor.png" },
-            new Category { Color = "#abcf2e", Text = AppResources.Politismos, Image = "culture.png" }
+            new Category { Color = "#2f962f", Text = "Φύση", Image = "place.png" },
+            new Category { Color = "#748f53", Text = "Δραστηριότητες", Image = "seaandsun.png" },
+            new Category { Color = "#914c2f", Text = AppResources.Gastronomy, Image = "gastronomy.png" },
+            new Category { Color = "#a38b3b", Text = "Εκδηλώσεις", Image = "place.png" },
+            new Category { Color = "#2b5f82", Text = "Παραλίες", Image = "outdoor.png" },
+            new Category { Color = "#abcf2e", Text = "Μουσεία", Image = "culture.png" },
+            new Category { Color = "#b83737", Text = "Μνημεία", Image = "culture.png" }
+            ,new Category { Color = "#9c436f", Text = "Κορυφαία αξιοθέατα", Image = "culture.png" }
+
+            
         };
 
-        public static List<Category> CategoriesList => categoriesList;
+        public static List<Category> CategoriesList => _categoriesList;
     }
 }
