@@ -9,20 +9,21 @@
     xmlns:uicontrols="clr-namespace:ESATouristGuide.UIControls"
     xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.Effects;assembly=Xamarin.CommunityToolkit"
-    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
-    Shell.NavBarIsVisible="False"
-    x:DataType="uicontrols:CollectionViewCard">
+    x:DataType="uicontrols:CollectionViewCard"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                      Light={StaticResource Background}}"
+    Shell.NavBarIsVisible="False">
     <ContentView.Content>
         <pv:PancakeView
             x:Name="POITapAction"
-            CornerRadius="1"
-            Padding="0">
+            Padding="0"
+            CornerRadius="1">
             <pv:PancakeView.Shadow>
                 <pv:DropShadow
-                    Offset="10,10"
-                    Color="#000000"
                     BlurRadius="10"
-                    Opacity="0.3" />
+                    Opacity="0.3"
+                    Offset="10,10"
+                    Color="#000000" />
             </pv:PancakeView.Shadow>
 
             <Grid
@@ -41,15 +42,15 @@
                     Grid.RowSpan="3"
                     Aspect="AspectFill"
                     Source="{Binding POIImage}" />
-               
+
 
                 <pv:PancakeView
                     Grid.Row="2"
+                    Padding="2,0,2,0"
                     BackgroundGradientEndPoint="1,0"
                     BackgroundGradientStartPoint="1,1"
                     CornerRadius="1"
                     HorizontalOptions="FillAndExpand"
-                    Padding="2,0,2,0"
                     TranslationY="0"
                     VerticalOptions="Fill">
                     <pv:PancakeView.BackgroundGradientStops>
@@ -61,9 +62,9 @@
 
                     <Grid
                         Grid.Row="1"
+                        Padding="16,12,16,4"
                         ColumnDefinitions="*,Auto"
-                        Padding="16,12"
-                        RowDefinitions="*,*"
+                        RowDefinitions="40,40"
                         RowSpacing="8">
 
 
@@ -71,10 +72,10 @@
                             x:Name="POIDistanceFromUserLabel"
                             Grid.Column="1"
                             Margin="0"
+                            Padding="0"
                             FontFamily="Inter"
                             FontSize="12"
                             HorizontalOptions="StartAndExpand"
-                            Padding="0"
                             Text="{Binding POIDistance}"
                             TextColor="WhiteSmoke"
                             VerticalOptions="Start" />
@@ -92,8 +93,10 @@
                             x:Name="POINameLabel"
                             Grid.Row="1"
                             Grid.Column="0"
+                            Grid.ColumnSpan="2"
                             FontFamily="InterBold"
                             FontSize="Title"
+                            HorizontalOptions="StartAndExpand"
                             Text="{Binding POIName}"
                             TextColor="WhiteSmoke"
                             VerticalOptions="Start" />

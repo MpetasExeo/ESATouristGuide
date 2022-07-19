@@ -329,6 +329,11 @@
                                     POIRegion="{Binding Country}" />
                             </DataTemplate>
                         </dxcv:DXCollectionView.ItemTemplate>
+
+                        <!--  Sort items.  -->
+                        <dxcv:DXCollectionView.SortDescriptions>
+                            <dxcv:SortDescription FieldName="DistanceFromUser" SortOrder="Ascending" />
+                        </dxcv:DXCollectionView.SortDescriptions>
                     </dxcv:DXCollectionView>
 
                     <FlexLayout
