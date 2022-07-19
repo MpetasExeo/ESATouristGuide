@@ -25,6 +25,8 @@
         VerticalOptions="FillAndExpand">
 
         <ui:HomePageView />
+
+        <!--<ui:HomeView />-->
     </ScrollView>
 
 </ContentPage>

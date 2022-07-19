@@ -14,10 +14,10 @@
     xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    Shell.NavBarIsVisible="False"
     x:DataType="vm:ItemDetailsViewModel"
     BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
                                       Light={StaticResource Background}}"
+    Shell.NavBarIsVisible="False"
     mc:Ignorable="d">
     <ContentPage.Resources>
         <StyleSheet>
@@ -49,7 +49,7 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />
                 <Setter Property="FontSize" Value="20" />
-                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource Primary}, Light={StaticResource DarkPrimary}}" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}" />
             </Style.Setters>
         </Style>
 
@@ -115,8 +115,8 @@
             </Grid.RowDefinitions>
             <!--  HEADER BACKGROUND  -->
             <BoxView
-                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
-                                                  Light={StaticResource Background}}"
+                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkAccent},
+                                                  Light={StaticResource Accent}}"
                 HorizontalOptions="Fill"
                 TranslationY="{Binding RelativeScrollY, Source={x:Reference Scroll}, Converter={StaticResource ScrollValueConverter}, ConverterParameter='-5;0;200;false;0'}" />
             <!--  HEADER CAROUSEL  -->
@@ -204,7 +204,6 @@
 
             <RefreshView
                 Grid.RowSpan="2"
-                Command="{Binding RefreshCommand}"
                 IsEnabled="False"
                 IsRefreshing="False"
                 RefreshColor="#FF9900">
@@ -218,7 +217,13 @@
                         <Frame
                             Padding="0"
                             d:IsVisible="False"
-                             BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                            xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource Background},
+                                                                     Light=#000000}"
+                            xct:ShadowEffect.OffsetX="0"
+                            xct:ShadowEffect.OffsetY="0"
+                            xct:ShadowEffect.Opacity="0.8"
+                            xct:ShadowEffect.Radius="1"
+                            BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
                                                               Light={StaticResource Secondary}}"
                             CornerRadius="8"
                             Visual="Material">
@@ -246,132 +251,127 @@
                                     To="0" />
                             </Frame.Behaviors>
 
-                            <pv:PancakeView Grid.Row="4" xct:CornerRadiusEffect.CornerRadius="6">
-                                <!--<pv:PancakeView.Background>
-                                    <LinearGradientBrush EndPoint="0,1">
-                                        <GradientStop Offset="0" Color="{AppThemeBinding Dark={StaticResource LoadingGreyDark}, Light={StaticResource Primary}}" />
-                                        <GradientStop Offset="0.6" Color="{AppThemeBinding Dark={StaticResource LoadingGreyDark}, Light={StaticResource LoadingGrey}}" />
-                                    </LinearGradientBrush>
-                                </pv:PancakeView.Background>-->
-                                <Grid
-                                    
-                                    xct:StateLayout.AnimateStateChanges="True"
-                                    xct:StateLayout.CurrentState="{Binding MainState}"
-                                        >
-                                    <xct:StateLayout.StateViews>
-                                        <xct:StateView StateKey="Loading">
-                                            <StackLayout x:Name="CurrentTemp">
-                                                <StackLayout.Resources>
-                                                    <anim:StoryBoard x:Key="LoadingDetails" Target="{x:Reference CurrentTemp}">
-                                                        <anim:FadeToAnimation Opacity="0.5" Duration="500" />
-                                                        <anim:FadeToAnimation Opacity="1" Duration="500" />
-                                                        <anim:FadeToAnimation Opacity="0.5" Duration="500" />
-                                                        <anim:FadeToAnimation Opacity="1" Duration="500" />
-                                                        <anim:FadeToAnimation Opacity="0.5" Duration="500" />
-                                                        <anim:FadeToAnimation Opacity="1" Duration="500" />
-                                                    </anim:StoryBoard>
-                                                </StackLayout.Resources>
-                                                <StackLayout.Triggers>
-                                                    <DataTrigger
-                                                        Binding="{Binding IsBusy}"
-                                                        TargetType="StackLayout"
-                                                        Value="true">
-                                                        <DataTrigger.EnterActions>
-                                                            <anim:BeginAnimation Animation="{StaticResource LoadingDetails}" />
-                                                        </DataTrigger.EnterActions>
 
-                                                    </DataTrigger>
-                                                </StackLayout.Triggers>
-                                                <StackLayout
-                                                    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
-                                                                                      Light={StaticResource Secondary}}"
-                                                    HeightRequest="78"
-                                                    HorizontalOptions="FillAndExpand"
-                                                    VerticalOptions="FillAndExpand" />
-                                            </StackLayout>
-                                        </xct:StateView>
-                                    </xct:StateLayout.StateViews>
-                                    <FlexLayout
-                                        Margin="2"
-                                        Padding="2"
-                                        HorizontalOptions="FillAndExpand"
-                                        JustifyContent="SpaceAround"
-                                        VerticalOptions="FillAndExpand">
+                            <Grid xct:StateLayout.AnimateStateChanges="True" xct:StateLayout.CurrentState="{Binding MainState}">
+                                <xct:StateLayout.StateViews>
+                                    <xct:StateView StateKey="Loading">
+                                        <StackLayout x:Name="CurrentTemp">
+                                            <StackLayout.Resources>
+                                                <anim:StoryBoard x:Key="LoadingDetails" Target="{x:Reference CurrentTemp}">
+                                                    <anim:FadeToAnimation Opacity="0.5" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="1" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="0.5" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="1" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="0.5" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="1" Duration="500" />
+                                                </anim:StoryBoard>
+                                            </StackLayout.Resources>
+                                            <StackLayout.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding IsBusy}"
+                                                    TargetType="StackLayout"
+                                                    Value="true">
+                                                    <DataTrigger.EnterActions>
+                                                        <anim:BeginAnimation Animation="{StaticResource LoadingDetails}" />
+                                                    </DataTrigger.EnterActions>
 
-
-                                        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
-                                            <ffimageloading1:SvgCachedImage
-                                                Margin="0,0"
-                                                Aspect="AspectFit"
-                                                HeightRequest="36"
-                                                HorizontalOptions="Fill"
-                                                Source="{Binding Temperatures.WeatherImage}"
-                                                VerticalOptions="Fill" />
-
-                                            <Label
-                                                Margin="0,0"
-                                                FontFamily="InterBold"
-                                                FontSize="14"
-                                                HorizontalOptions="Center"
-                                                Style="{StaticResource PageHeader}"
-                                                Text="{Binding Temperatures.Temperature}"
-                                                TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
-                                                                            Light={StaticResource Primary}}"
-                                                VerticalOptions="CenterAndExpand" />
+                                                </DataTrigger>
+                                            </StackLayout.Triggers>
+                                            <StackLayout
+                                                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                                                                                  Light={StaticResource Secondary}}"
+                                                HeightRequest="78"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="FillAndExpand" />
                                         </StackLayout>
+                                    </xct:StateView>
+                                </xct:StateLayout.StateViews>
+                                <FlexLayout
+                                    Margin="2"
+                                    Padding="2"
+                                    HorizontalOptions="FillAndExpand"
+                                    JustifyContent="SpaceAround"
+                                    VerticalOptions="FillAndExpand">
 
-                                        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
 
-                                            <Label Style="{StaticResource InfoIconLabel}" Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowsAltH}" />
+                                    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+                                        <ffimageloading1:SvgCachedImage
+                                            Margin="0,0"
+                                            Aspect="AspectFit"
+                                            HeightRequest="36"
+                                            HorizontalOptions="Fill"
+                                            Source="{Binding Temperatures.WeatherImage}"
+                                            VerticalOptions="Fill" />
 
-                                            <Label
-                                                Margin="0,0"
-                                                FontFamily="InterBold"
-                                                FontSize="14"
-                                                HorizontalOptions="Center"
-                                                Style="{StaticResource PageHeader}"
-                                                Text="{Binding Distances.Distance}"
-                                                TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
-                                                                            Light={StaticResource Primary}}" />
-                                        </StackLayout>
+                                        <Label
+                                            Margin="0,0"
+                                            FontFamily="InterBold"
+                                            FontSize="14"
+                                            HorizontalOptions="Center"
+                                            Style="{StaticResource PageHeader}"
+                                            Text="{Binding Temperatures.Temperature}"
+                                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                        Light={StaticResource Primary}}"
+                                            VerticalOptions="CenterAndExpand" />
+                                    </StackLayout>
 
-                                        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
-                                            <Label Style="{StaticResource InfoIconLabel}" Text="{x:Static fontAwesome:FontAwesomeIcons.Car}" />
+                                    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
 
-                                            <Label
-                                                Margin="0,0"
-                                                FontFamily="InterBold"
-                                                FontSize="14"
-                                                HorizontalOptions="Center"
-                                                Style="{StaticResource PageHeader}"
-                                                Text="{Binding Distances.DrivingDuration}"
-                                                TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
-                                                                            Light={StaticResource Primary}}" />
-                                        </StackLayout>
+                                        <Label Style="{StaticResource InfoIconLabel}" Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowsAltH}" />
 
-                                        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
-                                            <Label Style="{StaticResource InfoIconLabel}" Text="{x:Static fontAwesome:FontAwesomeIcons.Walking}" />
+                                        <Label
+                                            Margin="0,0"
+                                            FontFamily="InterBold"
+                                            FontSize="14"
+                                            HorizontalOptions="Center"
+                                            Style="{StaticResource PageHeader}"
+                                            Text="{Binding Distances.Distance}"
+                                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                        Light={StaticResource Primary}}" />
+                                    </StackLayout>
 
-                                            <Label
-                                                Margin="0,0"
-                                                FontFamily="InterBold"
-                                                FontSize="14"
-                                                HorizontalOptions="Center"
-                                                Style="{StaticResource PageHeader}"
-                                                Text="{Binding Distances.WalkingDuration}"
-                                                TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
-                                                                            Light={StaticResource Primary}}" />
-                                        </StackLayout>
+                                    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+                                        <Label Style="{StaticResource InfoIconLabel}" Text="{x:Static fontAwesome:FontAwesomeIcons.Car}" />
 
-                                    </FlexLayout>
-                                </Grid>
-                            </pv:PancakeView>
+                                        <Label
+                                            Margin="0,0"
+                                            FontFamily="InterBold"
+                                            FontSize="14"
+                                            HorizontalOptions="Center"
+                                            Style="{StaticResource PageHeader}"
+                                            Text="{Binding Distances.DrivingDuration}"
+                                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                        Light={StaticResource Primary}}" />
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+                                        <Label Style="{StaticResource InfoIconLabel}" Text="{x:Static fontAwesome:FontAwesomeIcons.Walking}" />
+
+                                        <Label
+                                            Margin="0,0"
+                                            FontFamily="InterBold"
+                                            FontSize="14"
+                                            HorizontalOptions="Center"
+                                            Style="{StaticResource PageHeader}"
+                                            Text="{Binding Distances.WalkingDuration}"
+                                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                        Light={StaticResource Primary}}" />
+                                    </StackLayout>
+
+                                </FlexLayout>
+                            </Grid>
                         </Frame>
 
                         <!--  SECOND SECTION  -->
                         <Frame
                             Padding="8"
                             d:IsVisible="false"
+                            xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource Background},
+                                                                     Light=#000000}"
+                            xct:ShadowEffect.OffsetX="0"
+                            xct:ShadowEffect.OffsetY="0"
+                            xct:ShadowEffect.Opacity="0.8"
+                            xct:ShadowEffect.Radius="1"
                             BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
                                                               Light={StaticResource Secondary}}"
                             Visual="Material">
@@ -428,14 +428,14 @@
                                     Text="{Binding SelectedPlace.CityCity}"
                                     TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
                                                                 Light={StaticResource Primary}}" />
-                                <BoxView BackgroundColor="{AppThemeBinding Dark={StaticResource Primary}, Light={StaticResource DarkPrimary}}" HeightRequest="1" />
+                                <BoxView BackgroundColor="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}" HeightRequest="1" />
                                 <Label
                                     FontSize="16"
                                     LineHeight="1.2"
                                     Text=" Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
                                     TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
                                                                 Light={StaticResource Primary}}" />
-                                <BoxView BackgroundColor="{AppThemeBinding Dark={StaticResource Primary}, Light={StaticResource DarkPrimary}}" HeightRequest="1" />
+                                <BoxView BackgroundColor="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}" HeightRequest="1" />
 
                             </StackLayout>
                         </Frame>
@@ -772,44 +772,44 @@
             <Frame
                 Padding="0"
                 xct:TouchEffect.Command="{Binding BackCommand}"
-                CornerRadius="16"
-                HeightRequest="32"
-                WidthRequest="32"
                 BackgroundColor="#1D000000"
-                FlexLayout.Shrink="0">
+                CornerRadius="16"
+                FlexLayout.Shrink="0"
+                HeightRequest="32"
+                WidthRequest="32">
                 <Label
                     BackgroundColor="Transparent"
                     FontFamily="FASolid"
                     FontSize="20"
                     HorizontalOptions="Center"
-                    VerticalTextAlignment="Center"
                     HorizontalTextAlignment="Center"
                     Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowLeft}"
                     TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
                                                 Light={StaticResource Primary}}"
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
             </Frame>
             <BoxView FlexLayout.Grow="1" />
 
             <Frame
                 Padding="0"
                 xct:TouchEffect.Command="{Binding BackCommand}"
-                CornerRadius="16"
-                HeightRequest="32"
-                WidthRequest="32"
                 BackgroundColor="#1D000000"
-                FlexLayout.Shrink="0">
+                CornerRadius="16"
+                FlexLayout.Shrink="0"
+                HeightRequest="32"
+                WidthRequest="32">
                 <Label
                     BackgroundColor="Transparent"
                     FontFamily="FASolid"
                     FontSize="20"
-                    VerticalTextAlignment="Center"
-                    HorizontalTextAlignment="Center"
                     HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
                     Text="{x:Static fontAwesome:FontAwesomeIcons.Star}"
                     TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
                                                 Light={StaticResource Primary}}"
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />
             </Frame>
 
         </FlexLayout>
@@ -838,11 +838,11 @@
             <Frame
                 Padding="0"
                 xct:TouchEffect.Command="{Binding BackCommand}"
-                CornerRadius="14"
-                HeightRequest="28"
-                WidthRequest="28"
                 BackgroundColor="Transparent"
-                FlexLayout.Shrink="0">
+                CornerRadius="14"
+                FlexLayout.Shrink="0"
+                HeightRequest="28"
+                WidthRequest="28">
                 <Label
                     BackgroundColor="Transparent"
                     FontFamily="FASolid"
@@ -868,11 +868,11 @@
             <Frame
                 Padding="0"
                 xct:TouchEffect.Command="{Binding BackCommand}"
-                CornerRadius="14"
-                HeightRequest="28"
-                WidthRequest="28"
                 BackgroundColor="Transparent"
-                FlexLayout.Shrink="0">
+                CornerRadius="14"
+                FlexLayout.Shrink="0"
+                HeightRequest="28"
+                WidthRequest="28">
                 <Label
                     BackgroundColor="Transparent"
                     FontFamily="FASolid"

@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="ESATouristGuide.UIControls.HomeView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:UIElements="clr-namespace:ESATouristGuide.UIControls"
+    xmlns:dxcv="clr-namespace:DevExpress.XamarinForms.CollectionView;assembly=DevExpress.XamarinForms.CollectionView"
+    xmlns:dxe="clr-namespace:DevExpress.XamarinForms.Editors;assembly=DevExpress.XamarinForms.Editors"
+    xmlns:models="clr-namespace:ESATouristGuide.Models"
+    xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:DataType="vm:CollectionViewViewModel"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                      Light={StaticResource Background}}">
+
+    <ContentView.Resources>
+        <Style
+            x:Key="ChipStyle"
+            ApplyToDerivedTypes="True"
+            TargetType="dxe:ChoiceChipGroup">
+            <Style.Setters>
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BoxMode" Value="Outlined" />
+                <Setter Property="BoxMode" Value="Outlined" />
+                <Setter Property="ChipBackgroundColor" Value="Transparent" />
+                <Setter Property="ChipBorderColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
+                <Setter Property="ChipFontFamily" Value="Roboto" />
+                <Setter Property="ChipFontSize" Value="16" />
+                <Setter Property="ChipPressedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark}, Light={StaticResource TransparentBackground}}" />
+                <Setter Property="ChipPressedTextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
+                <Setter Property="ChipSelectedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TransparentBackground}, Light={StaticResource TransparentBackgroundDark}}" />
+                <Setter Property="ChipSelectedBorderColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
+                <Setter Property="ChipSelectedTextColor" Value="White" />
+                <Setter Property="ChipTextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
+                <Setter Property="IsMultiline" Value="False" />
+            </Style.Setters>
+        </Style>
+
+        <Style
+            x:Key="SettingsChip"
+            ApplyToDerivedTypes="True"
+            TargetType="dxe:Chip">
+            <Style.Setters>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}" />
+                <Setter Property="BorderColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="RobotoBold" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="8,4.94427191" />
+                <Setter Property="PressedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
+                <Setter Property="PressedTextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
+                <Setter Property="SelectedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
+                <Setter Property="SelectedBorderColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
+                <Setter Property="SelectedTextColor" Value="White" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
+            </Style.Setters>
+        </Style>
+    </ContentView.Resources>
+
+    <ContentView.BindingContext>
+        <vm:CollectionViewViewModel />
+    </ContentView.BindingContext>
+
+    <ContentView.Content>
+        <ScrollView>
+            <Grid ColumnDefinitions="*" RowDefinitions="300,100,260,100,260">
+
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Aspect="AspectFill"
+                    Source="alexpoli.png" />
+
+                <!--#region FirstSlider-->
+                <Grid
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Padding="12,6,0,12"
+                    ColumnDefinitions="40,.4*,3*"
+                    RowDefinitions="30,70">
+
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        FontAttributes="Bold"
+                        FontFamily="Dela"
+                        FontSize="18"
+                        Text="Αξιοθέατα"
+                        TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                    Light={StaticResource Primary}}"
+                        VerticalOptions="Start" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        FontFamily="Inter"
+                        FontSize="16"
+                        Text="Όλα"
+                        TextColor="{AppThemeBinding Dark={StaticResource DarkInfo},
+                                                    Light={StaticResource Info}}"
+                        VerticalOptions="Center" />
+
+                    <dxe:ChoiceChipGroup
+                        x:Name="vertasdsadicalchoiceChipGroup"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Padding="0"
+                        ChipCheckIconColor="Transparent"
+                        ChipPressedCheckIconColor="Transparent"
+                        ChipUseRippleEffect="True"
+                        DisplayMember="Text"
+                        HorizontalOptions="End"
+                        HorizontalSpacing="8"
+                        IconMember="Image"
+                        IsMultiline="False"
+                        Style="{StaticResource ChipStyle}"
+                        VerticalOptions="Center">
+                        <dxe:Chip
+                            TapCommandParameter="{Binding .}"
+                            Text="Προτεινόμενα"
+                            VerticalOptions="Center" />
+                        <dxe:Chip
+                            TapCommandParameter="{Binding .}"
+                            Text="Δημοφιλή"
+                            VerticalOptions="Center" />
+                        <dxe:Chip
+                            TapCommandParameter="{Binding .}"
+                            Text="Πλησιέστερα"
+                            VerticalOptions="Center" />
+                        <dxe:Chip
+                            TapCommandParameter="{Binding .}"
+                            Text="Top 10"
+                            VerticalOptions="Center" />
+
+                        <!--
+                            IsSelected="{Binding BasicCategoriesEnabled}"
+                            TapCommand="{Binding BasicCategoriesSelectedCommand}"
+                            IsVisible="{Binding SecondaryOptionsEnabled}"
+                            TapCommand="{Binding SecondaryCategoriesSelectedCommand}"
+                        -->
+
+                    </dxe:ChoiceChipGroup>
+
+                </Grid>
+                <dxcv:DXCollectionView
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                      Light={StaticResource Background}}"
+                    ItemSize="240"
+                    ItemSpacing="0"
+                    ItemsSource="{Binding Cities}"
+                    Orientation="Horizontal"
+                    VerticalOptions="Center">
+                    <dxcv:DXCollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:City">
+                            <Frame
+                                Margin="8"
+                                Padding="0"
+                                xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource Background},
+                                                                         Light=#000000}"
+                                xct:ShadowEffect.OffsetX="0"
+                                xct:ShadowEffect.OffsetY="0"
+                                xct:ShadowEffect.Opacity="0.8"
+                                xct:ShadowEffect.Radius="1"
+                                CornerRadius="8">
+                                <UIElements:CollectionViewCard
+                                    xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CollectionViewViewModel}}, Path=NavToDetailsCommand}"
+                                    xct:TouchEffect.CommandParameter="{Binding .}"
+                                    xct:TouchEffect.NativeAnimation="True"
+                                    xct:TouchEffect.PressedAnimationDuration="340"
+                                    xct:TouchEffect.PressedAnimationEasing="SinInOut"
+                                    xct:TouchEffect.PressedBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                                             Light={StaticResource Background}}"
+                                    xct:TouchEffect.PressedOpacity="{AppThemeBinding Dark=0.925,
+                                                                                     Light=0.85}"
+                                    POIDistance="{Binding DistanceFromUser}"
+                                    POIImage="{Binding ImageUrl}"
+                                    POIName="{Binding CityCity}"
+                                    POIRegion="{Binding Country}" />
+                            </Frame>
+                        </DataTemplate>
+                    </dxcv:DXCollectionView.ItemTemplate>
+
+                    <!--  Sort items.  -->
+                    <dxcv:DXCollectionView.SortDescriptions>
+                        <dxcv:SortDescription FieldName="DistanceFromUser" SortOrder="Ascending" />
+                    </dxcv:DXCollectionView.SortDescriptions>
+
+                </dxcv:DXCollectionView>
+                <!--#endregion-->
+
+
+                <!--#region SecondSlider-->
+                <Grid
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Padding="12,6,0,12"
+                    ColumnDefinitions="40,.4*,3*"
+                    RowDefinitions="30,70">
+
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        FontAttributes="Bold"
+                        FontFamily="Dela"
+                        FontSize="18"
+                        Text="Εμπειρίες"
+                        TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                    Light={StaticResource Primary}}"
+                        VerticalOptions="Start" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        FontFamily="Inter"
+                        FontSize="16"
+                        Text="Όλα"
+                        TextColor="{AppThemeBinding Dark={StaticResource DarkInfo},
+                                                    Light={StaticResource Info}}"
+                        VerticalOptions="Center" />
+
+                    <dxe:ChoiceChipGroup
+                        x:Name="vertasasdasdsadicalchoiceChipGroup"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Padding="0"
+                        ChipCheckIconColor="Transparent"
+                        ChipPressedCheckIconColor="Transparent"
+                        ChipUseRippleEffect="True"
+                        DisplayMember="Text"
+                        HorizontalOptions="End"
+                        HorizontalSpacing="8"
+                        IconMember="Image"
+                        IsMultiline="False"
+                        Style="{StaticResource ChipStyle}"
+                        VerticalOptions="Center">
+                        <dxe:Chip
+                            TapCommandParameter="{Binding .}"
+                            Text="Προτεινόμενα"
+                            VerticalOptions="Center" />
+                        <dxe:Chip
+                            TapCommandParameter="{Binding .}"
+                            Text="Δημοφιλή"
+                            VerticalOptions="Center" />
+                        <dxe:Chip
+                            TapCommandParameter="{Binding .}"
+                            Text="Πλησιέστερα"
+                            VerticalOptions="Center" />
+                        <dxe:Chip
+                            TapCommandParameter="{Binding .}"
+                            Text="Top 10"
+                            VerticalOptions="Center" />
+
+                        <!--
+                            IsSelected="{Binding BasicCategoriesEnabled}"
+                            TapCommand="{Binding BasicCategoriesSelectedCommand}"
+                            IsVisible="{Binding SecondaryOptionsEnabled}"
+                            TapCommand="{Binding SecondaryCategoriesSelectedCommand}"
+                        -->
+
+                    </dxe:ChoiceChipGroup>
+
+                </Grid>
+
+                <dxcv:DXCollectionView
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                      Light={StaticResource Background}}"
+                    ItemSize="240"
+                    ItemSpacing="0"
+                    ItemsSource="{Binding Cities}"
+                    Orientation="Horizontal"
+                    VerticalOptions="Center">
+                    <dxcv:DXCollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:City">
+                            <Frame
+                                Margin="8"
+                                Padding="0"
+                                xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource Background},
+                                                                         Light=#000000}"
+                                xct:ShadowEffect.OffsetX="0"
+                                xct:ShadowEffect.OffsetY="0"
+                                xct:ShadowEffect.Opacity="1"
+                                xct:ShadowEffect.Radius="4"
+                                CornerRadius="8">
+                                <UIElements:CollectionViewCard
+                                    xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CollectionViewViewModel}}, Path=NavToDetailsCommand}"
+                                    xct:TouchEffect.CommandParameter="{Binding .}"
+                                    xct:TouchEffect.NativeAnimation="True"
+                                    xct:TouchEffect.PressedAnimationDuration="340"
+                                    xct:TouchEffect.PressedAnimationEasing="SinInOut"
+                                    xct:TouchEffect.PressedOpacity="{AppThemeBinding Dark=0.34,
+                                                                                     Light=0.85}"
+                                    POIDistance="{Binding DistanceFromUser}"
+                                    POIImage="{Binding ImageUrl}"
+                                    POIName="{Binding CityCity}"
+                                    POIRegion="{Binding Country}" />
+                            </Frame>
+                        </DataTemplate>
+                    </dxcv:DXCollectionView.ItemTemplate>
+
+                    <!--  Sort items.  -->
+                    <dxcv:DXCollectionView.SortDescriptions>
+                        <dxcv:SortDescription FieldName="DistanceFromUser" SortOrder="Ascending" />
+                    </dxcv:DXCollectionView.SortDescriptions>
+
+                </dxcv:DXCollectionView>
+                <!--#endregion-->
+
+            </Grid>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

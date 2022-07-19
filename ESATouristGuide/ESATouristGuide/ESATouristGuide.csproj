@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\Dela.ttf" />
     <None Remove="Fonts\FontAwesomeFonts\FontAwesomeRegular400.otf" />
     <None Remove="Fonts\FontAwesomeFonts\FontAwesomeSolid900.otf" />
     <None Remove="Fonts\Inter.ttf" />
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Fonts\Dela.ttf" />
     <EmbeddedResource Include="Fonts\FontAwesomeFonts\FontAwesomeRegular400.otf" />
     <EmbeddedResource Include="Fonts\FontAwesomeFonts\FontAwesomeSolid900.otf" />
     <EmbeddedResource Include="Fonts\Inter.ttf" />
@@ -75,6 +77,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIControls\HomePageView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIControls\HomeView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CollectionViewPage.xaml">
