@@ -21,6 +21,8 @@ namespace ESATouristGuide.ViewModels
         public ICommand Command4 { get; set; }
         public ICommand Command5 { get; set; }
 
+        public ICommand Command6 { get; set; }
+
         public HomePageViewViewModel()
         {
             Load();
@@ -71,6 +73,11 @@ namespace ESATouristGuide.ViewModels
             await Shell.Current.Navigation.PushAsync(new ItemDetailsPage() , true);
         }
 
+        private async void Button_Clicked_6()
+        {
+            await Shell.Current.Navigation.PushAsync(new FavouritesCollectionViewPage() , true);
+        }
+
         private async void Button_Clicked_4()
         {
             UserExperiencePrompts.NoInternetConnectionPrompt();
@@ -90,6 +97,8 @@ namespace ESATouristGuide.ViewModels
             Command4 = new Command(Button_Clicked_3);
 
             Command5 = new Command(Button_Clicked_4);
+
+            Command6 = new Command(Button_Clicked_6);
 
             return Task.CompletedTask;
 

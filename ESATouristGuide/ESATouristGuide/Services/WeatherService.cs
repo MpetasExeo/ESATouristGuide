@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms.GoogleMaps;
 
-using ESATouristGuide.Models.cmportal.Models;
 using ESATouristGuide.Resources;
 
 namespace ESATouristGuide.Services

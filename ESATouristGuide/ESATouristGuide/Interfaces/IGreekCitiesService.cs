@@ -12,6 +12,6 @@ namespace ESATouristGuide.Interfaces
         /// Returns the cities deserialized from the json file.
         /// </summary>
         /// <returns></returns>
-        Task<ObservableRangeCollection<City>> GetGreekCities();
+        Task<ObservableRangeCollection<POI>> GetGreekCities();
     }
 }

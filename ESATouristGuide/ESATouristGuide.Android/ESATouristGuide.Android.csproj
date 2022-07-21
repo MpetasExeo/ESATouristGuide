@@ -125,6 +125,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\purple_loader.json" />
+    <AndroidAsset Include="Assets\empty.json" />
+    <AndroidAsset Include="Assets\loader.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

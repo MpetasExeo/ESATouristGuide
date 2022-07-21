@@ -40,7 +40,7 @@
                 x:Name="LoadingLottie"
                 AbsoluteLayout.LayoutBounds="0.5, 0.4, 180, 180"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
-                Animation="purple_loader.json"
+                Animation="loader.json"
                 AutoPlay="True"
                 HorizontalOptions="FillAndExpand"
                 RepeatMode="Infinite"
@@ -124,7 +124,7 @@
                                 FontSize="14"
                                 HorizontalOptions="Start"
                                 HorizontalTextAlignment="Center"
-                                Text="{Binding SelectedPlace.CityCity}"
+                                Text="{Binding SelectedPlace.Name}"
                                 TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
                                                             Light={StaticResource Primary}}"
                                 VerticalOptions="Center" />
@@ -206,7 +206,7 @@
                             x:Name="PlaceCardTitle"
                             FontFamily="InterBold"
                             FontSize="12"
-                            Text="{Binding SelectedPlace.AdminName, Mode=OneWay}"
+                            Text="{Binding SelectedPlace.Region, Mode=OneWay}"
                             TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
                                                         Light={StaticResource Primary}}"
                             VerticalOptions="Start" />

@@ -36,7 +36,27 @@
               ]]>
         </StyleSheet>
 
+        <Style x:Key="FavoriteLabel" TargetType="Label">
 
+            <Setter Property="Text" Value="{x:Static fontAwesome:FontAwesomeIcons.Star}"/>
+
+            <Style.Triggers>
+                <DataTrigger TargetType="Label"
+                                         Binding="{Binding IsFavorite}"
+                                         Value="True">
+                    <Setter Property="FontSize" Value="24"></Setter>
+                    <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource DarkWarning},Light={StaticResource Warning}}"/>
+                </DataTrigger>
+                <DataTrigger TargetType="Label"
+                             
+                                         Binding="{Binding IsFavorite}"
+                                         Value="False">
+
+                    <Setter Property="FontSize" Value="18"></Setter>
+                    <Setter Property="TextColor" Value="#8cE2E2E2"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
         <Style
             x:Key="InfoIconLabel"
@@ -115,8 +135,8 @@
             </Grid.RowDefinitions>
             <!--  HEADER BACKGROUND  -->
             <BoxView
-                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkAccent},
-                                                  Light={StaticResource Accent}}"
+                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                  Light={StaticResource Background}}"
                 HorizontalOptions="Fill"
                 TranslationY="{Binding RelativeScrollY, Source={x:Reference Scroll}, Converter={StaticResource ScrollValueConverter}, ConverterParameter='-5;0;200;false;0'}" />
             <!--  HEADER CAROUSEL  -->
@@ -206,7 +226,7 @@
                 Grid.RowSpan="2"
                 IsEnabled="False"
                 IsRefreshing="False"
-                RefreshColor="#FF9900">
+                >
                 <ScrollView>
                     <ScrollView.Behaviors>
                         <anim:ScrollViewScrollBehavior x:Name="Scroll" />
@@ -216,7 +236,7 @@
                         <!--  THIRD SECTION  -->
                         <Frame
                             Padding="0"
-                            d:IsVisible="False"
+                            HasShadow="True"
                             xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource Background},
                                                                      Light=#000000}"
                             xct:ShadowEffect.OffsetX="0"
@@ -258,12 +278,12 @@
                                         <StackLayout x:Name="CurrentTemp">
                                             <StackLayout.Resources>
                                                 <anim:StoryBoard x:Key="LoadingDetails" Target="{x:Reference CurrentTemp}">
-                                                    <anim:FadeToAnimation Opacity="0.5" Duration="500" />
-                                                    <anim:FadeToAnimation Opacity="1" Duration="500" />
-                                                    <anim:FadeToAnimation Opacity="0.5" Duration="500" />
-                                                    <anim:FadeToAnimation Opacity="1" Duration="500" />
-                                                    <anim:FadeToAnimation Opacity="0.5" Duration="500" />
-                                                    <anim:FadeToAnimation Opacity="1" Duration="500" />
+                                                    <anim:FadeToAnimation Opacity="0.5" Duration="750" />
+                                                    <anim:FadeToAnimation Opacity="1" Duration="750" />
+                                                    <anim:FadeToAnimation Opacity="0.5" Duration="750" />
+                                                    <anim:FadeToAnimation Opacity="1" Duration="750" />
+                                                    <anim:FadeToAnimation Opacity="0.5" Duration="750" />
+                                                    <anim:FadeToAnimation Opacity="1" Duration="750" />
                                                 </anim:StoryBoard>
                                             </StackLayout.Resources>
                                             <StackLayout.Triggers>
@@ -278,9 +298,9 @@
                                                 </DataTrigger>
                                             </StackLayout.Triggers>
                                             <StackLayout
-                                                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                                                BackgroundColor="{AppThemeBinding Dark={StaticResource MenuSelectedDark},
                                                                                   Light={StaticResource Secondary}}"
-                                                HeightRequest="78"
+                                                HeightRequest="70"
                                                 HorizontalOptions="FillAndExpand"
                                                 VerticalOptions="FillAndExpand" />
                                         </StackLayout>
@@ -424,14 +444,16 @@
                                 <Label
                                     FontAttributes="Bold"
                                     FontSize="16"
+                                    FontFamily="RobotoBold"
                                     HorizontalTextAlignment="Center"
-                                    Text="{Binding SelectedPlace.CityCity}"
+                                    Text="{Binding SelectedPOI.Name}"
                                     TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
                                                                 Light={StaticResource Primary}}" />
                                 <BoxView BackgroundColor="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}" HeightRequest="1" />
                                 <Label
                                     FontSize="16"
                                     LineHeight="1.2"
+                                    FontFamily="Merri"
                                     Text=" Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
                                     TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
                                                                 Light={StaticResource Primary}}" />
@@ -770,46 +792,69 @@
 
         <FlexLayout Padding="10" Direction="Row">
             <Frame
-                Padding="0"
-                xct:TouchEffect.Command="{Binding BackCommand}"
-                BackgroundColor="#1D000000"
-                CornerRadius="16"
-                FlexLayout.Shrink="0"
-                HeightRequest="32"
-                WidthRequest="32">
+                            Padding="0"
+                            xct:TouchEffect.Command="{Binding BackCommand}"
+                            xct:TouchEffect.NativeAnimation="True"
+                            xct:TouchEffect.PressedAnimationDuration="340"
+                            xct:TouchEffect.PressedAnimationEasing="SinInOut"
+                            xct:TouchEffect.PressedOpacity="0.85"
+                            BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark},
+                                                              Light={StaticResource TransparentBackground}}"
+                            CornerRadius="12"
+                            FlexLayout.AlignSelf="Center"
+                            FlexLayout.Shrink="0"
+                            HeightRequest="48"
+                            WidthRequest="48">
                 <Label
-                    BackgroundColor="Transparent"
-                    FontFamily="FASolid"
-                    FontSize="20"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowLeft}"
-                    TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
-                                                Light={StaticResource Primary}}"
-                    VerticalOptions="Center"
-                    VerticalTextAlignment="Center" />
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                FontFamily="FASolid"
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="{x:Static fontAwesome:FontAwesomeIcons.ArrowLeft}"
+                                TextColor="#E2E2E2"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center" />
             </Frame>
             <BoxView FlexLayout.Grow="1" />
 
             <Frame
-                Padding="0"
-                xct:TouchEffect.Command="{Binding BackCommand}"
-                BackgroundColor="#1D000000"
-                CornerRadius="16"
-                FlexLayout.Shrink="0"
-                HeightRequest="32"
-                WidthRequest="32">
+                            Padding="0"
+                            xct:TouchEffect.Command="{Binding AddToFavouritesCommand}"
+                            xct:TouchEffect.NativeAnimation="True"
+                            xct:TouchEffect.PressedAnimationDuration="340"
+                            xct:TouchEffect.PressedAnimationEasing="SinInOut"
+                            xct:TouchEffect.PressedOpacity="0.85"
+                            BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark},
+                                                              Light={StaticResource TransparentBackground}}"
+                            CornerRadius="12"
+                            FlexLayout.AlignSelf="Center"
+                            FlexLayout.Shrink="0"
+                            HeightRequest="48"
+                            WidthRequest="48">
                 <Label
-                    BackgroundColor="Transparent"
-                    FontFamily="FASolid"
-                    FontSize="20"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Text="{x:Static fontAwesome:FontAwesomeIcons.Star}"
-                    TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
-                                                Light={StaticResource Primary}}"
-                    VerticalOptions="Center"
-                    VerticalTextAlignment="Center" />
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                FontFamily="FASolid"
+                                FontSize="20"
+                    Style="{StaticResource FavoriteLabel}"
+                                xct:TouchEffect.Command="{Binding AddToFavouritesCommand}"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center" ></Label>
+                <!--<Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                Binding="{Binding Source={x:Reference entry},
+                                       Path=Text}"
+                Value="İstanbul">
+                            <Setter Property="IsEnabled" Value="True" />
+                            <Setter Property="BackgroundColor" Value="Green" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>-->
             </Frame>
 
         </FlexLayout>
@@ -861,13 +906,13 @@
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
                 LineBreakMode="TailTruncation"
-                Text="{Binding SelectedPlace.CityCity}"
+                Text="{Binding SelectedPOI.Name}"
                 TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
                                             Light={StaticResource Primary}}"
                 VerticalOptions="Center" />
             <Frame
                 Padding="0"
-                xct:TouchEffect.Command="{Binding BackCommand}"
+                xct:TouchEffect.Command="{Binding AddToFavouritesCommand}"
                 BackgroundColor="Transparent"
                 CornerRadius="14"
                 FlexLayout.Shrink="0"

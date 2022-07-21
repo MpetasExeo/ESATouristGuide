@@ -19,9 +19,9 @@ namespace ESATouristGuide.Services
         /// Returns the deserialized list of cities from the .json file.
         /// </summary>
         /// <returns></returns>
-        public async Task<ObservableRangeCollection<City>> GetGreekCities()
+        public async Task<ObservableRangeCollection<POI>> GetGreekCities()
         {
-            ObservableRangeCollection<City> greekCities = new ObservableRangeCollection<City>();
+            ObservableRangeCollection<POI> greekCities = new ObservableRangeCollection<POI>();
             string jsonFolder = "Json";
             string jsonFileName = "greekcities.json";
             Assembly assembly = typeof(GoogleMapsPage).GetTypeInfo().Assembly;
@@ -32,7 +32,7 @@ namespace ESATouristGuide.Services
             using (StreamReader reader = new StreamReader(stream))
             {
                 string jsonString = await reader.ReadToEndAsync().ConfigureAwait(true);
-                greekCities = JsonConvert.DeserializeObject<ObservableRangeCollection<City>>(jsonString);
+                greekCities = JsonConvert.DeserializeObject<ObservableRangeCollection<POI>>(jsonString);
             }
 
             return greekCities;

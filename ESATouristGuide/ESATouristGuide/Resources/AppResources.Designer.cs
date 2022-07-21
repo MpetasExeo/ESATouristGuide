@@ -692,6 +692,15 @@ namespace ESATouristGuide.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Removed from favourites.
+        /// </summary>
+        internal static string RemovedFromFavourites {
+            get {
+                return ResourceManager.GetString("RemovedFromFavourites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove from
         ///favourites.
         /// </summary>

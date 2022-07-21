@@ -90,8 +90,8 @@ namespace ESATouristGuide.ViewModels
                 SetAndRaise(ref hasSelectedPlace , value);
             }
         }
-        City selectedPlace;
-        public City SelectedPlace
+        POI selectedPlace;
+        public POI SelectedPlace
         {
             get => selectedPlace;
             set
@@ -110,7 +110,7 @@ namespace ESATouristGuide.ViewModels
                 RaisePropertyChanged(nameof(SelectedPlace));
             }
         }
-        public ObservableRangeCollection<City> Cities { get; set; }
+        public ObservableRangeCollection<POI> POIS { get; set; }
         private LayoutState _temperaturesState;
         public LayoutState TemperaturesState
         {
@@ -128,9 +128,9 @@ namespace ESATouristGuide.ViewModels
             ConstructorFinished = true;
         }
 
-        async Task NavigateToDetails( City city )
+        async Task NavigateToDetails( POI poi )
         {
-            await city.NavigateToDetailsAsync();
+            await poi.NavigateToDetailsAsync();
         }
 
         private async Task InitializationTask()
@@ -204,7 +204,7 @@ namespace ESATouristGuide.ViewModels
         void UICommandsInit()
         {
             GoogleMap.PinClicked += GoogleMap_PinClicked;
-            NavToDetailsCommand = new AsyncCommand<City>(NavigateToDetails);
+            NavToDetailsCommand = new AsyncCommand<POI>(NavigateToDetails);
             OpenFiltersDrawerCommand = new Command(OpenFiltersDrawer);
         }
 
@@ -285,7 +285,7 @@ namespace ESATouristGuide.ViewModels
                     return;
                 }
 
-                if (SelectedPlace.Lng == e.Pin.Position.Longitude && SelectedPlace.Lat == e.Pin.Position.Latitude)
+                if (SelectedPlace.Longitude == e.Pin.Position.Longitude && SelectedPlace.Latitude == e.Pin.Position.Latitude)
                 {
                     HasSelectedPlace = true;
                     return;
@@ -306,7 +306,7 @@ namespace ESATouristGuide.ViewModels
             TemperaturesState = LayoutState.Loading;
             IsBusy = true;
 
-            SelectedPlace = Cities.Where(s => s.Lat == lat).Where(s => s.Lng == lon).FirstOrDefault();
+            SelectedPlace = POIS.Where(s => s.Latitude == lat).Where(s => s.Longitude == lon).FirstOrDefault();
 
             if (!( SelectedPlace is null ))
             {
@@ -323,17 +323,17 @@ namespace ESATouristGuide.ViewModels
         /// </summary>
         private async Task GetCitiesAsync()
         {
-            Cities = await GreekCitiesService.GetGreekCities().ConfigureAwait(false);
+            POIS = await GreekCitiesService.GetGreekCities().ConfigureAwait(false);
 
-            foreach (City city in Cities)
+            foreach (var poi in POIS)
             {
-                double lat = city.Lat;
-                double lng = city.Lng;
+                double lat = poi.Latitude;
+                double lng = poi.Longitude;
 
                 Pin pin = new Pin()
                 {
                     Position = new Position(lat , lng) ,
-                    Label = city.CityCity ,
+                    Label = poi.Name ,
                     Type = PinType.Place ,
                     Icon = BitmapDescriptorFactory.FromBundle("exeo_logo.png")
                 };

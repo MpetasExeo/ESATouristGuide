@@ -10,10 +10,9 @@
     xmlns:uicontrols="clr-namespace:ESATouristGuide.UIControls"
     xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.Effects;assembly=Xamarin.CommunityToolkit"
-    x:DataType="uicontrols:CollectionViewCard"
-    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
-                                      Light={StaticResource Background}}"
-    Shell.NavBarIsVisible="False">
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
+    Shell.NavBarIsVisible="False"
+    x:DataType="uicontrols:CollectionViewCard">
     <ContentView.Content>
 
         <!--<pv:PancakeView.Shadow>
@@ -44,11 +43,11 @@
 
             <pv:PancakeView
                 Grid.Row="2"
-                Padding="2,0,2,0"
                 BackgroundGradientEndPoint="1,0"
                 BackgroundGradientStartPoint="1,1"
                 CornerRadius="1"
                 HorizontalOptions="FillAndExpand"
+                Padding="2,0,2,0"
                 TranslationY="0"
                 VerticalOptions="Fill">
                 <pv:PancakeView.BackgroundGradientStops>
@@ -60,8 +59,8 @@
 
                 <Grid
                     Grid.Row="1"
-                    Padding="12,16"
                     ColumnDefinitions="*,Auto"
+                    Padding="12,16"
                     RowDefinitions="24,30"
                     RowSpacing="6">
 
@@ -74,23 +73,23 @@
 
                         <Label
                             x:Name="POIDistanceFromUserLabel"
-                            Padding="0"
                             FontFamily="Roboto"
                             FontSize="12"
                             HorizontalOptions="StartAndExpand"
+                            Padding="0"
                             Text="{Binding POIDistance}"
                             TextColor="WhiteSmoke"
                             VerticalOptions="Center" />
                         <Label
-                            Padding="0"
                             FontFamily="Roboto"
+                            x:Name="POIDistanceIndicatorLabel"
+                            IsVisible="{Binding POIShowDistance}"
                             FontSize="12"
                             HorizontalOptions="StartAndExpand"
+                            Padding="0"
                             Text="{helpers:Translate KilometersShort}"
                             TextColor="WhiteSmoke"
                             VerticalOptions="Center" />
-
-
                     </StackLayout>
 
                     <Label

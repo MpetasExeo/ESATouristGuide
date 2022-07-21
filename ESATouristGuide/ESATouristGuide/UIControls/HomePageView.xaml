@@ -34,7 +34,7 @@
                 x:Name="LoadingLottie"
                 AbsoluteLayout.LayoutBounds="0.5, 0.4, 180, 180"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
-                Animation="purple_loader.json"
+                Animation="loader.json"
                 AutoPlay="True"
                 HorizontalOptions="FillAndExpand"
                 RepeatMode="Infinite"
@@ -205,6 +205,26 @@
                         Text="Item details Page"
                         VerticalOptions="Center" />
                 </StackLayout>
+
+                <StackLayout
+                    Grid.Row="5"
+                    Padding="24,0"
+                    HorizontalOptions="Fill"
+                    Spacing="32"
+                    VerticalOptions="Center">
+                    <Button
+                        xct:CornerRadiusEffect.CornerRadius="8"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkSecondary},
+                                                          Light={StaticResource Primary}}"
+                        Command="{Binding Command6}"
+                        FontAttributes="Bold"
+                        FontFamily="Roboto"
+                        FontSize="22"
+                        HorizontalOptions="Fill"
+                        Text="Favourites Favorites"
+                        VerticalOptions="Center" />
+                </StackLayout>
+
             </FlexLayout>
 
         </Grid>

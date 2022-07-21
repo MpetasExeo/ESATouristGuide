@@ -13,6 +13,7 @@ namespace ESATouristGuide.UIControls
         public static readonly BindableProperty POIDistanceProperty = BindableProperty.Create(nameof(POIDistanceProperty) , typeof(string) , typeof(CollectionViewCard) , string.Empty , propertyChanged: POIDistancePropertyChanged);
         public static readonly BindableProperty POIImageProperty = BindableProperty.Create(nameof(POIImageProperty) , typeof(System.Uri) , typeof(CollectionViewCard) , null , propertyChanged: POIImagePropertyChanged);
         public static readonly BindableProperty POITapCommandProperty = BindableProperty.Create(nameof(POITapCommandProperty) , typeof(Command) , typeof(CollectionViewCard) , null , propertyChanged: POITapCommandPropertyChanged);
+        public static readonly BindableProperty POIShowDistanceProperty = BindableProperty.Create(nameof(POIShowDistanceProperty) , typeof(bool) , typeof(CollectionViewCard) , true , propertyChanged: POIShowDistancePropertyPropertyChanged);
         #endregion
 
         #region Get Set Properties
@@ -21,6 +22,12 @@ namespace ESATouristGuide.UIControls
         {
             get => (string)GetValue(POINameProperty);
             set => SetValue(POINameProperty , value);
+        }
+
+        public bool POIShowDistance
+        {
+            get => (bool)GetValue(POIShowDistanceProperty);
+            set => SetValue(POIShowDistanceProperty , value);
         }
 
         public System.Uri POIImage
@@ -52,17 +59,27 @@ namespace ESATouristGuide.UIControls
 
         #region PropertyChanged
 
-        private static void POINamePropertyChanged( BindableObject bindable , object oldValue , object newValue )
+        private static void POINamePropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
             var card = (CollectionViewCard)bindable;
             if ((string)newValue != string.Empty)
             {
-                card.POINameLabel.Text = ( (string)newValue );
+                card.POINameLabel.Text = ((string)newValue);
             }
-            else card.POINameLabel.Text = ( (string)oldValue );
+            else card.POINameLabel.Text = ((string)oldValue);
         }
 
-        private static void POIImagePropertyChanged( BindableObject bindable , object oldValue , object newValue )
+        private static void POIShowDistancePropertyPropertyChanged(BindableObject bindable , object oldValue , object newValue)
+        {
+            var card = (CollectionViewCard)bindable;
+            if ((bool)newValue != (bool)oldValue)
+            {
+                card.POIDistanceIndicatorLabel.IsVisible = ((bool)newValue);
+            }
+            else card.POINameLabel.IsVisible = ((bool)oldValue);
+        }
+
+        private static void POIImagePropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
             var card = (CollectionViewCard)bindable;
             if ((System.Uri)newValue != null)
@@ -72,17 +89,17 @@ namespace ESATouristGuide.UIControls
         }
 
 
-        private static void POIRegionPropertyChanged( BindableObject bindable , object oldValue , object newValue )
+        private static void POIRegionPropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
             var card = (CollectionViewCard)bindable;
             if ((string)newValue != string.Empty)
             {
-                card.POIRegionLabel.Text = ( (string)newValue );
+                card.POIRegionLabel.Text = ((string)newValue);
             }
-            else card.POIRegionLabel.Text = ( (string)oldValue );
+            else card.POIRegionLabel.Text = ((string)oldValue);
         }
 
-        private static void DescriptionPropertyChanged( BindableObject bindable , object oldValue , object newValue )
+        private static void DescriptionPropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
             var card = (CollectionViewCard)bindable;
             if ((string)newValue != string.Empty)
@@ -92,17 +109,17 @@ namespace ESATouristGuide.UIControls
             else { /*card.PlaceCardDescription.Text = ((string)oldValue); */}
         }
 
-        private static void POIDistancePropertyChanged( BindableObject bindable , object oldValue , object newValue )
+        private static void POIDistancePropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
             var card = (CollectionViewCard)bindable;
             if ((string)newValue != string.Empty)
             {
-                card.POIDistanceFromUserLabel.Text = ( (string)newValue );
+                card.POIDistanceFromUserLabel.Text = ((string)newValue);
             }
             else { } /*{ card.PlaceCardTitle.Text = ((double)oldValue.ToString()); }*/
         }
 
-        private static void POITapCommandPropertyChanged( BindableObject bindable , object oldValue , object newValue )
+        private static void POITapCommandPropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
             var card = (CollectionViewCard)bindable;
             if ((Command)newValue != null)

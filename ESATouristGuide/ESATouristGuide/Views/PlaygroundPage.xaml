@@ -828,11 +828,11 @@
                                                       Light={StaticResource Background}}"
                     ItemSize="240"
                     ItemSpacing="0"
-                    ItemsSource="{Binding Cities}"
+                    ItemsSource="{Binding POIs}"
                     Orientation="Horizontal"
                     VerticalOptions="Center">
                     <dxcv:DXCollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:City">
+                        <DataTemplate x:DataType="models:POI">
                             <Frame
                                 Margin="8"
                                 Padding="0"
@@ -855,8 +855,8 @@
                                                                                      Light=0.85}"
                                     POIDistance="{Binding DistanceFromUser}"
                                     POIImage="{Binding ImageUrl}"
-                                    POIName="{Binding CityCity}"
-                                    POIRegion="{Binding Country}" />
+                                    POIName="{Binding Name}"
+                                    POIRegion="{Binding Region}" />
                             </Frame>
                         </DataTemplate>
                     </dxcv:DXCollectionView.ItemTemplate>
@@ -951,11 +951,11 @@
                                                       Light={StaticResource Background}}"
                     ItemSize="240"
                     ItemSpacing="0"
-                    ItemsSource="{Binding Cities}"
+                    ItemsSource="{Binding POIs}"
                     Orientation="Horizontal"
                     VerticalOptions="Center">
                     <dxcv:DXCollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:City">
+                        <DataTemplate x:DataType="models:POI">
                             <Frame
                                 Margin="8"
                                 Padding="0"
@@ -976,8 +976,8 @@
                                                                                      Light=0.85}"
                                     POIDistance="{Binding DistanceFromUser}"
                                     POIImage="{Binding ImageUrl}"
-                                    POIName="{Binding CityCity}"
-                                    POIRegion="{Binding Country}" />
+                                    POIName="{Binding Name}"
+                                    POIRegion="{Binding Region}" />
                             </Frame>
                         </DataTemplate>
                     </dxcv:DXCollectionView.ItemTemplate>

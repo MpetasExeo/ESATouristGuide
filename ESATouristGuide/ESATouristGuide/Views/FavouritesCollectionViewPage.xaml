@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="ESATouristGuide.Views.CollectionViewPage"
+<ContentPage x:Class="ESATouristGuide.Views.FavouritesCollectionViewPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:UIElements="clr-namespace:ESATouristGuide.UIControls"
@@ -20,7 +19,7 @@
     xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.Effects;assembly=Xamarin.CommunityToolkit"
     xmlns:xct1="http://xamarin.com/schemas/2020/toolkit"
-    x:DataType="vm:CollectionViewViewModel"
+    x:DataType="vm:FavoritesViewModel"
     BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
                                       Light={StaticResource Background}}"
     Shell.NavBarIsVisible="False">
@@ -69,7 +68,7 @@
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <vm:CollectionViewViewModel />
+        <vm:FavoritesViewModel />
     </ContentPage.BindingContext>
 
     <customViews:TaskLoaderView
@@ -101,7 +100,7 @@
             DrawerFooterHeight="0"
             DrawerMinHeight="400"
             DrawerPosition="Bottom"
-            IsDrawerOpened="{Binding IsDrawerOpen, Mode=TwoWay}"
+            IsDrawerOpened="False"
             IsDrawerShadowVisible="True"
             IsScrimEnabled="True"
             ScrimColor="{AppThemeBinding Dark={StaticResource PrimaryOpacityDark},
@@ -148,7 +147,7 @@
 
             </dxn:DrawerView.DrawerHeaderContent>
 
-            <dxn:DrawerView.DrawerContent>
+            <!--<dxn:DrawerView.DrawerContent>
                 <dxn:TabView
                     BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
                                                       Light={StaticResource Background}}"
@@ -328,7 +327,7 @@
                     </dxn:TabViewItem>
 
                 </dxn:TabView>
-            </dxn:DrawerView.DrawerContent>
+            </dxn:DrawerView.DrawerContent>-->
 
             <dxn:DrawerView.MainContent>
                 <Grid
@@ -339,48 +338,15 @@
                     RowDefinitions="68,*"
                     RowSpacing="0">
 
-
-                    <StackLayout
-                        Grid.Column="1"
-                        HorizontalOptions="Center"
-                        Orientation="Horizontal"
-                        Spacing="2"
-                        VerticalOptions="Center">
-
-                        <Label
-                            FontFamily="RobotoBold"
-                            Text="Ανακαλύψτε "
-                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
-                                                        Light={StaticResource Primary}}" />
-
-                        <Label
-                            Grid.Column="1"
-                            FontAttributes="Bold,Italic"
-                            FontFamily="RobotoBold"
-                            Text="{Binding FilteredResults.Count}"
-                            TextColor="{AppThemeBinding Dark={StaticResource DarkAccent},
-                                                        Light={StaticResource Accent}}" />
-
-                        <Label
-                            Grid.Column="1"
-                            FontFamily="RobotoBold"
-                            Text=" προορισμούς"
-                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
-                                                        Light={StaticResource Primary}}" />
-                    </StackLayout>
-
-
-
                     <dxcv:DXCollectionView
-                        Grid.Row="1"
+                        Grid.Row="0"
                         Grid.RowSpan="2"
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
                         BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
                                                           Light={StaticResource Background}}"
-                        FilterExpression="{Binding}"
                         ItemSpacing="2"
-                        ItemsSource="{Binding FilteredResults}">
+                        ItemsSource="{Binding FavouritesResult}">
 
                         <dxcv:DXCollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:POI">
@@ -395,7 +361,7 @@
                                     xct:ShadowEffect.Radius="1"
                                     CornerRadius="8">
                                     <UIElements:CollectionViewCard
-                                        xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CollectionViewViewModel}}, Path=NavToDetailsCommand}"
+                                        xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FavoritesViewModel}}, Path=NavToDetailsCommand}"
                                         xct:TouchEffect.CommandParameter="{Binding .}"
                                         xct:TouchEffect.NativeAnimation="True"
                                         xct:TouchEffect.PressedAnimationDuration="340"
@@ -414,54 +380,10 @@
                         </dxcv:DXCollectionView.ItemTemplate>
 
                         <!--  Sort items.  -->
-                        <dxcv:DXCollectionView.SortDescriptions>
+                        <!--<dxcv:DXCollectionView.SortDescriptions>
                             <dxcv:SortDescription FieldName="Distance" SortOrder="Ascending" />
-                        </dxcv:DXCollectionView.SortDescriptions>
+                        </dxcv:DXCollectionView.SortDescriptions>-->
                     </dxcv:DXCollectionView>
-
-
-
-                    <StackLayout Grid.Row="1"
-                        Grid.RowSpan="2"
-                        Grid.Column="0"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center"
-                                     IsVisible="{Binding IsEmptyList}"
-                        Grid.ColumnSpan="3">
-
-
-                        <Frame     
-                            TranslationY="-60"
-                        HeightRequest="240"
-                            WidthRequest="240"
-                            CornerRadius="240"
-                        BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark},Light={StaticResource TransparentBackground}}"
-                        >
-
-                            <lottie:AnimationView
-
-                                x:Name="EmptyListLottie"
-                        Animation="empty.json"
-                        AutoPlay="True"
-                       AbsoluteLayout.LayoutBounds="0.5, 0.5, 148, 148"
-                AbsoluteLayout.LayoutFlags="PositionProportional"
-                        HorizontalOptions="FillAndExpand"
-                        RepeatMode="Infinite"
-                        VerticalOptions="Fill" />
-
-                        </Frame>
-                        <Label
-                                      
-                                        FontAttributes="Bold"
-                                        FontSize="18"
-                                        HorizontalOptions="Fill"
-                                        HorizontalTextAlignment="Center"
-                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
-                                                                                 Light={StaticResource Primary}}"
-                                        Text="No results matched your filter."
-                                        VerticalOptions="Start" />
-
-                    </StackLayout>
 
                     <FlexLayout
                         Grid.Column="0"

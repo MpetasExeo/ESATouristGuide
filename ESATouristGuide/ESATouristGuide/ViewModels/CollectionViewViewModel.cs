@@ -28,21 +28,16 @@ namespace ESATouristGuide.ViewModels
         private IUserLocationService _userLocationService;
 
         //private IWeatherService WeatherService { get; set; }
+        private CancellationToken _ct = new CancellationToken();
+        private ObservableRangeCollection<POI> _pois;
 
-        public Map GoogleMap { get; set; } = new Map();
-
-        public List<Pin> Pins { get; set; } = new List<Pin>();
-        private CancellationToken ct = new CancellationToken();
-        private ObservableRangeCollection<City> _cities;
-
-        public ObservableRangeCollection<City> Cities { get => _cities; set { SetAndRaise(ref _cities , value); } }
+        public ObservableRangeCollection<POI> POIs { get => _pois; set { SetAndRaise(ref _pois , value); } }
 
         public TaskLoaderNotifier LoaderNotifier { get; set; } = new TaskLoaderNotifier();
         #endregion
 
         public CollectionViewViewModel()
         {
-
             PropertiesInit();
         }
 
@@ -57,14 +52,14 @@ namespace ESATouristGuide.ViewModels
         private async Task InitializationTask()
         {
 
-            Cities = await GreekCitiesService.GetGreekCities();
+            POIs = await GreekCitiesService.GetGreekCities();
 
             PopulateCitiesList();
 
             Categories = new List<Category>(Models.Categories.CategoriesList);
             //FilteredResults = new ObservableRangeCollection<City>();
 
-            await _userLocationService.GetUserLocationAsync(ct);
+            await _userLocationService.GetUserLocationAsync(_ct);
         }
 
 
@@ -87,31 +82,34 @@ namespace ESATouristGuide.ViewModels
             set
             {
                 SetAndRaise(ref _selectedCategories , value);
-                if (!(Cities is null))
+                if (!(POIs is null))
                 {
-                    Filtered = Cities.Where(x => SelectedCategories.Where(sc => sc.IsSelected == true).Contains(x.Category));
+                    Filtered = POIs.Where(x => SelectedCategories.Where(sc => sc.IsSelected == true).Contains(x.Category));
                 }
             }
         }
 
-        ObservableRangeCollection<City> _filteredResults;
-        public ObservableRangeCollection<City> FilteredResults
+        ObservableRangeCollection<POI> _filteredResults;
+        public ObservableRangeCollection<POI> FilteredResults
         {
             get => _filteredResults;
             set => SetAndRaise(ref _filteredResults , value);
         }
 
-        IEnumerable<City> _filtered;
-        public IEnumerable<City> Filtered
+        IEnumerable<POI> _filtered;
+        public IEnumerable<POI> Filtered
         {
             get => _filtered;
             set
             {
                 SetAndRaise(ref _filtered , value);
-                FilteredResults = new ObservableRangeCollection<City>(_filtered.ToList());
+                FilteredResults = new ObservableRangeCollection<POI>(_filtered.ToList());
+                RaisePropertyChanged(nameof(IsEmptyList));
             }
             //FilteredResults = new ObservableRangeCollection<City>(SelectedCategories.Where(x => x.IsSelected == true).ToList());
         }
+
+        public bool IsEmptyList { get => FilteredResults.Count == 0; }
 
         Task ApplyFiltersChange()
         {
@@ -119,15 +117,11 @@ namespace ESATouristGuide.ViewModels
             return Task.FromResult(Categories);
         }
 
-
-
         public override void Load() { LoaderNotifier.Load(_ => InitializationTask()); }
-
 
         public ICommand NavToDetailsCommand { get; set; }
         public ICommand ApplyFiltersChangeCommand { get; set; }
-
-        private async Task NavigateToDetails(City city) { await city.NavigateToDetailsAsync(); }
+        private async Task NavigateToDetails(POI poi) { await poi.NavigateToDetailsAsync(); }
 
         private void PropertiesInit()
         {
@@ -136,7 +130,7 @@ namespace ESATouristGuide.ViewModels
             _userLocationService = new UserLocationService();
             GreekCitiesService = new GreekCitiesService();
             //WeatherService = new WeatherService();
-            NavToDetailsCommand = new AsyncCommand<City>(NavigateToDetails);
+            NavToDetailsCommand = new AsyncCommand<POI>(NavigateToDetails);
             ApplyFiltersChangeCommand = new AsyncCommand(ApplyFiltersChange);
         }
 
@@ -176,7 +170,7 @@ namespace ESATouristGuide.ViewModels
             int categoryIndex = 0;
             try
             {
-                foreach (var city in Cities)
+                foreach (var city in POIs)
                 {
                     city.ImageUrl = new Uri(string.Format("https://picsum.photos/1080/720?random={0}" , i));
 

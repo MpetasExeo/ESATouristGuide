@@ -4,7 +4,7 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
 [assembly: ExportFont("Inter.ttf" , Alias = "Inter")]
-
+[assembly: ExportFont("Merri.ttf" , Alias = "Merri")]
 [assembly: ExportFont("Dela.ttf" , Alias = "Dela")]
 [assembly: ExportFont("InterBold.ttf" , Alias = "InterBold")]
 [assembly: ExportFont("RobotoSlab.ttf" , Alias = "Roboto")]

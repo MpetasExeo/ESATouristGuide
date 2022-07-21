@@ -381,4 +381,7 @@ favourites</value>
   <data name="Politismos" xml:space="preserve">
     <value>Culture</value>
   </data>
+  <data name="RemovedFromFavourites" xml:space="preserve">
+    <value>Removed from favourites</value>
+  </data>
 </root>
