@@ -16,8 +16,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-using Xamarin.Forms.GoogleMaps;
-
 namespace ESATouristGuide.ViewModels
 {
     public partial class CollectionViewViewModel : BaseViewModel
@@ -52,6 +50,8 @@ namespace ESATouristGuide.ViewModels
         private async Task InitializationTask()
         {
 
+            await _userLocationService.GetUserLocationAsync(_ct);
+
             POIs = await GreekCitiesService.GetGreekCities();
 
             PopulateCitiesList();
@@ -59,7 +59,6 @@ namespace ESATouristGuide.ViewModels
             Categories = new List<Category>(Models.Categories.CategoriesList);
             //FilteredResults = new ObservableRangeCollection<City>();
 
-            await _userLocationService.GetUserLocationAsync(_ct);
         }
 
 

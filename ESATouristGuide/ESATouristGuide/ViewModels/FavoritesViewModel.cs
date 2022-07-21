@@ -24,7 +24,6 @@ namespace ESATouristGuide.ViewModels
         public FavoritesViewModel()
         {
             PropertiesInit();
-            Load();
         }
 
         #region Properties

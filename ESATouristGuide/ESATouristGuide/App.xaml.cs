@@ -15,6 +15,7 @@ namespace ESATouristGuide
         {
             InitializeComponent();
 
+            Sharpnado.Tabs.Initializer.Initialize(loggerEnable: false,true);
             DevExpress.XamarinForms.CollectionView.Initializer.Init();
             DevExpress.XamarinForms.Editors.Initializer.Init();
             DevExpress.XamarinForms.Navigation.Initializer.Init();

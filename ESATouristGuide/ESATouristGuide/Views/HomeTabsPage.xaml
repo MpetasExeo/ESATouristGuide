@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tabs="http://sharpnado.com"
+             xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
+             xmlns:fontAwesome="clr-namespace:ESATouristGuide.Fonts"
+             x:DataType="vm:HomeTabsViewModel"
+             xmlns:sho="clr-namespace:Sharpnado.Tabs;assembly=Sharpnado.Tabs"
+             xmlns:views="clr-namespace:ESATouristGuide.LazyTabsViews"
+             x:Class="ESATouristGuide.Views.HomeTabsPage"  BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                      Light={StaticResource Background}}"
+    Shell.NavBarIsVisible="False">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="BottomTabStyle" TargetType="tabs:MaterialUnderlinedTabItem">
+                <Setter Property="SelectedTabColor" Value="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}" />
+                <Setter Property="UnselectedLabelColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
+                <Setter Property="UnderlineHeight" Value="2" />
+                <Setter Property="UnderlineHeight" Value="2" />
+                <Setter Property="LabelSize" Value="32" />
+            </Style>
+
+            <Style x:Key="HomeTabStyle" TargetType="tabs:MaterialUnderlinedTabItem">
+                <Setter Property="SelectedTabColor" Value="White" />
+                <Setter Property="UnselectedLabelColor" Value="#88ffffff" />
+                <Setter Property="UnderlineHeight" Value="0" />
+                <Setter Property="LabelSize" Value="32" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:HomeTabsViewModel></vm:HomeTabsViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid
+            BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                              Light={StaticResource Background}}"
+            ColumnSpacing="0"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+
+            <tabs:ViewSwitcher
+                x:Name="Switcher"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Animate="True"
+                SelectedIndex="{Binding SelectedViewModelIndex, Mode=TwoWay}">
+                <sho:LazyView x:TypeArguments="views:CollectionView" BindingContext="{Binding CollectionViewViewModel}"/>
+                <sho:LazyView x:TypeArguments="views:GoogleMapsView" BindingContext="{Binding GoogleMapsViewModel}" />
+                <sho:LazyView x:TypeArguments="views:HomeView" BindingContext="{Binding CollectionViewViewModel}" />
+                <sho:LazyView x:TypeArguments="views:FavoritesView" BindingContext="{Binding FavoritesViewModel}" />
+
+            </tabs:ViewSwitcher>
+
+            <tabs:TabHostView
+                Grid.Row="1"
+                Margin="0,0,0,12"
+                BackgroundColor="#F5F3F0"
+                CornerRadius="30"
+                HeightRequest="36"
+                HorizontalOptions="Center"
+                IsSegmented="True"
+                Orientation="Horizontal"
+                SelectedIndex="{Binding Source={x:Reference Switcher}, Path=SelectedIndex, Mode=TwoWay}"
+                TabType="Fixed"
+                VerticalOptions="Start"
+                WidthRequest="332">
+
+                <tabs:TabHostView.Tabs>
+
+                    <tabs:MaterialUnderlinedTabItem
+                        FontFamily="FASolid"
+                        IconOptions="TextOnly"
+                        Label="{x:Static fontAwesome:FontAwesomeIcons.ListUl}"
+                        LabelSize="18"
+                        Style="{StaticResource BottomTabStyle}" />
+
+                    <tabs:MaterialUnderlinedTabItem
+                        FontFamily="FASolid"
+                        IconOptions="TextOnly"
+                        Label="{x:Static fontAwesome:FontAwesomeIcons.MapMarkedAlt}"
+                        LabelSize="18"
+                        Style="{StaticResource BottomTabStyle}" />
+
+                    <tabs:MaterialUnderlinedTabItem
+                        x:Name="TabButton"
+                        FontFamily="FASolid"
+                        IconOptions="TextOnly"
+                        IsVisible="True"
+                        Label="{x:Static fontAwesome:FontAwesomeIcons.Home}"
+                        LabelSize="18"
+                        Style="{StaticResource BottomTabStyle}" />
+
+                    <tabs:MaterialUnderlinedTabItem
+                        x:Name="FavTab"
+                        FontFamily="FASolid"
+                        IconOptions="TextOnly"
+                        Label="{x:Static fontAwesome:FontAwesomeIcons.Star}"
+                        LabelSize="18"
+                        Style="{StaticResource BottomTabStyle}"/>
+
+                    <!--<tabs:MaterialUnderlinedTabItem
+                        FontFamily="FASolid"
+                        IconOptions="TextOnly"
+                        Label="{x:Static fontAwesome:FontAwesomeIcons.EllipsisH}"
+                        LabelSize="18"
+                        Style="{StaticResource BottomTabStyle}" />-->
+
+                </tabs:TabHostView.Tabs>
+            </tabs:TabHostView>
+
+        </Grid>
+    </ContentPage.Content>
+
+
+</ContentPage>

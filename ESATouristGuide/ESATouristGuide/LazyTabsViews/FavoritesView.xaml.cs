@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ESATouristGuide.UIControls
+namespace ESATouristGuide.LazyTabsViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomeView : ContentView
+    public partial class FavoritesView : ContentView
     {
-        public HomeView()
+        public FavoritesView()
         {
             InitializeComponent();
         }

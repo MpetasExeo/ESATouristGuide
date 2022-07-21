@@ -3,7 +3,6 @@ using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.Forms;
@@ -12,7 +11,7 @@ using Command = MvvmHelpers.Commands.Command;
 
 namespace ESATouristGuide.ViewModels
 {
-    public abstract class BaseViewModel : INotifyPropertyChanged,IDisposable
+    public abstract class BaseViewModel : INotifyPropertyChanged, IDisposable
     {
         /// <summary>
         /// The property changed.
@@ -35,22 +34,30 @@ namespace ESATouristGuide.ViewModels
             set { SetAndRaise(ref title , value); }
         }
 
+        // TODO BaseViewModel base
+        //protected IUserLocationService UserLocationService { get; }
+        //protected IDistancesService DistancesService { get; }
+        //protected IWeatherService WeatherService{ get; }
+
         public ICommand SkeletonCommand { get; set; }
 
         public ICommand BackCommand { get; set; }
 
         public BaseViewModel()
         {
-           
-            BackCommand = new Command(( x ) =>
+
+            BackCommand = new Command((x) =>
             {
                 Shell.Current.SendBackButtonPressed();
             });
         }
 
-        public virtual void OnNavigated( object parameter )
+        public virtual void OnNavigated(object parameter)
         {
         }
+
+
+
 
         /// <summary>
         /// Μπορεί να χρησιμοποιηθεί ως lazy load, δηλαδή να κληθεί μονάχα οταν θα είναι απαραίτητο ώστε να μην αργεί ο constructor του viewmodel.
@@ -58,7 +65,6 @@ namespace ESATouristGuide.ViewModels
         public virtual void Load()
         {
         }
-
 
 
         /// <summary>
@@ -73,14 +79,14 @@ namespace ESATouristGuide.ViewModels
         /// </exception>
         /// <exception cref="NotSupportedException">
         /// </exception>
-        public void RaisePropertyChanged<T>( Expression<Func<T>> expression )
+        public void RaisePropertyChanged<T>(Expression<Func<T>> expression)
         {
             if (expression == null)
             {
                 throw new ArgumentException("Getting property name form expression is not supported for this type.");
             }
 
-            if (!( expression is LambdaExpression lamda ))
+            if (!(expression is LambdaExpression lamda))
             {
                 throw new NotSupportedException("Getting property name form expression is not supported for this type.");
             }
@@ -107,7 +113,7 @@ namespace ESATouristGuide.ViewModels
         /// <param name="propertyName">
         /// The property name.
         /// </param>
-        protected virtual void RaisePropertyChanged( [CallerMemberName] string propertyName = null )
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this , new PropertyChangedEventArgs(propertyName));
         }
@@ -129,7 +135,7 @@ namespace ESATouristGuide.ViewModels
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        protected bool SetAndRaise<T>( ref T property , T value , [CallerMemberName] string propertyName = null )
+        protected bool SetAndRaise<T>(ref T property , T value , [CallerMemberName] string propertyName = null)
         {
             if (Equals(property , value))
             {
@@ -141,7 +147,7 @@ namespace ESATouristGuide.ViewModels
             return true;
         }
 
-        protected virtual void Dispose( bool disposing )
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {

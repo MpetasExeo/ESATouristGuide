@@ -16,7 +16,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.CommunityToolkit.UI.Views;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
@@ -71,7 +70,7 @@ namespace ESATouristGuide.ViewModels
                     IsDrawerOpen = value;
                 }
                 SetAndRaise(ref filtersClicked , value);
-              
+
             }
         }
 
@@ -128,7 +127,7 @@ namespace ESATouristGuide.ViewModels
             ConstructorFinished = true;
         }
 
-        async Task NavigateToDetails( POI poi )
+        async Task NavigateToDetails(POI poi)
         {
             await poi.NavigateToDetailsAsync();
         }
@@ -185,7 +184,7 @@ namespace ESATouristGuide.ViewModels
         }
 
         private async Task AfterInitializationTask()
-        { 
+        {
             List<Task> tasks = new List<Task>
             {
                 GetCitiesAsync()
@@ -223,7 +222,7 @@ namespace ESATouristGuide.ViewModels
                     SetAndRaise(ref hasSelectedPlace , !value);
                 }
                 SetAndRaise(ref isDrawerOpen , value);
-               
+
             }
         }
 
@@ -255,14 +254,14 @@ namespace ESATouristGuide.ViewModels
 
         #region Pin Clicked 
 
-        private void GoogleMap_PinClicked( object sender , PinClickedEventArgs e ) => PinSelected(e);
+        private void GoogleMap_PinClicked(object sender , PinClickedEventArgs e) => PinSelected(e);
 
-        private void GetSelectedPlaceTemperature( double lat , double lon )
+        private void GetSelectedPlaceTemperature(double lat , double lon)
         {
             ThreadPool.QueueUserWorkItem(o => GetTemperatureAsync(lat , lon));
         }
 
-        async void GetTemperatureAsync( double lat , double lon )
+        async void GetTemperatureAsync(double lat , double lon)
         {
             Position pos = new Position(lat , lon);
             CancellationToken ct = new CancellationToken();
@@ -273,7 +272,7 @@ namespace ESATouristGuide.ViewModels
             TemperaturesState = LayoutState.None;
         }
 
-        void PinSelected( PinClickedEventArgs e )
+        void PinSelected(PinClickedEventArgs e)
         {
             e.Handled = true;
 
@@ -301,14 +300,14 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        private void FindSelectedPlace( double lat , double lon )
+        private void FindSelectedPlace(double lat , double lon)
         {
             TemperaturesState = LayoutState.Loading;
             IsBusy = true;
 
             SelectedPlace = POIS.Where(s => s.Latitude == lat).Where(s => s.Longitude == lon).FirstOrDefault();
 
-            if (!( SelectedPlace is null ))
+            if (!(SelectedPlace is null))
             {
                 HasSelectedPlace = true;
             }

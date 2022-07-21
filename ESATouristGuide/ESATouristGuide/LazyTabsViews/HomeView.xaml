@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentView
-    x:Class="ESATouristGuide.UIControls.HomeView"
+    x:Class="ESATouristGuide.LazyTabsViews.HomeView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:UIElements="clr-namespace:ESATouristGuide.UIControls"
@@ -23,13 +23,13 @@
                 <Setter Property="BoxMode" Value="Outlined" />
                 <Setter Property="BoxMode" Value="Outlined" />
                 <Setter Property="ChipBackgroundColor" Value="Transparent" />
-                <Setter Property="ChipBorderColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
+                <Setter Property="ChipBorderColor" Value="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}" />
                 <Setter Property="ChipFontFamily" Value="Roboto" />
                 <Setter Property="ChipFontSize" Value="16" />
                 <Setter Property="ChipPressedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark}, Light={StaticResource TransparentBackground}}" />
                 <Setter Property="ChipPressedTextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
-                <Setter Property="ChipSelectedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource TransparentBackground}, Light={StaticResource TransparentBackgroundDark}}" />
-                <Setter Property="ChipSelectedBorderColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource DarkPrimary}}" />
+                <Setter Property="ChipSelectedBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}" />
+                <Setter Property="ChipSelectedBorderColor" Value="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}" />
                 <Setter Property="ChipSelectedTextColor" Value="White" />
                 <Setter Property="ChipTextColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
                 <Setter Property="IsMultiline" Value="False" />
@@ -63,7 +63,7 @@
 
     <ContentView.Content>
         <ScrollView>
-            <Grid ColumnDefinitions="*" RowDefinitions="300,100,260,100,260">
+            <Grid ColumnDefinitions="*" RowDefinitions="300,100,260,100,260,60">
 
                 <Image
                     Grid.Row="0"

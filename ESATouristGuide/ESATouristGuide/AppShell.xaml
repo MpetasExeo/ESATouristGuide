@@ -105,7 +105,7 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     <FlyoutItem Title="Home" Icon="icon_feed.png">
-        <ShellContent ContentTemplate="{DataTemplate local:HomePage}" Route="HomePage" />
+        <ShellContent ContentTemplate="{DataTemplate local:HomeTabsPage}" Route="HomeTabsPage" />
     </FlyoutItem>
 
 

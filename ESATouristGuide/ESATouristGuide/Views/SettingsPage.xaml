@@ -170,7 +170,7 @@
                         RowDefinitions="Auto,Auto"
                         RowSpacing="10">
                         <RadioButton
-                            x:Name="RadioButtonSystem"
+                            x:Name="RadioButtonSystem"  
                             Grid.Column="1"
                             CheckedChanged="RadioButton_CheckedChanged"
                             Value="System">

@@ -1,7 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="ESATouristGuide.Views.GoogleMapsPage"
-    xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="ESATouristGuide.LazyTabsViews.GoogleMapsView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:UIElements="clr-namespace:ESATouristGuide.UIControls"
     xmlns:anim="clr-namespace:Xamanimation;assembly=Xamanimation"
@@ -21,9 +20,9 @@
     x:DataType="vm:GoogleMapsViewModel"
     Shell.NavBarIsVisible="False">
 
-    <ContentPage.BindingContext>
+    <ContentView.BindingContext>
         <vm:GoogleMapsViewModel />
-    </ContentPage.BindingContext>
+    </ContentView.BindingContext>
 
 
     <customViews:TaskLoaderView
@@ -31,17 +30,8 @@
         HorizontalOptions="FillAndExpand"
         TaskLoaderNotifier="{Binding LoaderNotifier}"
         VerticalOptions="FillAndExpand">
-        
         <customViews:TaskLoaderView.EmptyView>
-            <lottie:AnimationView
-                x:Name="EmptyLottie"
-                AbsoluteLayout.LayoutBounds="0.5, 0.4, 180, 180"
-                AbsoluteLayout.LayoutFlags="PositionProportional"
-                Animation="loader.json"
-                AutoPlay="True"
-                HorizontalOptions="FillAndExpand"
-                RepeatMode="Infinite"
-                VerticalOptions="FillAndExpand" />
+            <Label Text="isloading " />
         </customViews:TaskLoaderView.EmptyView>
 
         <customViews:TaskLoaderView.LoadingView>
@@ -62,7 +52,7 @@
                                                     Light={StaticResource Background}}"
             DrawerContentMinHeight="270"
             DrawerFooterHeight="0"
-            DrawerMinHeight="300"
+            DrawerMinHeight="360"
             DrawerPosition="Bottom"
             IsDrawerOpened="{Binding IsDrawerOpen, Mode=TwoWay}"
             IsDrawerShadowVisible="True"
@@ -96,6 +86,8 @@
                     <StackLayout
                         Grid.Row="0"
                         Grid.Column="0"
+                        Margin="0,0,0,60"
+                        VerticalOptions="Center"
                         Padding="8">
                         <Frame
                             Padding="0"
@@ -104,6 +96,7 @@
                             xct:ShadowEffect.OffsetX="0"
                             xct:ShadowEffect.OffsetY="0"
                             xct:ShadowEffect.Opacity=".725"
+                            Margin="0,0,0,60"
                             xct:ShadowEffect.Radius="2"
                             CornerRadius="12"
                             IsVisible="{Binding HasSelectedPlace}"
@@ -118,14 +111,15 @@
                         </Frame>
                     </StackLayout>
                     <StackLayout
+                        
+                        Margin="4,4,4,60"
                         Grid.Row="0"
                         Grid.Column="1"
-                        Margin="4"
                         HorizontalOptions="FillAndExpand"
                         IsVisible="{Binding HasSelectedPlace}"
                         VerticalOptions="Fill">
 
-                        <Grid ColumnDefinitions="*,Auto" HorizontalOptions="FillAndExpand">
+                        <Grid  ColumnDefinitions="*,Auto" HorizontalOptions="FillAndExpand">
                             <Label
                                 x:Name="PlaceCardDistance"
                                 Grid.Column="0"
@@ -279,7 +273,196 @@
 
                     </StackLayout>
 
+
+
                     <dxn:TabView
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        MinimumHeightRequest="330"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                          Light={StaticResource Background}}"
+                        HeaderPanelBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                     Light={StaticResource Background}}"
+                        HeaderPanelIndent="8"
+                        HeaderPanelItemSpacing="16"
+                        IsVisible="{Binding FiltersClicked}"
+                   
+                    ItemHeaderTextColor="{AppThemeBinding Dark={StaticResource DarkTextPale},
+                                                          Light={StaticResource TextPale}}"
+                    SelectedItemHeaderBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                        Light={StaticResource Background}}"
+                    SelectedItemHeaderTextColor="{AppThemeBinding Dark={StaticResource DarkAccent},
+                                                                  Light={StaticResource Accent}}"
+                    SelectedItemIndicatorColor="{AppThemeBinding Dark={StaticResource DarkAccent},
+                                                                 Light={StaticResource Accent}}">
+
+                        <dxn:TabViewItem HeaderText="Τοποθεσίες">
+                            <dxn:TabViewItem.Content>
+                                <Grid
+                                Padding="4"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                  Light={StaticResource Background}}"
+                                HorizontalOptions="StartAndExpand"
+                                RowDefinitions="*">
+
+                                    <dxcv:DXCollectionView
+                                    Margin="4,0"
+                                    HorizontalOptions="Start"
+                                    ItemSpacing="4"
+                                    ItemsSource="{Binding Categories}"
+                                    SelectionMode="None"
+                                    VerticalOptions="Center">
+
+                                        <dxcv:DXCollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="models:Category">
+                                                <StackLayout
+                                                Margin="0"
+                                                Padding="0"
+                                                HorizontalOptions="Start"
+                                                Orientation="Horizontal"
+                                                TranslationX="-16"
+                                                VerticalOptions="Center">
+                                                    <BoxView
+                                                    BackgroundColor="{Binding Color}"
+                                                    CornerRadius="24"
+                                                    HeightRequest="10"
+                                                    HorizontalOptions="Start"
+                                                    TranslationX="46"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="10" />
+                                                    <dxe:CheckEdit
+                                                    Margin="0,0,0,0"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource DarkAccent},
+                                                                                    Light={StaticResource Accent}}"
+                                                    CheckBoxIndent="24"
+                                                    CheckedCheckBoxColor="{Binding Color}"
+                                                    HorizontalOptions="Start"
+                                                    IsChecked="{Binding IsSelected}"
+                                                    Label="{Binding Text}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                                 Light={StaticResource Primary}}"
+                                                    LabelFontAttributes="Bold"
+                                                    LabelFontFamily="InterBold"
+                                                    LabelFontSize="14"
+                                                    LabelHorizontalAlignment="Start"
+                                                    VerticalOptions="Center" />
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </dxcv:DXCollectionView.ItemTemplate>
+                                    </dxcv:DXCollectionView>
+                                </Grid>
+                            </dxn:TabViewItem.Content>
+                        </dxn:TabViewItem>
+                        <dxn:TabViewItem HeaderText="Αξιοθέατα">
+                            <dxn:TabViewItem.Content>
+                                <Grid
+                                Margin="12"
+                                Padding="4"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                  Light={StaticResource Background}}">
+                                    <dxcv:DXCollectionView
+                                    IsEnabled="True"
+                                    IsVisible="true "
+                                    ItemSpacing="4"
+                                    ItemsSource="{Binding Categories}"
+                                    SelectionMode="None"
+                                    VerticalOptions="Start">
+                                        <dxcv:DXCollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="models:Category">
+                                                <StackLayout
+                                                HorizontalOptions="Start"
+                                                Orientation="Horizontal"
+                                                VerticalOptions="Center">
+                                                    <BoxView
+                                                    BackgroundColor="{Binding Color}"
+                                                    CornerRadius="24"
+                                                    HeightRequest="10"
+                                                    HorizontalOptions="Center"
+                                                    TranslationX="46"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="10" />
+                                                    <dxe:CheckEdit
+                                                    Margin="0,0,0,0"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource Primary},
+                                                                                    Light={StaticResource DarkPrimary}}"
+                                                    CheckBoxIndent="24"
+                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource Primary},
+                                                                                           Light={StaticResource DarkPrimary}}"
+                                                    HorizontalOptions="Center"
+                                                    IsChecked="True"
+                                                    Label="{Binding Text}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                                 Light={StaticResource Primary}}"
+                                                    LabelFontAttributes="Bold"
+                                                    LabelFontFamily="RobotoBold"
+                                                    LabelFontSize="16"
+                                                    LabelHorizontalAlignment="Start"
+                                                    VerticalOptions="Center" />
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </dxcv:DXCollectionView.ItemTemplate>
+                                    </dxcv:DXCollectionView>
+                                </Grid>
+                            </dxn:TabViewItem.Content>
+                        </dxn:TabViewItem>
+                        <dxn:TabViewItem HeaderText="Απόσταση">
+                            <dxn:TabViewItem.Content>
+                                <Grid
+                                Margin="12"
+                                Padding="4"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                  Light={StaticResource Background}}">
+                                    <dxcv:DXCollectionView
+                                    IsEnabled="True"
+                                    IsVisible="true "
+                                    ItemSpacing="4"
+                                    ItemsSource="{Binding Categories}"
+                                    SelectionMode="None"
+                                    VerticalOptions="Start">
+                                        <dxcv:DXCollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="models:Category">
+                                                <StackLayout
+                                                HorizontalOptions="Start"
+                                                Orientation="Horizontal"
+                                                VerticalOptions="Center">
+                                                    <BoxView
+                                                    BackgroundColor="{Binding Color}"
+                                                    CornerRadius="24"
+                                                    HeightRequest="10"
+                                                    HorizontalOptions="Center"
+                                                    TranslationX="46"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="10" />
+                                                    <dxe:CheckEdit
+                                                    Margin="0,0,0,0"
+                                                    CheckBoxColor="{AppThemeBinding Dark={StaticResource Primary},
+                                                                                    Light={StaticResource DarkPrimary}}"
+                                                    CheckBoxIndent="24"
+                                                    CheckedCheckBoxColor="{AppThemeBinding Dark={StaticResource Primary},
+                                                                                           Light={StaticResource DarkPrimary}}"
+                                                    HorizontalOptions="Center"
+                                                    IsChecked="True"
+                                                    Label="{Binding Text}"
+                                                    LabelColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                                 Light={StaticResource Primary}}"
+                                                    LabelFontAttributes="Bold"
+                                                    LabelFontFamily="RobotoBold"
+                                                    LabelFontSize="16"
+                                                    LabelHorizontalAlignment="Start"
+                                                    VerticalOptions="Center" />
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </dxcv:DXCollectionView.ItemTemplate>
+                                    </dxcv:DXCollectionView>
+                                </Grid>
+                            </dxn:TabViewItem.Content>
+                        </dxn:TabViewItem>
+
+                    </dxn:TabView>
+
+
+                    <!--<dxn:TabView
                         Grid.Row="0"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
@@ -458,7 +641,7 @@
                             </dxn:TabViewItem.Content>
                         </dxn:TabViewItem>
 
-                    </dxn:TabView>
+                    </dxn:TabView>-->
 
                 </Grid>
             </dxn:DrawerView.DrawerContent>
@@ -567,4 +750,4 @@
 
         </dxn:DrawerView>
     </customViews:TaskLoaderView>
-</ContentPage>
+</ContentView>
