@@ -35,7 +35,7 @@ namespace ESATouristGuide.Helpers
             set => Preferences.Set(nameof(Language) , value);
         }
 
-        public static Position Position { get; set; }
+        public static Location Position { get; set; }
         public static int Theme
         {
             get => Preferences.Get(nameof(Theme) , theme);

@@ -1,8 +1,11 @@
 ﻿
+using ESATouristGuide.Interfaces;
+
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.Forms;
@@ -34,10 +37,9 @@ namespace ESATouristGuide.ViewModels
             set { SetAndRaise(ref title , value); }
         }
 
-        // TODO BaseViewModel base
         //protected IUserLocationService UserLocationService { get; }
         //protected IDistancesService DistancesService { get; }
-        //protected IWeatherService WeatherService{ get; }
+        //protected IWeatherService WeatherService { get; }
 
         public ICommand SkeletonCommand { get; set; }
 
@@ -56,14 +58,12 @@ namespace ESATouristGuide.ViewModels
         {
         }
 
-
-
-
         /// <summary>
         /// Μπορεί να χρησιμοποιηθεί ως lazy load, δηλαδή να κληθεί μονάχα οταν θα είναι απαραίτητο ώστε να μην αργεί ο constructor του viewmodel.
         /// </summary>
         public virtual void Load()
         {
+            
         }
 
 

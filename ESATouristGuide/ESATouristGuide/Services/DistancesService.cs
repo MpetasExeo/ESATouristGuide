@@ -19,13 +19,13 @@ namespace ESATouristGuide.Services
 
         HttpClient _httpClient;
 
-        public async Task<Distances> GetDistancesFromUserAsync( Position PlacePosition , Position UserPosition )
+        public async Task<Distances> GetDistancesFromUserAsync( Location PlaceLocation , Location UserPosition )
         {
             // default values
             Distances distances = new Distances { DrivingDuration = AppResources.TimeSpanError , Distance = AppResources.TimeSpanError , WalkingDuration = AppResources.TimeSpanError };
 
             // αν δεν έχει ίντερνετ || UserPosition == dummyPosition ==> return default values
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet || UserPosition == new Position(40.5000001 , 22.9500001))
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet || UserPosition == new Location(40.5000001 , 22.9500001))
             {
                 return distances;
             }
@@ -39,8 +39,8 @@ namespace ESATouristGuide.Services
             GoogleApiResponse result;
 
             string parameters = string.Format("destinations={0},{1}&origins={2},{3}&mode={4}&key={5}" ,
-                                    PlacePosition.Latitude.ToString(culture) ,
-                                    PlacePosition.Longitude.ToString(culture) ,
+                                    PlaceLocation.Latitude.ToString(culture) ,
+                                    PlaceLocation.Longitude.ToString(culture) ,
                                     UserPosition.Latitude.ToString(culture) ,
                                     UserPosition.Longitude.ToString(culture) ,
                                     mode ,
@@ -71,7 +71,7 @@ namespace ESATouristGuide.Services
 
             mode = "walking";
 
-            parameters = $"destinations={PlacePosition.Latitude.ToString(culture)},{PlacePosition.Longitude.ToString(culture)}&origins={UserPosition.Latitude.ToString(culture)},{UserPosition.Longitude.ToString(culture)}&mode={mode}&key={Constants.GoogleApiKey}";
+            parameters = $"destinations={PlaceLocation.Latitude.ToString(culture)},{PlaceLocation.Longitude.ToString(culture)}&origins={UserPosition.Latitude.ToString(culture)},{UserPosition.Longitude.ToString(culture)}&mode={mode}&key={Constants.GoogleApiKey}";
 
             response = await _httpClient.GetAsync($"/maps/api/distancematrix/json?{parameters}")
                                         .ConfigureAwait(true);

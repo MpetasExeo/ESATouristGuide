@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.CommunityToolkit.UI.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
@@ -121,9 +122,8 @@ namespace ESATouristGuide.ViewModels
 
         public GoogleMapsViewModel()
         {
-            ServicesAndPropertiesInit();
+            ServicesAndPropertiesInit();             
             UICommandsInit();
-
             ConstructorFinished = true;
         }
 
@@ -139,7 +139,7 @@ namespace ESATouristGuide.ViewModels
                 DefineMapStyle();
                 return;
             }
-
+            
             List<Task> tasks = new List<Task>
             {
 
@@ -149,6 +149,9 @@ namespace ESATouristGuide.ViewModels
 
             //περιμένω να Init map 
             await Task.WhenAll(tasks).ConfigureAwait(true);
+
+
+            await Task.Delay(2000);
 
             //ο χάρτης φόρτωσε
             MapLoaded = true;
@@ -263,7 +266,7 @@ namespace ESATouristGuide.ViewModels
 
         async void GetTemperatureAsync(double lat , double lon)
         {
-            Position pos = new Position(lat , lon);
+            Location pos = new Location(lat , lon);
             CancellationToken ct = new CancellationToken();
 
             SelectedPlaceTemperature = await WeatherService.GetCurrentWeatherAsync(pos , ct);

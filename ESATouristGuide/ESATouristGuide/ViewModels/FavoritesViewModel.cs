@@ -44,7 +44,9 @@ namespace ESATouristGuide.ViewModels
 
         private async Task InitializationTask()
         {
+
             Favourites = new ObservableRangeCollection<POIDatabaseItem>(await Database.GetFavoritesAsync());
+
 
             foreach (var item in Favourites)
             {
@@ -58,7 +60,8 @@ namespace ESATouristGuide.ViewModels
                     throw;
                 }
             }
-            
+
+            await Task.Delay(1000);
             //await GreekCitiesService.GetGreekCities();
         }
 

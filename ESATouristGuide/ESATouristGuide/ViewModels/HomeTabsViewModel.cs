@@ -1,8 +1,11 @@
 ﻿using ESATouristGuide.Services;
 
+using Sharpnado.TaskLoaderView;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ESATouristGuide.ViewModels
@@ -14,36 +17,33 @@ namespace ESATouristGuide.ViewModels
         public HomeTabsViewModel()
         {
             CollectionViewViewModel = new CollectionViewViewModel();
+            CollectionViewViewModelModel = new CollectionViewViewModel();
             GoogleMapsViewModel = new GoogleMapsViewModel();
             FavoritesViewModel = new FavoritesViewModel();
-            Task.Run(async () => await userLocationService.GetUserLocationAsync(new System.Threading.CancellationToken()));
         }
 
+        public TaskLoaderNotifier LoaderNotifier { get; set; } = new TaskLoaderNotifier();
 
         public override void Load()
+        {
+            LoaderNotifier.Load(_ => InitializationTask());
+        }
+
+        private void LoadSelectedViewModel()
         {
             switch (SelectedViewModelIndex)
             {
                 case 0:
-                    if (!CollectionViewViewModel.IsLoaded)
-                    {
-                        CollectionViewViewModel.IsLoaded = true;
-                    }
+                    CollectionViewViewModel.Load();
                     break;
                 case 1:
                     GoogleMapsViewModel.Load();
                     break;
                 case 2:
-                    if (!CollectionViewViewModel.IsLoaded)
-                    {
-                        CollectionViewViewModel.IsLoaded = true;
-                    }
+                    CollectionViewViewModel.Load();
                     break;
                 case 3:
-                    if (!FavoritesViewModel.IsLoaded)
-                    {
-                        FavoritesViewModel.IsLoaded = true;
-                    }
+                    FavoritesViewModel.Load();
                     break;
                 default:
                     HomePageViewModel.Load();
@@ -51,24 +51,29 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
+        async Task InitializationTask()
+        {
+            await Task.Delay(2000);
+        }
+
+
+
         public FavoritesViewModel FavoritesViewModel { get; }
         public HomePageViewModel HomePageViewModel { get; }
 
-        public bool IsTabVisible { get; set; } = true;
         public GoogleMapsViewModel GoogleMapsViewModel { get; set; }
-        //public MiscViewModel MiscViewModel { get; }
-        //public PlacesArFiltersViewModel PlacesArFiltersViewModel { get; }
+
+        public CollectionViewViewModel CollectionViewViewModelModel { get; }
 
         public CollectionViewViewModel CollectionViewViewModel { get; }
 
         public int SelectedViewModelIndex
         {
             get => _selectedViewModelIndex;
-
             set
             {
                 SetAndRaise(ref _selectedViewModelIndex , value);
-                Load();
+                LoadSelectedViewModel();
             }
 
         }

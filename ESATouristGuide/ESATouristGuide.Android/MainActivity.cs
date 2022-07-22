@@ -27,6 +27,7 @@ namespace ESATouristGuide.Droid
             Xamarin.Essentials.Platform.Init(this , savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this , savedInstanceState);
             global::Xamarin.Forms.FormsMaterial.Init(this , savedInstanceState);
+            Android.Glide.Forms.Init(this , debug: true);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             CachedImageRenderer.InitImageViewHandler();
 

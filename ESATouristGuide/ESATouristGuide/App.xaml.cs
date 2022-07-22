@@ -5,17 +5,21 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 
 using ESATouristGuide.Views;
+using ESATouristGuide.Interfaces;
+using Xamarin.Forms.Xaml;
+
 
 namespace ESATouristGuide
 {
     public partial class App : Application
     {
+        public static ILocationUpdateService LocationUpdateService => DependencyService.Get<ILocationUpdateService>();
 
         public App()
         {
             InitializeComponent();
 
-            Sharpnado.Tabs.Initializer.Initialize(loggerEnable: false,true);
+            Sharpnado.Tabs.Initializer.Initialize(loggerEnable: false , true);
             DevExpress.XamarinForms.CollectionView.Initializer.Init();
             DevExpress.XamarinForms.Editors.Initializer.Init();
             DevExpress.XamarinForms.Navigation.Initializer.Init();
@@ -28,7 +32,19 @@ namespace ESATouristGuide
             {
                 MainPage = new AppShell();
             }
+
+
+            LocationUpdateService.LocationChanged += LocationUpdateService_LocationChanged;
         }
+
+        private void LocationUpdateService_LocationChanged(object sender , ILocationEventArgs e)
+        {
+            //Here you can get the user's location from "e" -> new Location(e.Latitude, e.Longitude);
+            //new Location is from Xamarin.Essentials Location object.
+            Settings.Position = new Location(e.Latitude , e.Longitude);
+        }
+
+
 
         protected override void OnStart()
         {
@@ -48,7 +64,7 @@ namespace ESATouristGuide
             RequestedThemeChanged += App_RequestedThemeChanged;
         }
 
-        private void App_RequestedThemeChanged( object sender , AppThemeChangedEventArgs e )
+        private void App_RequestedThemeChanged(object sender , AppThemeChangedEventArgs e)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {

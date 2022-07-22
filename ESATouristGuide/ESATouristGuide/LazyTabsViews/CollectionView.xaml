@@ -76,7 +76,15 @@
         TaskLoaderNotifier="{Binding LoaderNotifier}"
         VerticalOptions="FillAndExpand">
         <customViews:TaskLoaderView.EmptyView>
-            <Label Text="isloading " />
+            <lottie:AnimationView
+                x:Name="EmptyLottie"
+                AbsoluteLayout.LayoutBounds="0.5, 0.4, 180, 180"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Animation="loader.json"
+                AutoPlay="True"
+                HorizontalOptions="FillAndExpand"
+                RepeatMode="Infinite"
+                VerticalOptions="FillAndExpand" />
         </customViews:TaskLoaderView.EmptyView>
 
         <customViews:TaskLoaderView.LoadingView>
@@ -175,6 +183,8 @@
                                 <dxcv:DXCollectionView
                                     Margin="4,0"
                                     HorizontalOptions="Start"
+                                    
+
                                     ItemSpacing="4"
                                     ItemsSource="{Binding Categories}"
                                     SelectionMode="None"

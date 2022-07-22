@@ -79,7 +79,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        public Position CityPosition { get; set; }
+        public Location CityPosition { get; set; }
         bool _isFavorite;
         public bool IsFavorite
         {
@@ -93,18 +93,16 @@ namespace ESATouristGuide.ViewModels
             LoadImages();
             PropertiesInit();
             SelectedPOI = poi;
-            CityPosition = new Position(poi.Latitude , poi.Longitude);
-
-            Load();
+            CityPosition = new Location(poi.Latitude , poi.Longitude);
         }
 
         void PropertiesInit()
         {
-            UserLocationService = new UserLocationService();
+            //UserLocationService = new UserLocationService();
             Database = new POIRepository();
             WeatherService = new WeatherService();
-            AddToFavouritesCommand = new AsyncCommand(AddToFavourites);
             DistancesService = new DistancesService();
+            AddToFavouritesCommand = new AsyncCommand(AddToFavourites);
         }
         async Task AddToFavourites()
         {
@@ -148,11 +146,11 @@ namespace ESATouristGuide.ViewModels
 
             IsBusy = true;
 
-            var userLocation = await UserLocationService.GetUserLocationAsync(ct);
+            //var userLocation = await UserLocationService.GetUserLocationAsync(ct);
 
             Temperatures = await WeatherService.GetCurrentWeatherAsync(CityPosition , ct);
 
-            Distances = await DistancesService.GetDistancesFromUserAsync(CityPosition , userLocation);
+            Distances = await DistancesService.GetDistancesFromUserAsync(CityPosition , Settings.Position);
 
             IsBusy = false;
 

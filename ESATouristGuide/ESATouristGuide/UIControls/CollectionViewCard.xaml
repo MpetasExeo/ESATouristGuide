@@ -3,6 +3,7 @@
     x:Class="ESATouristGuide.UIControls.CollectionViewCard"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:helpers="clr-namespace:ESATouristGuide.Helpers"
@@ -37,8 +38,14 @@
             <Image
                 x:Name="POIImageUri"
                 Grid.RowSpan="3"
-                Aspect="AspectFill"
-                Source="{Binding POIImage, TargetNullValue='gradient.png'}" />
+                Aspect="AspectFill">
+                <Image.Source>
+                    <UriImageSource
+                        CacheValidity="1"
+                        CachingEnabled="true"
+                        Uri="{Binding POIImage, TargetNullValue='gradient.png'}"/>
+                </Image.Source>
+            </Image>
 
 
             <pv:PancakeView
@@ -81,11 +88,11 @@
                             TextColor="WhiteSmoke"
                             VerticalOptions="Center" />
                         <Label
-                            FontFamily="Roboto"
                             x:Name="POIDistanceIndicatorLabel"
-                            IsVisible="{Binding POIShowDistance}"
+                            FontFamily="Roboto"
                             FontSize="12"
                             HorizontalOptions="StartAndExpand"
+                            IsVisible="{Binding POIShowDistance}"
                             Padding="0"
                             Text="{helpers:Translate KilometersShort}"
                             TextColor="WhiteSmoke"

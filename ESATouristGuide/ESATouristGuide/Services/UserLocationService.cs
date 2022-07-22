@@ -14,9 +14,9 @@ namespace ESATouristGuide.Services
     public class UserLocationService : IUserLocationService
     {
         CancellationTokenSource cts;
-        readonly Position DummyPosition = new Position(40.5000001 , 22.9500001);
+        readonly Location DummyPosition = new Location(40.5000001 , 22.9500001);
 
-        public async Task<Position> GetUserLocationAsync( CancellationToken cancellationToken )
+        public async Task<Location> GetUserLocationAsync( CancellationToken cancellationToken )
         {
             PermissionStatus locationPermissionStatus = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>().ConfigureAwait(true);
 
@@ -25,7 +25,7 @@ namespace ESATouristGuide.Services
                 try
                 {
                     //Location location = await Geolocation.GetLastKnownLocationAsync();
-                    Position pos = new Position();
+                    Location pos = new Location();
 
                     //if (location != null)
                     //{
@@ -44,7 +44,7 @@ namespace ESATouristGuide.Services
                         cts = new CancellationTokenSource();
                         var location = await Geolocation.GetLocationAsync(request , cts.Token).ConfigureAwait(true);
 
-                        pos = new Position(location.Latitude , location.Longitude);
+                        pos = new Location(location.Latitude , location.Longitude);
 
                         if (pos != DummyPosition)
                         {

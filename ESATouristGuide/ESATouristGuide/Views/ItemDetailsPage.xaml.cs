@@ -1,4 +1,6 @@
 ﻿
+using ESATouristGuide.ViewModels;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,6 +12,13 @@ namespace ESATouristGuide.Views
         public ItemDetailsPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            var vm = this.BindingContext as ItemDetailsViewModel;
+            vm.Load();
         }
     }
 }

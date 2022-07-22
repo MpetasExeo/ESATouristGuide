@@ -38,17 +38,7 @@ namespace ESATouristGuide.Models
         public bool ShowDistance { get => Distance < 1500 ? true : false; }
         public string DistanceFromUser
         {
-            get
-            {
-                if (Distance > 1500)
-                {
-                    return "∞";
-                }
-                else
-                {
-                    return Distance.ToString();
-                }
-            }
+            get => Distance > 1500 ? "∞" : Distance.ToString();
         }
 
         public double CalculateDistanceFromUser(double latitude , double longitude)
@@ -58,33 +48,19 @@ namespace ESATouristGuide.Models
 
         public async Task NavigateToDetailsAsync()
         {
-            // item null => do nothing  
-            //if (item == null) return;
-
-            //Έλεγχος για ίντερνετ
             if (!RequiredChecks.HasInternetConnection())
             {
 
                 IToastMessage toastMessage = new Toaster();
                 await toastMessage.MakeToastAsync(StandardToastMessages.No_Internet);
-
                 return;
-                //αν δεν έχει ίντερνετ ==> μην τρέξεις τον παρακάτω κώδικα
             }
 
-
-            // PlaceDetailsPage init && binding 
             ItemDetailsPage detailsPage = new ItemDetailsPage();
-
             ItemDetailsViewModel itemDetailsViewModel = new ItemDetailsViewModel(this);
-
             detailsPage.BindingContext = itemDetailsViewModel;
 
-            // όταν γίνουν τα προηγούμενα => κλείσε το popup
-            //popup.Dismiss(popup);
-
-            // Άνοιξε PlaceDetailsPage
-            await Shell.Current.Navigation.PushAsync(detailsPage , true).ConfigureAwait(true);
+            await Shell.Current.Navigation.PushAsync(detailsPage , true).ConfigureAwait(false);
 
         }
     }
