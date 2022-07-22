@@ -1,5 +1,4 @@
-﻿using DevExpress.XamarinForms.Core.Filtering;
-
+﻿
 using ESATouristGuide.Helpers;
 using ESATouristGuide.Interfaces;
 using ESATouristGuide.Models;

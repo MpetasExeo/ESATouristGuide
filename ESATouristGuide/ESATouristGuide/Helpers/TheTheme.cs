@@ -27,7 +27,7 @@ namespace ESATouristGuide.Helpers
 
             NavigationPage nav = Application.Current.MainPage as NavigationPage;
 
-            IEnvironment e = DependencyService.Get<IEnvironment>();
+            var e = DependencyService.Get<IEnvironment>();
             if (Application.Current.RequestedTheme == OSAppTheme.Dark)
             {
                 e?.SetStatusBarColor(Color.FromHex("#15181f") , false);

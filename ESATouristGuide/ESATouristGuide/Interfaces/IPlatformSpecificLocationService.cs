@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ESATouristGuide.Interfaces
+﻿namespace ESATouristGuide.Interfaces
 {
     public interface IPlatformSpecificLocationService
     {

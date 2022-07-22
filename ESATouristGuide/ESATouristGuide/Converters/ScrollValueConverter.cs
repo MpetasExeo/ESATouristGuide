@@ -10,20 +10,20 @@ namespace ESATouristGuide.Converters
     public class ScrollValueConverter : IValueConverter
     {
 
-        public object Convert( object value , Type targetType , object parameter , CultureInfo culture )
+        public object Convert(object value , Type targetType , object parameter , CultureInfo culture)
         {
             NumberFormatInfo fmt = new NumberFormatInfo() { NegativeSign = "-" };
 
-            double percentage = (double)value;
+            var percentage = (double)value;
 
             Debug.WriteLine(percentage);
 
-            string[] allParams = ( (string)parameter ).Split(';');
-            double factor = double.Parse(allParams[0] , fmt);
-            double min = double.Parse(allParams[1]);
-            double max = double.Parse(allParams[2]);
-            bool reverse = bool.Parse(allParams[3]);
-            double delayUntilPercentage = double.Parse(allParams[4]);
+            var allParams = ((string)parameter).Split(';');
+            var factor = double.Parse(allParams[0] , fmt);
+            var min = double.Parse(allParams[1]);
+            var max = double.Parse(allParams[2]);
+            var reverse = bool.Parse(allParams[3]);
+            var delayUntilPercentage = double.Parse(allParams[4]);
 
             if (percentage == 0)
             {
@@ -39,7 +39,7 @@ namespace ESATouristGuide.Converters
 
             if (reverse)
             {
-                percentage = 1 - percentage * factor;
+                percentage = 1 - (percentage * factor);
                 return percentage * max;
             }
             else
@@ -48,7 +48,7 @@ namespace ESATouristGuide.Converters
             }
         }
 
-        public object ConvertBack( object value , Type targetType , object parameter , CultureInfo culture )
+        public object ConvertBack(object value , Type targetType , object parameter , CultureInfo culture)
         {
             //throw new NotImplementedException();
             return null;

@@ -3,7 +3,6 @@
 using ESATouristGuide.Interfaces;
 
 using System;
-using System.Linq;
 
 using XFTemplateApp.iOS.Services;
 
@@ -19,7 +18,7 @@ namespace XFTemplateApp.iOS.Services
 
     public class LocationUpdateService : ILocationUpdateService
     {
-        CLLocationManager _locationManager;
+        private CLLocationManager _locationManager;
 
         public event EventHandler<ILocationEventArgs> LocationChanged;
 

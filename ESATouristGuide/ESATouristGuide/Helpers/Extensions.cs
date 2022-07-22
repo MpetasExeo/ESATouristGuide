@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace ESATouristGuide.Helpers
 {
@@ -12,15 +10,18 @@ namespace ESATouristGuide.Helpers
         public static TTarget Clone<TSource, TTarget>(this TSource source) where TTarget : new()
         {
             TTarget target = new TTarget();
-            var properties = new Hashtable();
+            Hashtable properties = new Hashtable();
             var targetType = source.GetType();
             targetType.GetProperties().ToList().ForEach(p => properties[p.Name] = p);
             foreach (var key in properties.Keys)
             {
-                var pPropertyInfo = properties[key] as PropertyInfo;
-                Type type = Nullable.GetUnderlyingType(pPropertyInfo.PropertyType);
+                PropertyInfo pPropertyInfo = properties[key] as PropertyInfo;
+                var type = Nullable.GetUnderlyingType(pPropertyInfo.PropertyType);
                 if (type == null)
+                {
                     type = pPropertyInfo.PropertyType;
+                }
+
                 if (IsSimpleType(type))
                 {
                     var sPropertyInfo = target.GetType().GetProperty(key.ToString());
@@ -28,9 +29,13 @@ namespace ESATouristGuide.Helpers
                     {
                         var pValue = pPropertyInfo.GetValue(source);
                         if (pValue.CanConvertTo(type))
+                        {
                             sPropertyInfo.SetValue(target , Convert.ChangeType(pValue , type));
+                        }
                         else if (pValue == null)
+                        {
                             sPropertyInfo.SetValue(target , null);
+                        }
                     }
                 }
             }
@@ -70,7 +75,7 @@ namespace ESATouristGuide.Helpers
             typeof(Uri),
                 }.Contains(type) ||
                 Convert.GetTypeCode(type) != TypeCode.Object ||
-                type.IsArray && IsSimpleType(type.GetElementType()) ||
+                (type.IsArray && IsSimpleType(type.GetElementType())) ||
                 (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) && IsSimpleType(type.GetGenericArguments()[0]));
         }
     }

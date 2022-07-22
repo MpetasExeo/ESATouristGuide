@@ -1,5 +1,6 @@
 ﻿
 using ESATouristGuide.Helpers;
+using ESATouristGuide.Views;
 
 using Sharpnado.TaskLoaderView;
 
@@ -8,8 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.Forms;
-
-using ESATouristGuide.Views;
 
 namespace ESATouristGuide.ViewModels
 {
@@ -86,7 +85,8 @@ namespace ESATouristGuide.ViewModels
 
             UserExperiencePrompts.NoGPSPrompt();
         }
-        Task InitCommands()
+
+        private Task InitCommands()
         {
             Command1 = new Command(Button_Clicked);
 

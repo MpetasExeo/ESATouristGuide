@@ -14,10 +14,14 @@ namespace ESATouristGuide.Models
         public static void DetailsPageRequiredChecks()
         {
             if (!HasInternetConnection())
+            {
                 UserExperiencePrompts.NoInternetConnectionPrompt();
+            }
 
             if (!HasGPSServiceEnabled())
+            {
                 UserExperiencePrompts.NoGPSPrompt();
+            }
         }
     }
 }

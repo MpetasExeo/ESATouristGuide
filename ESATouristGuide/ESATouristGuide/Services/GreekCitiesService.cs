@@ -1,5 +1,6 @@
 ﻿using ESATouristGuide.Interfaces;
 using ESATouristGuide.Models;
+using ESATouristGuide.Views;
 
 using MvvmHelpers;
 
@@ -8,8 +9,6 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-
-using ESATouristGuide.Views;
 
 namespace ESATouristGuide.Services
 {
@@ -22,16 +21,16 @@ namespace ESATouristGuide.Services
         public async Task<ObservableRangeCollection<POI>> GetGreekCities()
         {
             ObservableRangeCollection<POI> greekCities = new ObservableRangeCollection<POI>();
-            string jsonFolder = "Json";
-            string jsonFileName = "greekcities.json";
-            Assembly assembly = typeof(GoogleMapsPage).GetTypeInfo().Assembly;
-            Stream stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{jsonFolder}.{jsonFileName}");
+            var jsonFolder = "Json";
+            var jsonFileName = "greekcities.json";
+            var assembly = typeof(GoogleMapsPage).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{jsonFolder}.{jsonFileName}");
 
             stream.Position = 0;
 
             using (StreamReader reader = new StreamReader(stream))
             {
-                string jsonString = await reader.ReadToEndAsync().ConfigureAwait(true);
+                var jsonString = await reader.ReadToEndAsync().ConfigureAwait(true);
                 greekCities = JsonConvert.DeserializeObject<ObservableRangeCollection<POI>>(jsonString);
             }
 

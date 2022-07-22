@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using Xamarin.Essentials;
-using Xamarin.Forms.GoogleMaps;
 
 namespace ESATouristGuide.Helpers
 {
@@ -10,9 +9,10 @@ namespace ESATouristGuide.Helpers
     {
 
         // 0 = Αγγλικά, 1 = Ελληνικά, 2 = Γερμανικά
-        const int language = 0;
+        private const int language = 0;
+
         // 0 = Προεπιλογή, 1 = Φωτεινή, 2 = Σκοτεινή
-        const int theme = 0;
+        private const int theme = 0;
 
         public static Dictionary<int , string> CategoriesId = new Dictionary<int , string>
         {

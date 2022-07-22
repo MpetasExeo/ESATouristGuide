@@ -2,7 +2,7 @@
 {
     public class Language
     {
-        public Language( string name , string ci )
+        public Language(string name , string ci)
         {
             Name = name;
             CI = ci;

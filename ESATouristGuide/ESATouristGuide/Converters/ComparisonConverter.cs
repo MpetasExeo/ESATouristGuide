@@ -9,14 +9,14 @@ namespace ESATouristGuide.Converters
 
     public class ComparisonConverter : IValueConverter
     {
-        public object Convert( object value , Type targetType , object parameter , CultureInfo culture )
+        public object Convert(object value , Type targetType , object parameter , CultureInfo culture)
         {
             NumberFormatInfo fmt = new NumberFormatInfo();
             fmt.NegativeSign = "-";
 
-            string[] allParams = ( (string)parameter ).Split(';');
-            double compValue = double.Parse(allParams[0] , fmt);
-            string comparison = allParams[1];
+            var allParams = ((string)parameter).Split(';');
+            var compValue = double.Parse(allParams[0] , fmt);
+            var comparison = allParams[1];
 
             switch (comparison)
             {
@@ -31,7 +31,7 @@ namespace ESATouristGuide.Converters
                     return (double)value == compValue;
             }
         }
-        public object ConvertBack( object value , Type targetType , object parameter , CultureInfo culture )
+        public object ConvertBack(object value , Type targetType , object parameter , CultureInfo culture)
         {
             return null;
         }

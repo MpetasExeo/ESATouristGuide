@@ -7,7 +7,7 @@ namespace ESATouristGuide.Helpers
 {
     public class ApplicationExceptions
     {
-        public static string ToString( Exception exception )
+        public static string ToString(Exception exception)
         {
             switch (exception)
             {
@@ -41,7 +41,7 @@ namespace ESATouristGuide.Helpers
 
         public class LocalizedException : Exception
         {
-            public LocalizedException( string message )
+            public LocalizedException(string message)
                 : base(message)
             {
             }

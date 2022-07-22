@@ -1,15 +1,12 @@
 ﻿using ESATouristGuide.Interfaces;
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Essentials;
 
 namespace ESATouristGuide.Services
 {
-    class LocationService : ILocationService
+    internal class LocationService : ILocationService
     {
         public async Task<bool> IsLocationPermissionGranted()
         {
@@ -36,7 +33,7 @@ namespace ESATouristGuide.Services
 
         public async Task<Location> GetCurrentLocation()
         {
-            var request = new GeolocationRequest(GeolocationAccuracy.High);
+            GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.High);
 
             var location = await Geolocation.GetLocationAsync(request);
 

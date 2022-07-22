@@ -30,7 +30,7 @@ namespace ESATouristGuide.Helpers
             }
         }
 
-        public void SetCulture( CultureInfo language )
+        public void SetCulture(CultureInfo language)
         {
             Thread.CurrentThread.CurrentUICulture = language;
             AppResources.Culture = language;
@@ -39,7 +39,7 @@ namespace ESATouristGuide.Helpers
             Invalidate();
         }
 
-        public string GetValue( string text , string ResourceId )
+        public string GetValue(string text , string ResourceId)
         {
             ResourceManager resourceManager = new ResourceManager(ResourceId , typeof(TranslateExtension).GetTypeInfo().Assembly);
             return resourceManager.GetString(text , CultureInfo.CurrentCulture);

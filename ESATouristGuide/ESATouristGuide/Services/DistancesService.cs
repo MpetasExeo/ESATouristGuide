@@ -10,16 +10,14 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 using Xamarin.Essentials;
-using Xamarin.Forms.GoogleMaps;
 
 namespace ESATouristGuide.Services
 {
     public class DistancesService : IDistancesService
     {
+        private HttpClient _httpClient;
 
-        HttpClient _httpClient;
-
-        public async Task<Distances> GetDistancesFromUserAsync( Location PlaceLocation , Location UserPosition )
+        public async Task<Distances> GetDistancesFromUserAsync(Location PlaceLocation , Location UserPosition)
         {
             // default values
             Distances distances = new Distances { DrivingDuration = AppResources.TimeSpanError , Distance = AppResources.TimeSpanError , WalkingDuration = AppResources.TimeSpanError };
@@ -31,14 +29,14 @@ namespace ESATouristGuide.Services
             }
 
             // απόσταση πάντα >= 0 ==> -1 για έλεγχο αν βρέθηκε απόσταση
-            int dist = -1;
+            var dist = -1;
 
-            string mode = "driving";
+            var mode = "driving";
 
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
             GoogleApiResponse result;
 
-            string parameters = string.Format("destinations={0},{1}&origins={2},{3}&mode={4}&key={5}" ,
+            var parameters = string.Format("destinations={0},{1}&origins={2},{3}&mode={4}&key={5}" ,
                                     PlaceLocation.Latitude.ToString(culture) ,
                                     PlaceLocation.Longitude.ToString(culture) ,
                                     UserPosition.Latitude.ToString(culture) ,
@@ -51,11 +49,11 @@ namespace ESATouristGuide.Services
                 /* Διαμορφώνω το request*/
                 BaseAddress = new Uri("https://maps.googleapis.com")
             };
-            HttpResponseMessage response = await _httpClient.GetAsync($"/maps/api/distancematrix/json?{parameters}")
+            var response = await _httpClient.GetAsync($"/maps/api/distancematrix/json?{parameters}")
                 .ConfigureAwait(true);
             _ = response.EnsureSuccessStatusCode();
 
-            string stringResult = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
+            var stringResult = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
             result = JsonConvert.DeserializeObject<GoogleApiResponse>(stringResult);
 
             TimeSpan drivingDuration;
@@ -81,7 +79,7 @@ namespace ESATouristGuide.Services
             stringResult = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
             result = JsonConvert.DeserializeObject<GoogleApiResponse>(stringResult);
 
-            TimeSpan walkingDuration = result.rows[0].elements[0].duration != null
+            var walkingDuration = result.rows[0].elements[0].duration != null
                 ? TimeSpan.FromSeconds(result.rows[0].elements[0].duration.value)
                 : TimeSpan.FromSeconds(-1);
 
@@ -92,7 +90,7 @@ namespace ESATouristGuide.Services
 
         }
 
-        public void DurationFormatting( Distances distances , TimeSpan driving , TimeSpan walking , float distance )
+        public void DurationFormatting(Distances distances , TimeSpan driving , TimeSpan walking , float distance)
         {
             // formatting durations
             distances.WalkingDuration = TimeSpanFormatting(walking.Days , walking.Hours , walking.Minutes);
@@ -109,9 +107,9 @@ namespace ESATouristGuide.Services
             distances.Distance = AppResources.TimeSpanError;
         }
 
-        public string TimeSpanFormatting( int days , int hours , int minutes )
+        public string TimeSpanFormatting(int days , int hours , int minutes)
         {
-            string Format = AppResources.NaN;
+            var Format = AppResources.NaN;
 
             // δεν βρέθηκε απόσταση
             //if (timeSpan.Seconds == -1) return Format = string.Format("{0}", AppResources.TimeSpanError);
@@ -119,7 +117,7 @@ namespace ESATouristGuide.Services
             // αν απόσταση έχει μέρες
             if (days > 0)
             {
-                return $"{days * 24 + hours}{AppResources.Hours} {minutes}{AppResources.Minutes}";
+                return $"{(days * 24) + hours}{AppResources.Hours} {minutes}{AppResources.Minutes}";
             }
 
             // αν απόσταση έχει ώρες

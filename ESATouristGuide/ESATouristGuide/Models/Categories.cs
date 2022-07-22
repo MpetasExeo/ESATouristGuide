@@ -18,7 +18,7 @@ namespace ESATouristGuide.Models
             new Category { Color = "#b83737", Text = "Μνημεία", Image = "culture.png" }
             ,new Category { Color = "#9c436f", Text = "Κορυφαία αξιοθέατα", Image = "culture.png" }
 
-            
+
         };
 
         public static List<Category> CategoriesList => _categoriesList;

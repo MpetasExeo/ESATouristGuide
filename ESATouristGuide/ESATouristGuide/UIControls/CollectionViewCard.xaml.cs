@@ -61,27 +61,33 @@ namespace ESATouristGuide.UIControls
 
         private static void POINamePropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
-            var card = (CollectionViewCard)bindable;
+            CollectionViewCard card = (CollectionViewCard)bindable;
             if ((string)newValue != string.Empty)
             {
-                card.POINameLabel.Text = ((string)newValue);
+                card.POINameLabel.Text = (string)newValue;
             }
-            else card.POINameLabel.Text = ((string)oldValue);
+            else
+            {
+                card.POINameLabel.Text = (string)oldValue;
+            }
         }
 
         private static void POIShowDistancePropertyPropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
-            var card = (CollectionViewCard)bindable;
+            CollectionViewCard card = (CollectionViewCard)bindable;
             if ((bool)newValue != (bool)oldValue)
             {
-                card.POIDistanceIndicatorLabel.IsVisible = ((bool)newValue);
+                card.POIDistanceIndicatorLabel.IsVisible = (bool)newValue;
             }
-            else card.POINameLabel.IsVisible = ((bool)oldValue);
+            else
+            {
+                card.POINameLabel.IsVisible = (bool)oldValue;
+            }
         }
 
         private static void POIImagePropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
-            var card = (CollectionViewCard)bindable;
+            CollectionViewCard card = (CollectionViewCard)bindable;
             if ((System.Uri)newValue != null)
             {
                 card.POIImageUri.Source = (System.Uri)newValue;
@@ -91,17 +97,20 @@ namespace ESATouristGuide.UIControls
 
         private static void POIRegionPropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
-            var card = (CollectionViewCard)bindable;
+            CollectionViewCard card = (CollectionViewCard)bindable;
             if ((string)newValue != string.Empty)
             {
-                card.POIRegionLabel.Text = ((string)newValue);
+                card.POIRegionLabel.Text = (string)newValue;
             }
-            else card.POIRegionLabel.Text = ((string)oldValue);
+            else
+            {
+                card.POIRegionLabel.Text = (string)oldValue;
+            }
         }
 
         private static void DescriptionPropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
-            var card = (CollectionViewCard)bindable;
+            CollectionViewCard card = (CollectionViewCard)bindable;
             if ((string)newValue != string.Empty)
             {
                 //card.PlaceCardDescription.Text = ((string)newValue);
@@ -111,17 +120,17 @@ namespace ESATouristGuide.UIControls
 
         private static void POIDistancePropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
-            var card = (CollectionViewCard)bindable;
+            CollectionViewCard card = (CollectionViewCard)bindable;
             if ((string)newValue != string.Empty)
             {
-                card.POIDistanceFromUserLabel.Text = ((string)newValue);
+                card.POIDistanceFromUserLabel.Text = (string)newValue;
             }
             else { } /*{ card.PlaceCardTitle.Text = ((double)oldValue.ToString()); }*/
         }
 
         private static void POITapCommandPropertyChanged(BindableObject bindable , object oldValue , object newValue)
         {
-            var card = (CollectionViewCard)bindable;
+            CollectionViewCard card = (CollectionViewCard)bindable;
             if ((Command)newValue != null)
             {
                 //card.POITapAction.Command .Command = ( (double)newValue.ToString() );

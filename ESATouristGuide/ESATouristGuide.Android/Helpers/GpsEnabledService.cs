@@ -1,10 +1,9 @@
 ﻿using Android.Content;
 
+using ESATouristGuide.Droid.Helpers;
 using ESATouristGuide.Interfaces;
 
 using Xamarin.Forms;
-
-using ESATouristGuide.Droid.Helpers;
 
 [assembly: Dependency(typeof(GpsEnabledService))]
 namespace ESATouristGuide.Droid.Helpers
@@ -13,7 +12,7 @@ namespace ESATouristGuide.Droid.Helpers
     {
         public bool IsGPSEnabled()
         {
-            bool value = false;
+            var value = false;
             Android.Locations.LocationManager manager = (Android.Locations.LocationManager)Android.App.Application.Context.GetSystemService(Android.Content.Context.LocationService);
             if (!manager.IsProviderEnabled(Android.Locations.LocationManager.GpsProvider))
             {

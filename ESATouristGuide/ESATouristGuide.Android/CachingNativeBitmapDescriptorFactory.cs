@@ -13,13 +13,13 @@ namespace ESATouristGuide.Droid
         private readonly ConcurrentDictionary<string , AndroidBitmapDescriptor> _cache
             = new ConcurrentDictionary<string , AndroidBitmapDescriptor>();
 
-        public AndroidBitmapDescriptor ToNative( BitmapDescriptor descriptor )
+        public AndroidBitmapDescriptor ToNative(BitmapDescriptor descriptor)
         {
-            DefaultBitmapDescriptorFactory defaultFactory = DefaultBitmapDescriptorFactory.Instance;
+            var defaultFactory = DefaultBitmapDescriptorFactory.Instance;
 
             if (!string.IsNullOrEmpty(descriptor.Id))
             {
-                int iconId = 0;
+                var iconId = 0;
                 switch (descriptor.Id)
                 {
                     case "Πολιτισμός":

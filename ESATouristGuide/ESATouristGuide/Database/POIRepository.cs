@@ -11,10 +11,12 @@ namespace ESATouristGuide.Database
     {
         private static SQLiteAsyncConnection _db;
 
-        async Task Init()
+        private async Task Init()
         {
             if (_db != null)
+            {
                 return;
+            }
 
             _db = new SQLiteAsyncConnection(Constants.DatabasePath);
 

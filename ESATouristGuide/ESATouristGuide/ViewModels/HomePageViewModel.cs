@@ -14,7 +14,7 @@ namespace ESATouristGuide.ViewModels
             // HomePageViewViewModel= new HomePageViewViewModel();
         }
 
-        bool homePageViewLoaded;
+        private bool homePageViewLoaded;
         public bool HomePageViewLoaded
         {
             get => homePageViewLoaded;
@@ -25,7 +25,7 @@ namespace ESATouristGuide.ViewModels
         }
         public HomePageViewViewModel HomePageViewViewModel { get; set; }
 
-        async Task PerformRequiredChecks()
+        private async Task PerformRequiredChecks()
         {
             RequiredChecks.DetailsPageRequiredChecks();
             {

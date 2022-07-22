@@ -1,11 +1,8 @@
 ﻿
-using ESATouristGuide.Interfaces;
-
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.Forms;
@@ -21,14 +18,14 @@ namespace ESATouristGuide.ViewModels
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        bool isBusy;
+        private bool isBusy;
         public bool IsBusy
         {
             get { return isBusy; }
             set { SetAndRaise(ref isBusy , value); }
         }
 
-        string title = string.Empty;
+        private string title = string.Empty;
         private bool disposedValue;
 
         public string Title
@@ -63,7 +60,7 @@ namespace ESATouristGuide.ViewModels
         /// </summary>
         public virtual void Load()
         {
-            
+
         }
 
 

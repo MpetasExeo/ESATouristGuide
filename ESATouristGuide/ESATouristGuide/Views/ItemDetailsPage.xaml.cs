@@ -17,7 +17,7 @@ namespace ESATouristGuide.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            var vm = this.BindingContext as ItemDetailsViewModel;
+            ItemDetailsViewModel vm = this.BindingContext as ItemDetailsViewModel;
             vm.Load();
         }
     }

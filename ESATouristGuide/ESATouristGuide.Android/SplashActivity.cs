@@ -11,7 +11,7 @@ namespace ESATouristGuide.Droid
         MainLauncher = true)]
     public class SplashActivity : AppCompatActivity
     {
-        protected override void OnCreate( Bundle savedInstanceState )
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Intent intent = new Intent(this , typeof(MainActivity));

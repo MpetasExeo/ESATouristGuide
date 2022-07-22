@@ -13,7 +13,7 @@ namespace ESATouristGuide.Converters
     {
         private static ImageResourceExtension imageResourceExtension;
 
-        public object Convert( object value , Type targetType , object parameter , CultureInfo culture )
+        public object Convert(object value , Type targetType , object parameter , CultureInfo culture)
         {
             if (value == null)
             {
@@ -25,7 +25,7 @@ namespace ESATouristGuide.Converters
                 imageResourceExtension = new ImageResourceExtension();
             }
 
-            string imageName = value switch
+            var imageName = value switch
             {
                 ServerException _ => "Sample.Images.server.png",
                 NetworkException _ => "Sample.Images.the_internet.png",
@@ -36,7 +36,7 @@ namespace ESATouristGuide.Converters
 
         }
 
-        public object ConvertBack( object value , Type targetType , object parameter , CultureInfo culture )
+        public object ConvertBack(object value , Type targetType , object parameter , CultureInfo culture)
         {
             throw new NotImplementedException();
         }

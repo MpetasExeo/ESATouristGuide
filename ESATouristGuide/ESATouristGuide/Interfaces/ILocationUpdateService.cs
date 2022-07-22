@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ESATouristGuide.Interfaces
 {
@@ -15,4 +13,6 @@ namespace ESATouristGuide.Interfaces
         double Latitude { get; set; }
         double Longitude { get; set; }
     }
+
+
 }

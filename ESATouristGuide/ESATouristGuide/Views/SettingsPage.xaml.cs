@@ -39,21 +39,21 @@ namespace ESATouristGuide.Views
             }
         }
 
-        bool loaded;
+        private bool loaded;
         protected override void OnAppearing()
         {
             base.OnAppearing();
             loaded = true;
         }
 
-        void RadioButton_CheckedChanged( object sender , CheckedChangedEventArgs e )
+        private void RadioButton_CheckedChanged(object sender , CheckedChangedEventArgs e)
         {
             if (!loaded || !e.Value)
             {
                 return;
             }
 
-            string val = ( sender as RadioButton )?.Value as string;
+            var val = (sender as RadioButton)?.Value as string;
             if (string.IsNullOrWhiteSpace(val))
             {
                 return;
@@ -75,7 +75,7 @@ namespace ESATouristGuide.Views
             TheTheme.SetTheme();
         }
 
-        void LanguageRadioButton_CheckedChanged( object sender , CheckedChangedEventArgs e )
+        private void LanguageRadioButton_CheckedChanged(object sender , CheckedChangedEventArgs e)
         {
             if (!loaded)
             {
@@ -87,7 +87,7 @@ namespace ESATouristGuide.Views
                 return;
             }
 
-            string val = ( sender as RadioButton )?.Value as string;
+            var val = (sender as RadioButton)?.Value as string;
             if (string.IsNullOrWhiteSpace(val))
             {
                 return;

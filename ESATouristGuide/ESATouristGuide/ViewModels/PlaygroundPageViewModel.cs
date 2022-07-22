@@ -23,7 +23,7 @@ namespace ESATouristGuide.ViewModels
 
         public List<Category> Categories { get; set; } /*= Models.Categories.CategoriesList;*/
 
-        bool isDrawerOpen;
+        private bool isDrawerOpen;
 
         public bool IsDrawerOpen
         {
@@ -36,7 +36,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        bool secondaryCategoriesVisible;
+        private bool secondaryCategoriesVisible;
 
         public bool SecondaryCategoriesVisible
         {
@@ -49,8 +49,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-
-        bool basicCategoriesVisible = true;
+        private bool basicCategoriesVisible = true;
 
         public bool BasicCategoriesVisible
         {
@@ -63,7 +62,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        bool basicCategoriesEnabled = true;
+        private bool basicCategoriesEnabled = true;
 
         public bool BasicCategoriesEnabled
         {
@@ -76,7 +75,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        bool secondaryOptionsEnabled;
+        private bool secondaryOptionsEnabled;
 
         public bool SecondaryOptionsEnabled
         {
@@ -92,10 +91,9 @@ namespace ESATouristGuide.ViewModels
 
         public ICommand BasicCategoriesChangedCommand { get; set; }
 
+        private void OpenDrawer(object obj) { IsDrawerOpen = true; }
 
-        void OpenDrawer( object obj ) { IsDrawerOpen = true; }
-
-        IReadOnlyList<object> selectedItems;
+        private IReadOnlyList<object> selectedItems;
 
 
         public IReadOnlyList<object> SelectedItems
@@ -104,7 +102,7 @@ namespace ESATouristGuide.ViewModels
             set => SetAndRaise(ref selectedItems , value);
         }
 
-        IList<int> selectedIndexes;
+        private IList<int> selectedIndexes;
 
         public IList<int> SelectedIndexes
         {
@@ -116,21 +114,20 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-
-        void SecondaryCategoriesEnable( object obj )
+        private void SecondaryCategoriesEnable(object obj)
         {
             var a = obj;
             SecondaryCategoriesVisible = true;
             BasicCategoriesVisible = false;
         }
 
-        void BasicCategoriesEnable( object obj )
+        private void BasicCategoriesEnable(object obj)
         {
             var a = obj;
             BasicCategoriesVisible = true;
             SecondaryCategoriesVisible = false;
         }
 
-        void BasicCategoriesChanged( object obj ) { RaisePropertyChanged(nameof(SecondaryOptionsEnabled)); }
+        private void BasicCategoriesChanged(object obj) { RaisePropertyChanged(nameof(SecondaryOptionsEnabled)); }
     }
 }

@@ -2,10 +2,6 @@
 
 using Sharpnado.TaskLoaderView;
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace ESATouristGuide.ViewModels
@@ -51,7 +47,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        async Task InitializationTask()
+        private async Task InitializationTask()
         {
             await Task.Delay(2000);
         }

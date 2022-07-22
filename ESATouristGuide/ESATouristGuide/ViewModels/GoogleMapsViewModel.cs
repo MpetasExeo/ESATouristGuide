@@ -36,7 +36,8 @@ namespace ESATouristGuide.ViewModels
 
 
         public ICommand NavToDetailsCommand { get; set; }
-        bool mapLoaded;
+
+        private bool mapLoaded;
         public bool MapLoaded
         {
             get => mapLoaded;
@@ -47,7 +48,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        bool constructorFinished;
+        private bool constructorFinished;
         public bool ConstructorFinished
         {
             get => constructorFinished;
@@ -58,7 +59,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        bool filtersClicked;
+        private bool filtersClicked;
 
         public bool FiltersClicked
         {
@@ -75,7 +76,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        bool hasSelectedPlace;
+        private bool hasSelectedPlace;
 
         public bool HasSelectedPlace
         {
@@ -90,7 +91,8 @@ namespace ESATouristGuide.ViewModels
                 SetAndRaise(ref hasSelectedPlace , value);
             }
         }
-        POI selectedPlace;
+
+        private POI selectedPlace;
         public POI SelectedPlace
         {
             get => selectedPlace;
@@ -100,7 +102,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        readonly Temperatures selectedPlaceTemperature;
+        private readonly Temperatures selectedPlaceTemperature;
         public Temperatures SelectedPlaceTemperature
         {
             get => selectedPlaceTemperature;
@@ -122,12 +124,12 @@ namespace ESATouristGuide.ViewModels
 
         public GoogleMapsViewModel()
         {
-            ServicesAndPropertiesInit();             
+            ServicesAndPropertiesInit();
             UICommandsInit();
             ConstructorFinished = true;
         }
 
-        async Task NavigateToDetails(POI poi)
+        private async Task NavigateToDetails(POI poi)
         {
             await poi.NavigateToDetailsAsync();
         }
@@ -139,7 +141,7 @@ namespace ESATouristGuide.ViewModels
                 DefineMapStyle();
                 return;
             }
-            
+
             List<Task> tasks = new List<Task>
             {
 
@@ -157,11 +159,11 @@ namespace ESATouristGuide.ViewModels
             MapLoaded = true;
         }
 
-        void DefineMapStyle()
+        private void DefineMapStyle()
         {
             var assembly = typeof(GoogleMapsViewModel).GetTypeInfo().Assembly;
 
-            OSAppTheme currentTheme = Application.Current.RequestedTheme;
+            var currentTheme = Application.Current.RequestedTheme;
 
             var assemblyStream = System.String.Empty;
 
@@ -178,7 +180,7 @@ namespace ESATouristGuide.ViewModels
             var stream = assembly.GetManifestResourceStream(assemblyStream);
 
             string styleFile;
-            using (var reader = new System.IO.StreamReader(stream))
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
             {
                 styleFile = reader.ReadToEnd();
             }
@@ -203,7 +205,7 @@ namespace ESATouristGuide.ViewModels
             LoaderNotifier.Load(_ => InitializationTask());
         }
 
-        void UICommandsInit()
+        private void UICommandsInit()
         {
             GoogleMap.PinClicked += GoogleMap_PinClicked;
             NavToDetailsCommand = new AsyncCommand<POI>(NavigateToDetails);
@@ -213,7 +215,7 @@ namespace ESATouristGuide.ViewModels
 
         public List<Category> Categories { get; set; } = new List<Category>();/*= Models.Categories.CategoriesList;*/
 
-        bool isDrawerOpen;
+        private bool isDrawerOpen;
 
         public bool IsDrawerOpen
         {
@@ -230,9 +232,10 @@ namespace ESATouristGuide.ViewModels
         }
 
         public ICommand OpenFiltersDrawerCommand { get; set; }
-        void OpenFiltersDrawer() { FiltersClicked = true; }
 
-        void ServicesAndPropertiesInit()
+        private void OpenFiltersDrawer() { FiltersClicked = true; }
+
+        private void ServicesAndPropertiesInit()
         {
             GreekCitiesService = new GreekCitiesService();
             WeatherService = new WeatherService();
@@ -264,7 +267,7 @@ namespace ESATouristGuide.ViewModels
             ThreadPool.QueueUserWorkItem(o => GetTemperatureAsync(lat , lon));
         }
 
-        async void GetTemperatureAsync(double lat , double lon)
+        private async void GetTemperatureAsync(double lat , double lon)
         {
             Location pos = new Location(lat , lon);
             CancellationToken ct = new CancellationToken();
@@ -275,7 +278,7 @@ namespace ESATouristGuide.ViewModels
             TemperaturesState = LayoutState.None;
         }
 
-        void PinSelected(PinClickedEventArgs e)
+        private void PinSelected(PinClickedEventArgs e)
         {
             e.Handled = true;
 
@@ -329,8 +332,8 @@ namespace ESATouristGuide.ViewModels
 
             foreach (var poi in POIS)
             {
-                double lat = poi.Latitude;
-                double lng = poi.Longitude;
+                var lat = poi.Latitude;
+                var lng = poi.Longitude;
 
                 Pin pin = new Pin()
                 {
@@ -349,9 +352,9 @@ namespace ESATouristGuide.ViewModels
         /// <summary>
         /// Adds pins to map using the UI Thread()
         /// </summary>
-        void AddPinsToMap()
+        private void AddPinsToMap()
         {
-            foreach (Pin pin in Pins)
+            foreach (var pin in Pins)
             {
                 Device.BeginInvokeOnMainThread(() =>
                 GoogleMap.Pins.Add(pin));

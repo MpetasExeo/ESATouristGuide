@@ -1,19 +1,4 @@
-﻿using ESATouristGuide.Helpers;
-using ESATouristGuide.Interfaces;
-
-using ESATouristGuide.ViewModels;
-
-using ESATouristGuide.Views;
-
-using Newtonsoft.Json;
-
-using System;
-using System.Threading.Tasks;
-
-using Xamarin.Essentials;
-using Xamarin.Forms;
-
-namespace ESATouristGuide.Models
+﻿namespace ESATouristGuide.Models
 {
     //public partial class City
     //{

@@ -15,14 +15,14 @@ namespace ESATouristGuide.Infrastructure
 
         public string Source { get; set; }
 
-        public static ImageSource GetImageSource( string value )
+        public static ImageSource GetImageSource(string value)
         {
             if (value == null)
             {
                 return null;
             }
 
-            if (Cache.TryGetValue(value , out ImageSource imageSource))
+            if (Cache.TryGetValue(value , out var imageSource))
             {
                 return imageSource;
             }
@@ -33,7 +33,7 @@ namespace ESATouristGuide.Infrastructure
             return newImageSource;
         }
 
-        public object ProvideValue( IServiceProvider serviceProvider )
+        public object ProvideValue(IServiceProvider serviceProvider)
         {
             if (Source == null)
             {

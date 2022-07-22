@@ -1,8 +1,4 @@
-﻿using Xamarin.Forms;
-
-using ESATouristGuide.Views;
-
-namespace ESATouristGuide
+﻿namespace ESATouristGuide
 {
     public partial class AppShell : Xamarin.Forms.Shell
     {

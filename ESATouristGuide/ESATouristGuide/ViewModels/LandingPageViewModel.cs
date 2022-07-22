@@ -18,7 +18,8 @@ namespace ESATouristGuide.ViewModels
         }
 
         public ICommand StartAppCommand { get; set; }
-        void StartApplication( )
+
+        private void StartApplication()
         {
             if (RequiredChecks.HasInternetConnection())
             {

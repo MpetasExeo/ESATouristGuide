@@ -7,18 +7,17 @@ using System.Threading.Tasks;
 
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
 
 namespace ESATouristGuide.Services
 {
     public class UserLocationService : IUserLocationService
     {
-        CancellationTokenSource cts;
-        readonly Location DummyPosition = new Location(40.5000001 , 22.9500001);
+        private CancellationTokenSource cts;
+        private readonly Location DummyPosition = new Location(40.5000001 , 22.9500001);
 
-        public async Task<Location> GetUserLocationAsync( CancellationToken cancellationToken )
+        public async Task<Location> GetUserLocationAsync(CancellationToken cancellationToken)
         {
-            PermissionStatus locationPermissionStatus = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>().ConfigureAwait(true);
+            var locationPermissionStatus = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>().ConfigureAwait(true);
 
             if (locationPermissionStatus == PermissionStatus.Granted)
             {

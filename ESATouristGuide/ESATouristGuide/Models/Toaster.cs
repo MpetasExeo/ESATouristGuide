@@ -9,12 +9,12 @@ namespace ESATouristGuide.Models
 {
     public class Toaster : IToastMessage
     {
-        public async Task MakeToastAsync( string message )
+        public async Task MakeToastAsync(string message)
         {
             await Shell.Current.CurrentPage.DisplayToastAsync(message);
         }
 
-        public async void MakeSnackBarAsync( string message )
+        public async void MakeSnackBarAsync(string message)
         {
             try
             {

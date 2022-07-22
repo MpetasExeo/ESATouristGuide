@@ -18,7 +18,7 @@ namespace ESATouristGuide.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            var vm = this.BindingContext as CollectionViewViewModel;
+            CollectionViewViewModel vm = this.BindingContext as CollectionViewViewModel;
             if (!vm.IsLoaded)
             {
                 vm.IsLoaded = true;

@@ -3,15 +3,12 @@ using ESATouristGuide.Database;
 using ESATouristGuide.Helpers;
 using ESATouristGuide.Interfaces;
 using ESATouristGuide.Models;
-using ESATouristGuide.Resources;
 using ESATouristGuide.Services;
 
 using MvvmHelpers.Commands;
 
 using Sharpnado.TaskLoaderView;
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,10 +16,6 @@ using System.Windows.Input;
 
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Essentials;
-using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
-
-using Command = MvvmHelpers.Commands.Command;
 
 namespace ESATouristGuide.ViewModels
 {
@@ -41,7 +34,8 @@ namespace ESATouristGuide.ViewModels
         public LayoutState MainState { get => _mainState; set => SetAndRaise(ref _mainState , value); }
 
         public TaskLoaderNotifier LoaderNotifier { get; set; } = new TaskLoaderNotifier();
-        Distances distances;
+
+        private Distances distances;
 
         public Distances Distances { get => distances; set => SetAndRaise(ref distances , value); }
 
@@ -57,17 +51,17 @@ namespace ESATouristGuide.ViewModels
 
         public int CurrentImage { get { return _currentImage; } set { SetAndRaise(ref _currentImage , value); } }
 
-        IWeatherService WeatherService { get; set; }
+        private IWeatherService WeatherService { get; set; }
 
         public IUserLocationService UserLocationService { get; set; }
 
         public IDistancesService DistancesService { get; set; }
 
-        POI _selectedPOI = new POI();
+        private POI _selectedPOI = new POI();
 
         public POI SelectedPOI { get => _selectedPOI; set { SetAndRaise(ref _selectedPOI , value); } }
 
-        Temperatures temperatures;
+        private Temperatures temperatures;
 
         public Temperatures Temperatures
         {
@@ -80,7 +74,8 @@ namespace ESATouristGuide.ViewModels
         }
 
         public Location CityPosition { get; set; }
-        bool _isFavorite;
+
+        private bool _isFavorite;
         public bool IsFavorite
         {
             get => _isFavorite;
@@ -96,7 +91,7 @@ namespace ESATouristGuide.ViewModels
             CityPosition = new Location(poi.Latitude , poi.Longitude);
         }
 
-        void PropertiesInit()
+        private void PropertiesInit()
         {
             //UserLocationService = new UserLocationService();
             Database = new POIRepository();
@@ -104,7 +99,8 @@ namespace ESATouristGuide.ViewModels
             DistancesService = new DistancesService();
             AddToFavouritesCommand = new AsyncCommand(AddToFavourites);
         }
-        async Task AddToFavourites()
+
+        private async Task AddToFavourites()
         {
             try
             {
@@ -126,7 +122,7 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        POIDatabaseItem _poi;
+        private POIDatabaseItem _poi;
         public POIDatabaseItem Poi
         {
             get => _poi;
@@ -157,7 +153,7 @@ namespace ESATouristGuide.ViewModels
             MainState = LayoutState.None;
         }
 
-        void LoadImages()
+        private void LoadImages()
         {
             Images = new ObservableCollection<CustomImage>
             {

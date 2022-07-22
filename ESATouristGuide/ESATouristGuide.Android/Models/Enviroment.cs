@@ -13,7 +13,7 @@ namespace ESATouristGuide.Droid.Models
 {
     public class Enviroment : IEnvironment
     {
-        public async void SetStatusBarColor( System.Drawing.Color color , bool darkStatusBarTint )
+        public async void SetStatusBarColor(System.Drawing.Color color , bool darkStatusBarTint)
         {
             try
             {
@@ -22,8 +22,8 @@ namespace ESATouristGuide.Droid.Models
                     return;
                 }
 
-                Android.App.Activity activity = Platform.CurrentActivity;
-                Android.Views.Window window = activity.Window;
+                var activity = Platform.CurrentActivity;
+                var window = activity.Window;
 
                 //this may not be necessary(but may be fore older than M)
                 window.AddFlags(Android.Views.WindowManagerFlags.DrawsSystemBarBackgrounds);

@@ -1,12 +1,10 @@
 ﻿using ESATouristGuide.Helpers;
+using ESATouristGuide.Interfaces;
 using ESATouristGuide.Models;
+using ESATouristGuide.Views;
 
 using Xamarin.Essentials;
 using Xamarin.Forms;
-
-using ESATouristGuide.Views;
-using ESATouristGuide.Interfaces;
-using Xamarin.Forms.Xaml;
 
 
 namespace ESATouristGuide

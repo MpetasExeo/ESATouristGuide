@@ -10,12 +10,12 @@ namespace ESATouristGuide.Helpers
     public class TranslateExtension : IMarkupExtension<BindingBase>
     {
         public string Text { get; set; }
-        object IMarkupExtension.ProvideValue( IServiceProvider serviceProvider )
+        object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider)
         {
             return ProvideValue(serviceProvider);
         }
 
-        public BindingBase ProvideValue( IServiceProvider serviceProvider )
+        public BindingBase ProvideValue(IServiceProvider serviceProvider)
         {
             Binding binding = new Binding
             {
