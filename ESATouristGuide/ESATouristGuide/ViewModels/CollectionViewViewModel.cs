@@ -135,6 +135,10 @@ namespace ESATouristGuide.ViewModels
 
             POIs = await GreekCitiesService.GetGreekCities();
 
+
+            //var a = await GreekCitiesService.GetPagedListItem(0 , new int[5] , page: 1); 
+
+
             PopulateCitiesList();
 
             Categories = new List<Category>(Models.Categories.CategoriesList);

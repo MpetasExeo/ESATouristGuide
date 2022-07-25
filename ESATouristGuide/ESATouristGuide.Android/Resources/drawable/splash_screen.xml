@@ -4,6 +4,6 @@
 		<color android:color="@color/splash_background" />
 	</item>
 	<item>
-		<bitmap android:src="@drawable/exeo" android:tileMode="disabled" android:gravity="center" android:layout_gravity="center" />
+		<bitmap android:src="@drawable/logotext" android:tileMode="disabled" android:gravity="center" android:layout_gravity="center" />
 	</item>
 </layer-list>

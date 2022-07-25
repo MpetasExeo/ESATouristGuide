@@ -59,6 +59,7 @@
                 <sho:LazyView x:TypeArguments="views:GoogleMapsView" BindingContext="{Binding GoogleMapsViewModel}" />
                 <sho:LazyView x:TypeArguments="views:HomeView" BindingContext="{Binding CollectionViewViewModel}" />
                 <sho:LazyView x:TypeArguments="views:FavoritesView" BindingContext="{Binding FavoritesViewModel}" />
+                <sho:LazyView x:TypeArguments="views:MiscView" BindingContext="{Binding MiscViewModel}"/>
 
             </tabs:ViewSwitcher>
 
@@ -109,12 +110,12 @@
                         LabelSize="18"
                         Style="{StaticResource BottomTabStyle}"/>
 
-                    <!--<tabs:MaterialUnderlinedTabItem
+                    <tabs:MaterialUnderlinedTabItem
                         FontFamily="FASolid"
                         IconOptions="TextOnly"
                         Label="{x:Static fontAwesome:FontAwesomeIcons.EllipsisH}"
                         LabelSize="18"
-                        Style="{StaticResource BottomTabStyle}" />-->
+                        Style="{StaticResource BottomTabStyle}" />
 
                 </tabs:TabHostView.Tabs>
             </tabs:TabHostView>

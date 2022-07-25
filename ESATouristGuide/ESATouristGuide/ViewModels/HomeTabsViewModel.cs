@@ -16,6 +16,7 @@ namespace ESATouristGuide.ViewModels
             CollectionViewViewModelModel = new CollectionViewViewModel();
             GoogleMapsViewModel = new GoogleMapsViewModel();
             FavoritesViewModel = new FavoritesViewModel();
+            MiscViewModel = new MiscViewModel();
         }
 
         public TaskLoaderNotifier LoaderNotifier { get; set; } = new TaskLoaderNotifier();
@@ -41,6 +42,9 @@ namespace ESATouristGuide.ViewModels
                 case 3:
                     FavoritesViewModel.Load();
                     break;
+                case 4:
+                    MiscViewModel.Load();
+                    break;
                 default:
                     HomePageViewModel.Load();
                     break;
@@ -49,7 +53,7 @@ namespace ESATouristGuide.ViewModels
 
         private async Task InitializationTask()
         {
-            await Task.Delay(2000);
+            await Task.Delay(500);
         }
 
 
@@ -62,6 +66,8 @@ namespace ESATouristGuide.ViewModels
         public CollectionViewViewModel CollectionViewViewModelModel { get; }
 
         public CollectionViewViewModel CollectionViewViewModel { get; }
+        public MiscViewModel MiscViewModel { get; }
+
 
         public int SelectedViewModelIndex
         {

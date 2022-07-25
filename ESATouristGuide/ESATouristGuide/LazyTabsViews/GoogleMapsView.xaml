@@ -58,9 +58,9 @@
         <dxn:DrawerView
             BackgroundColor="#000000"
             DrawerBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
-            DrawerContentMinHeight="270"
+           DrawerContentMinHeight="326"
             DrawerFooterHeight="0"
-            DrawerMinHeight="360"
+            DrawerMinHeight="400"
             DrawerPosition="Bottom"
             IsDrawerOpened="{Binding IsDrawerOpen, Mode=TwoWay}"
             IsDrawerShadowVisible="True"
@@ -186,7 +186,7 @@
                                 </Grid>
                             </dxn:TabViewItem.Content>
                         </dxn:TabViewItem>
-                        <dxn:TabViewItem HeaderText="Αξιοθέατα">
+                        <!--<dxn:TabViewItem HeaderText="Αξιοθέατα">
                             <dxn:TabViewItem.Content>
                                 <Grid
                                     Margin="12"
@@ -281,7 +281,7 @@
                                     </dxcv:DXCollectionView>
                                 </Grid>
                             </dxn:TabViewItem.Content>
-                        </dxn:TabViewItem>
+                        </dxn:TabViewItem>-->
 
                     </dxn:TabView>
                     <StackLayout

@@ -59,9 +59,9 @@
         </Style>
     </ContentView.Resources>
 
-    <ContentView.BindingContext>
+    <!--<ContentView.BindingContext>
         <vm:CollectionViewViewModel />
-    </ContentView.BindingContext>
+    </ContentView.BindingContext>-->
 
     <ContentView.Content>
         <customViews:TaskLoaderView
