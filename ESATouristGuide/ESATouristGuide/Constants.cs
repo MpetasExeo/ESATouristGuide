@@ -7,7 +7,7 @@ namespace ESATouristGuide
     {
         public static readonly string GoogleApiKey = "AIzaSyAbe9MnGMU3M9DP3BHmSYqkKpW8qRSNePU";
 
-        public const string DB_Name = "esapoisdb2.db3";
+        public const string DB_Name = "esapoisdb3.db3";
 
         public const SQLite.SQLiteOpenFlags Flags =
             // open the database in read/write mode

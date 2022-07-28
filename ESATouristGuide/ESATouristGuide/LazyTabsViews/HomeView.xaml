@@ -13,7 +13,7 @@
     xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
-    x:DataType="vm:CollectionViewViewModel">
+    x:DataType="vm:HomeViewViewModel">
 
     <ContentView.Resources>
         <Style
@@ -60,7 +60,7 @@
     </ContentView.Resources>
 
     <!--<ContentView.BindingContext>
-        <vm:CollectionViewViewModel />
+        <vm:HomeViewViewModel />
     </ContentView.BindingContext>-->
 
     <ContentView.Content>
@@ -95,7 +95,7 @@
 
 
             <ScrollView>
-                <Grid ColumnDefinitions="*" RowDefinitions="300,100,260,100,260,60">
+                <Grid ColumnDefinitions="*" RowDefinitions="300,100,260,100,260,100,260,60">
 
                     <ff:CachedImage
                         Grid.Row="0"
@@ -122,7 +122,124 @@
                             FontAttributes="Bold"
                             FontFamily="Dela"
                             FontSize="18"
-                            Text="Αξιοθέατα"
+                            Text="Τι να κάνετε"
+                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
+                            VerticalOptions="Start" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            FontFamily="Inter"
+                            FontSize="16"
+                            Text="Όλα"
+                            TextColor="{AppThemeBinding Dark={StaticResource DarkInfo}, Light={StaticResource Info}}"
+                            VerticalOptions="Center" />
+
+                        <dxe:ChoiceChipGroup
+                            x:Name="vertasdsadicasdsaalchoiceChipGroup"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            ChipCheckIconColor="Transparent"
+                            ChipPressedCheckIconColor="Transparent"
+                            ChipUseRippleEffect="True"
+                            DisplayMember="Text"
+                            HorizontalOptions="End"
+                            HorizontalSpacing="8"
+                            IconMember="Image"
+                            IsMultiline="False"
+                            Padding="0"
+                            Style="{StaticResource ChipStyle}"
+                            VerticalOptions="Center">
+                            <dxe:Chip
+                                TapCommandParameter="{Binding .}"
+                                Text="Προτεινόμενα"
+                                VerticalOptions="Center" />
+                            <dxe:Chip
+                                TapCommandParameter="{Binding .}"
+                                Text="Δημοφιλή"
+                                VerticalOptions="Center" />
+                            <dxe:Chip
+                                TapCommandParameter="{Binding .}"
+                                Text="Πλησιέστερα"
+                                VerticalOptions="Center" />
+                            <dxe:Chip
+                                TapCommandParameter="{Binding .}"
+                                Text="Top 10"
+                                VerticalOptions="Center" />
+
+                        </dxe:ChoiceChipGroup>
+
+                    </Grid>
+
+                    <dxcv:DXCollectionView
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        IsRefreshing="{Binding IsRefreshingExperiences,Mode=TwoWay}"
+                        IsLoadMoreEnabled="{Binding CanLoadMoreExperiences}"
+                        LoadMoreCommand="{Binding LoadMoreExperiencesCommand}"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                          Light={StaticResource Background}}"
+                        ItemSize="240"           
+                        ItemSpacing="0"
+                        Orientation="Horizontal"
+                        ReduceSizeToContent="True"
+                        VerticalOptions="Center"                        
+                        ItemsSource="{Binding Experiences}">
+
+                        <dxcv:DXCollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:POISlim">
+                                <Frame
+                                    Margin="8"
+                                    Padding="0"
+                                    xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource Background},
+                                                                             Light=#000000}"
+                                    xct:ShadowEffect.OffsetX="0"
+                                    xct:ShadowEffect.OffsetY="0"
+                                    xct:ShadowEffect.Opacity="0.8"
+                                    xct:ShadowEffect.Radius="1"
+                                    CornerRadius="8">
+                                    <UIElements:CollectionViewCard
+                                        xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeViewViewModel}}, Path=NavToDetailsCommand}"
+                                        xct:TouchEffect.CommandParameter="{Binding .}"
+                                        xct:TouchEffect.NativeAnimation="True"
+                                        xct:TouchEffect.PressedAnimationDuration="340"
+                                        xct:TouchEffect.PressedAnimationEasing="SinInOut"
+                                        xct:TouchEffect.PressedBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                                                 Light={StaticResource Background}}"
+                                        xct:TouchEffect.PressedOpacity="{AppThemeBinding Dark=0.925,
+                                                                                         Light=0.85}"
+                                        POIDistance="{Binding DistanceFromUser}"
+                                        POIImage="{Binding ImageUrl}"
+                                        POIShowDistance="{Binding ShowDistance}"
+                                        POIName="{Binding Title}"
+                                        POIRegion="{Binding Category}" />
+                                </Frame>
+                            </DataTemplate>
+                        </dxcv:DXCollectionView.ItemTemplate>
+
+                        <!--  Sort items.  -->
+                        <!--<dxcv:DXCollectionView.SortDescriptions>
+                            <dxcv:SortDescription FieldName="Distance" SortOrder="Ascending" />
+                        </dxcv:DXCollectionView.SortDescriptions>-->
+                    </dxcv:DXCollectionView>
+
+
+                    <Grid
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        ColumnDefinitions="40,.4*,3*"
+                        Padding="12,6,0,12"
+                        RowDefinitions="30,70">
+
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            FontAttributes="Bold"
+                            FontFamily="Dela"
+                            FontSize="18"
+                            Text="Τι να δείτε"
                             TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                             VerticalOptions="Start" />
                         <Label
@@ -176,21 +293,221 @@
 
                         </dxe:ChoiceChipGroup>
 
+
+
+
+
+
+
                     </Grid>
+
                     <dxcv:DXCollectionView
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        IsRefreshing="{Binding IsRefreshingHighlights,Mode=TwoWay}"
+                        IsLoadMoreEnabled="{Binding CanLoadMoreHighlights}"
+                        LoadMoreCommand="{Binding LoadMoreHighlightsCommand}"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                          Light={StaticResource Background}}"
+                        ItemSize="240"           
+                        ItemSpacing="0"
+                        Orientation="Horizontal"
+                        ReduceSizeToContent="True"
+                        VerticalOptions="Center"                        
+                        ItemsSource="{Binding Highlights}">
+
+                        <dxcv:DXCollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:POISlim">
+                                <Frame
+                                    Margin="8"
+                                    Padding="0"
+                                    xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource Background},
+                                                                             Light=#000000}"
+                                    xct:ShadowEffect.OffsetX="0"
+                                    xct:ShadowEffect.OffsetY="0"
+                                    xct:ShadowEffect.Opacity="0.8"
+                                    xct:ShadowEffect.Radius="1"
+                                    CornerRadius="8">
+                                    <UIElements:CollectionViewCard
+                                        xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeViewViewModel}}, Path=NavToDetailsCommand}"
+                                        xct:TouchEffect.CommandParameter="{Binding .}"
+                                        xct:TouchEffect.NativeAnimation="True"
+                                        xct:TouchEffect.PressedAnimationDuration="340"
+                                        xct:TouchEffect.PressedAnimationEasing="SinInOut"
+                                        xct:TouchEffect.PressedBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                                                 Light={StaticResource Background}}"
+                                        xct:TouchEffect.PressedOpacity="{AppThemeBinding Dark=0.925,
+                                                                                         Light=0.85}"
+                                        POIDistance="{Binding DistanceFromUser}"
+                                        POIImage="{Binding ImageUrl}"
+                                        POIShowDistance="{Binding ShowDistance}"
+                                        POIName="{Binding Title}"
+                                        POIRegion="{Binding Category}" />
+                                </Frame>
+                            </DataTemplate>
+                        </dxcv:DXCollectionView.ItemTemplate>
+
+                        <!--  Sort items.  -->
+                        <!--<dxcv:DXCollectionView.SortDescriptions>
+                            <dxcv:SortDescription FieldName="Distance" SortOrder="Ascending" />
+                        </dxcv:DXCollectionView.SortDescriptions>-->
+                    </dxcv:DXCollectionView>
+
+
+
+
+
+                    <Grid
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        ColumnDefinitions="40,.4*,3*"
+                        Padding="12,6,0,12"
+                        RowDefinitions="30,70">
+
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            FontAttributes="Bold"
+                            FontFamily="Dela"
+                            FontSize="18"
+                            Text="Χρήσιμα"
+                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
+                            VerticalOptions="Start" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            FontFamily="Inter"
+                            FontSize="16"
+                            Text="Όλα"
+                            TextColor="{AppThemeBinding Dark={StaticResource DarkInfo}, Light={StaticResource Info}}"
+                            VerticalOptions="Center" />
+
+                        <dxe:ChoiceChipGroup
+                            x:Name="lchoiceChipGroup"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            ChipCheckIconColor="Transparent"
+                            ChipPressedCheckIconColor="Transparent"
+                            ChipUseRippleEffect="True"
+                            DisplayMember="Text"
+                            HorizontalOptions="End"
+                            HorizontalSpacing="8"
+                            IconMember="Image"
+                            IsMultiline="False"
+                            Padding="0"
+                            Style="{StaticResource ChipStyle}"
+                            VerticalOptions="Center">
+                            <dxe:Chip
+                                TapCommandParameter="{Binding .}"
+                                Text="Προτεινόμενα"
+                                VerticalOptions="Center" />
+                            <dxe:Chip
+                                TapCommandParameter="{Binding .}"
+                                Text="Δημοφιλή"
+                                VerticalOptions="Center" />
+                            <dxe:Chip
+                                TapCommandParameter="{Binding .}"
+                                Text="Πλησιέστερα"
+                                VerticalOptions="Center" />
+                            <dxe:Chip
+                                TapCommandParameter="{Binding .}"
+                                Text="Top 10"
+                                VerticalOptions="Center" />
+
+                            <!--
+                            IsSelected="{Binding BasicCategoriesEnabled}"
+                            TapCommand="{Binding BasicCategoriesSelectedCommand}"
+                            IsVisible="{Binding SecondaryOptionsEnabled}"
+                            TapCommand="{Binding SecondaryCategoriesSelectedCommand}"
+                        -->
+
+                        </dxe:ChoiceChipGroup>
+
+
+
+
+
+
+
+                    </Grid>
+
+                    <dxcv:DXCollectionView
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        IsRefreshing="{Binding IsRefreshingUseful,Mode=TwoWay}"
+                        IsLoadMoreEnabled="{Binding CanLoadMoreUseful}"
+                        LoadMoreCommand="{Binding LoadMoreUsefulCommand}"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                          Light={StaticResource Background}}"
+                        ItemSize="240"           
+                        ItemSpacing="0"
+                        Orientation="Horizontal"
+                        ReduceSizeToContent="True"
+                        VerticalOptions="Center"                        
+                        ItemsSource="{Binding Useful}">
+
+                        <dxcv:DXCollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:POISlim">
+                                <Frame
+                                    Margin="8"
+                                    Padding="0"
+                                    xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource Background},
+                                                                             Light=#000000}"
+                                    xct:ShadowEffect.OffsetX="0"
+                                    xct:ShadowEffect.OffsetY="0"
+                                    xct:ShadowEffect.Opacity="0.8"
+                                    xct:ShadowEffect.Radius="1"
+                                    CornerRadius="8">
+                                    <UIElements:CollectionViewCard
+                                        xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeViewViewModel}}, Path=NavToDetailsCommand}"
+                                        xct:TouchEffect.CommandParameter="{Binding .}"
+                                        xct:TouchEffect.NativeAnimation="True"
+                                        xct:TouchEffect.PressedAnimationDuration="340"
+                                        xct:TouchEffect.PressedAnimationEasing="SinInOut"
+                                        xct:TouchEffect.PressedBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                                                                 Light={StaticResource Background}}"
+                                        xct:TouchEffect.PressedOpacity="{AppThemeBinding Dark=0.925,
+                                                                                         Light=0.85}"
+                                        POIDistance="{Binding DistanceFromUser}"
+                                        POIImage="{Binding ImageUrl}"
+                                        POIShowDistance="{Binding ShowDistance}"
+                                        POIName="{Binding Title}"
+                                        POIRegion="{Binding Category}" />
+                                </Frame>
+                            </DataTemplate>
+                        </dxcv:DXCollectionView.ItemTemplate>
+
+                        <!--  Sort items.  -->
+                        <!--<dxcv:DXCollectionView.SortDescriptions>
+                            <dxcv:SortDescription FieldName="Distance" SortOrder="Ascending" />
+                        </dxcv:DXCollectionView.SortDescriptions>-->
+                    </dxcv:DXCollectionView>
+
+
+
+
+
+
+                    <!--<dxcv:DXCollectionView
                         Grid.Row="2"
                         Grid.Column="0"
                         AllowCascadeUpdate="False"
                         BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
                         IsScrollBarVisible="False"
-                        ItemSize="240"
+                                    
+                        ItemsSource="{Binding FilteredResults}"
+                        IsRefreshing="{Binding IsRefreshing1,Mode=TwoWay}"
+                        IsLoadMoreEnabled="True"
+                        ItemSize="240"           
                         ItemSpacing="0"
-                        ItemsSource="{Binding POIs}"
                         Orientation="Horizontal"
                         ReduceSizeToContent="True"
                         VerticalOptions="Center">
                         <dxcv:DXCollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:POI">
+                            <DataTemplate x:DataType="models:POISlim">
                                 <Frame
                                     Margin="8"
                                     CornerRadius="8"
@@ -203,9 +520,9 @@
                                     <UIElements:CollectionViewCard
                                         POIDistance="{Binding DistanceFromUser}"
                                         POIImage="{Binding ImageUrl}"
-                                        POIName="{Binding Name}"
-                                        POIRegion="{Binding Region}"
-                                        xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CollectionViewViewModel}}, Path=NavToDetailsCommand}"
+                                        POIName="{Binding Title}"
+                                        POIRegion="{Binding Category}"
+                                        xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeViewViewModel}}, Path=NavToDetailsCommand}"
                                         xct:TouchEffect.CommandParameter="{Binding .}"
                                         xct:TouchEffect.NativeAnimation="True"
                                         xct:TouchEffect.PressedAnimationDuration="340"
@@ -216,17 +533,17 @@
                             </DataTemplate>
                         </dxcv:DXCollectionView.ItemTemplate>
 
-                        <!--  Sort items.  -->
-                        <dxcv:DXCollectionView.SortDescriptions>
+                        --><!--  Sort items.  -->
+                        <!--<dxcv:DXCollectionView.SortDescriptions>
                             <dxcv:SortDescription FieldName="DistanceFromUser" SortOrder="Ascending" />
-                        </dxcv:DXCollectionView.SortDescriptions>
+                        </dxcv:DXCollectionView.SortDescriptions>--><!--
 
-                    </dxcv:DXCollectionView>
+                    </dxcv:DXCollectionView>-->
                     <!--#endregion-->
 
 
                     <!--#region SecondSlider-->
-                    <Grid
+                    <!--<Grid
                         Grid.Row="3"
                         Grid.Column="0"
                         ColumnDefinitions="40,.4*,3*"
@@ -286,28 +603,31 @@
                                 Text="Top 10"
                                 VerticalOptions="Center" />
 
-                            <!--
+                            --><!--
                             IsSelected="{Binding BasicCategoriesEnabled}"
                             TapCommand="{Binding BasicCategoriesSelectedCommand}"
                             IsVisible="{Binding SecondaryOptionsEnabled}"
                             TapCommand="{Binding SecondaryCategoriesSelectedCommand}"
-                        -->
+                        --><!--
 
                         </dxe:ChoiceChipGroup>
 
-                    </Grid>
+                    </Grid>-->
 
-                    <dxcv:DXCollectionView
+                    <!--<dxcv:DXCollectionView
                         Grid.Row="4"
                         Grid.Column="0"
                         BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
                         ItemSize="240"
                         ItemSpacing="0"
-                        ItemsSource="{Binding POIs}"
+                        ItemsSource="{Binding FilteredResults}"
+                        IsRefreshing="{Binding IsRefreshing1,Mode=TwoWay}"
+                        IsLoadMoreEnabled="True"
+                        LoadMoreCommand="{Binding LoadMoreCommand}"
                         Orientation="Horizontal"
                         VerticalOptions="Center">
                         <dxcv:DXCollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:POI">
+                            <DataTemplate x:DataType="models:POISlim">
                                 <Frame
                                     Margin="8"
                                     CornerRadius="8"
@@ -320,9 +640,9 @@
                                     <UIElements:CollectionViewCard
                                         POIDistance="{Binding DistanceFromUser}"
                                         POIImage="{Binding ImageUrl}"
-                                        POIName="{Binding Name}"
-                                        POIRegion="{Binding Region}"
-                                        xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CollectionViewViewModel}}, Path=NavToDetailsCommand}"
+                                        POIName="{Binding Title}"
+                                        POIRegion="{Binding Category}"
+                                        xct:TouchEffect.Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeViewViewModel}}, Path=NavToDetailsCommand}"
                                         xct:TouchEffect.CommandParameter="{Binding .}"
                                         xct:TouchEffect.NativeAnimation="True"
                                         xct:TouchEffect.PressedAnimationDuration="340"
@@ -332,12 +652,14 @@
                             </DataTemplate>
                         </dxcv:DXCollectionView.ItemTemplate>
 
-                        <!--  Sort items.  -->
+                        -->
+                    <!--  Sort items.  -->
+                    <!--
                         <dxcv:DXCollectionView.SortDescriptions>
                             <dxcv:SortDescription FieldName="DistanceFromUser" SortOrder="Ascending" />
                         </dxcv:DXCollectionView.SortDescriptions>
 
-                    </dxcv:DXCollectionView>
+                    </dxcv:DXCollectionView>-->
                     <!--#endregion-->
 
                 </Grid>

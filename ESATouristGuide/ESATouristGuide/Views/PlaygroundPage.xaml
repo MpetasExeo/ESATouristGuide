@@ -828,7 +828,7 @@
                                                       Light={StaticResource Background}}"
                     ItemSize="240"
                     ItemSpacing="0"
-                    ItemsSource="{Binding POIs}"
+                    ItemsSource="{Binding FilteredResults}"
                     Orientation="Horizontal"
                     VerticalOptions="Center">
                     <dxcv:DXCollectionView.ItemTemplate>
@@ -855,8 +855,8 @@
                                                                                      Light=0.85}"
                                     POIDistance="{Binding DistanceFromUser}"
                                     POIImage="{Binding ImageUrl}"
-                                    POIName="{Binding Name}"
-                                    POIRegion="{Binding Region}" />
+                                    POIName="{Binding Title}"
+                                    POIRegion="{Binding Category}" />
                             </Frame>
                         </DataTemplate>
                     </dxcv:DXCollectionView.ItemTemplate>
@@ -951,7 +951,7 @@
                                                       Light={StaticResource Background}}"
                     ItemSize="240"
                     ItemSpacing="0"
-                    ItemsSource="{Binding POIs}"
+                    ItemsSource="{Binding FilteredResults}"
                     Orientation="Horizontal"
                     VerticalOptions="Center">
                     <dxcv:DXCollectionView.ItemTemplate>
@@ -976,8 +976,8 @@
                                                                                      Light=0.85}"
                                     POIDistance="{Binding DistanceFromUser}"
                                     POIImage="{Binding ImageUrl}"
-                                    POIName="{Binding Name}"
-                                    POIRegion="{Binding Region}" />
+                                    POIName="{Binding Title}"
+                                    POIRegion="{Binding Category}" />
                             </Frame>
                         </DataTemplate>
                     </dxcv:DXCollectionView.ItemTemplate>

@@ -57,7 +57,7 @@
                 SelectedIndex="{Binding SelectedViewModelIndex, Mode=TwoWay}">
                 <sho:LazyView x:TypeArguments="views:CollectionView" BindingContext="{Binding CollectionViewViewModel}"/>
                 <sho:LazyView x:TypeArguments="views:GoogleMapsView" BindingContext="{Binding GoogleMapsViewModel}" />
-                <sho:LazyView x:TypeArguments="views:HomeView" BindingContext="{Binding CollectionViewViewModel}" />
+                <sho:LazyView x:TypeArguments="views:HomeView" BindingContext="{Binding HomeViewViewModel}" />
                 <sho:LazyView x:TypeArguments="views:FavoritesView" BindingContext="{Binding FavoritesViewModel}" />
                 <sho:LazyView x:TypeArguments="views:MiscView" BindingContext="{Binding MiscViewModel}"/>
 

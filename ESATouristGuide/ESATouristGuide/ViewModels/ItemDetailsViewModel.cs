@@ -9,10 +9,13 @@ using MvvmHelpers.Commands;
 
 using Sharpnado.TaskLoaderView;
 
+using System;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ESATouristGuide.Helpers;
 
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Essentials;
@@ -85,10 +88,14 @@ namespace ESATouristGuide.ViewModels
 
         public ItemDetailsViewModel(POI poi)
         {
-            LoadImages();
+            //LoadImages();
             PropertiesInit();
             SelectedPOI = poi;
-            CityPosition = new Location(poi.Latitude , poi.Longitude);
+            CityPosition = new Location((double)poi.Latitude , (double)poi.Longitude);
+
+            
+
+            //Load();
         }
 
         private void PropertiesInit()
@@ -107,7 +114,7 @@ namespace ESATouristGuide.ViewModels
                 if (IsFavorite)
                 {
                     UserExperiencePrompts.RemovedFromFavorites();
-                    await Database.DeleteItemAsync(Poi.ID);
+                    await Database.DeleteItemAsync(Poi.Id);
                 }
                 else
                 {
@@ -135,8 +142,18 @@ namespace ESATouristGuide.ViewModels
         private async Task InitializationTask()
         {
             Poi = SelectedPOI.Clone<POI , POIDatabaseItem>();
-            Poi.ID = await Database.GetItemIdAsync(Poi);
-            IsFavorite = Poi.ID != -1;
+            var st = SelectedPOI.Content;
+
+            static string StripHTML(string input)
+            {
+                return Regex.Replace(input , "<.*?>" , String.Empty);
+            }
+
+            var d = StripHTML(SelectedPOI.Content);
+            SelectedPOI.Content = d;
+            RaisePropertyChanged(nameof(SelectedPOI));
+            Poi.Id = await Database.GetItemIdAsync(Poi);
+            IsFavorite = Poi.Id != -1;
 
             MainState = LayoutState.Loading;
 

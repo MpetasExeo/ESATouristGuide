@@ -191,8 +191,8 @@
                                         POIDistance="{Binding DistanceFromUser}"
                                         POIImage="{Binding ImageUrl}"
                                         POIShowDistance="{Binding ShowDistance}"
-                                        POIName="{Binding Name}"
-                                        POIRegion="{Binding Region}" />
+                                        POIName="{Binding Title}"
+                                        POIRegion="{Binding Category}" />
                                 </Frame>
                             </DataTemplate>
                         </dxcv:DXCollectionView.ItemTemplate>

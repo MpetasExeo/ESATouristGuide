@@ -84,6 +84,7 @@
                             FontSize="12"
                             HorizontalOptions="StartAndExpand"
                             Padding="0"
+                            IsVisible="{Binding POIShowDistance}"
                             Text="{Binding POIDistance}"
                             TextColor="WhiteSmoke"
                             VerticalOptions="Center" />

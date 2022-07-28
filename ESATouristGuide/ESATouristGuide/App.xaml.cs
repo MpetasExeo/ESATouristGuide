@@ -46,7 +46,16 @@ namespace ESATouristGuide
 
         protected override void OnStart()
         {
-            OnResume();
+            try
+            {
+
+                OnResume();
+            }
+            catch (System.Exception ex)
+            {
+                var st = ex.Message;
+                throw;
+            }
         }
         protected override void OnSleep()
         {
@@ -57,9 +66,17 @@ namespace ESATouristGuide
 
         protected override void OnResume()
         {
-            TheLanguage.SetLanguage();
-            TheTheme.SetTheme();
-            RequestedThemeChanged += App_RequestedThemeChanged;
+            try
+            {
+                TheLanguage.SetLanguage();
+                TheTheme.SetTheme();
+                RequestedThemeChanged += App_RequestedThemeChanged;
+            }
+            catch (System.Exception ex)
+            {
+                var st = ex.Message;
+            }
+            
         }
 
         private void App_RequestedThemeChanged(object sender , AppThemeChangedEventArgs e)

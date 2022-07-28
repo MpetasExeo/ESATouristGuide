@@ -107,7 +107,7 @@
 
                             <Image
                                 Aspect="AspectFill"
-                                Source="i1.jpg"
+                                Source="{Binding SelectedPlace.ImageUrl}"
                                 VerticalOptions="Fill" />
 
 
@@ -300,7 +300,7 @@
                                 FontSize="14"
                                 HorizontalOptions="Start"
                                 HorizontalTextAlignment="Center"
-                                Text="{Binding SelectedPlace.Name}"
+                                Text="{Binding SelectedPlace.Title}"
                                 TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                                 VerticalOptions="Center" />
                             <Frame
@@ -352,22 +352,22 @@
                                             </StackLayout>
                                         </xct:StateView>
                                     </xct:StateLayout.StateViews>
-                                    <Image
+                                    <!--<Image
                                         x:Name="weatherImage"
                                         Aspect="AspectFit"
                                         HeightRequest="48"
                                         HorizontalOptions="End"
                                         Source="{Binding SelectedPlace.Temperatures.WeatherImage}"
-                                        VerticalOptions="CenterAndExpand" />
+                                        VerticalOptions="CenterAndExpand" />-->
 
-                                    <Label
+                                    <!--<Label
                                         FontFamily="InterBold"
                                         FontSize="12"
                                         HorizontalOptions="StartAndExpand"
                                         HorizontalTextAlignment="Center"
                                         Text="{Binding SelectedPlace.Temperatures.Temperature}"
                                         TranslationX="-4"
-                                        VerticalOptions="Center" />
+                                        VerticalOptions="Center" />-->
 
                                 </StackLayout>
                             </Frame>
@@ -378,7 +378,7 @@
                             x:Name="PlaceCardTitle"
                             FontFamily="InterBold"
                             FontSize="12"
-                            Text="{Binding SelectedPlace.Region, Mode=OneWay}"
+                            Text="{Binding SelectedPlace.Category, Mode=OneWay}"
                             TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                             VerticalOptions="Start" />
 
@@ -626,7 +626,7 @@
                 <Grid
                     ColumnDefinitions="*"
                     HorizontalOptions="Fill"
-                    RowDefinitions="68,*"
+                    RowDefinitions="68,*,48"
                     VerticalOptions="Fill">
 
 

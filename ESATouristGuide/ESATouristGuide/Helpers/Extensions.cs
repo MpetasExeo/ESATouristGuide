@@ -1,12 +1,27 @@
-﻿using System;
+﻿using MvvmHelpers;
+
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace ESATouristGuide.Helpers
 {
     public static class Extensions
     {
+        public static string StripHTML(string input)
+        {
+            return Regex.Replace(input , "<.*?>" , String.Empty);
+        }
+
+
+        public static ObservableRangeCollection<T> ToObservableCollection<T>(this IEnumerable<T> col)
+        {
+            return new ObservableRangeCollection<T>(col);
+        }
+
         public static TTarget Clone<TSource, TTarget>(this TSource source) where TTarget : new()
         {
             TTarget target = new TTarget();
@@ -59,6 +74,7 @@ namespace ESATouristGuide.Helpers
             }
             return false;
         }
+
 
         public static bool IsSimpleType(Type type)
         {

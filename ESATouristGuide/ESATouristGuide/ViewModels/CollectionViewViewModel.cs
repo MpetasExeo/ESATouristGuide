@@ -16,12 +16,53 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+using Xamarin.Essentials;
+using Xamarin.Forms;
+
 namespace ESATouristGuide.ViewModels
 {
     public partial class CollectionViewViewModel : BaseViewModel
     {
         #region Properties
 
+        ICommand loadMoreCommand = null;
+        public ICommand LoadMoreCommand
+        {
+            get { return loadMoreCommand; }
+            set
+            {
+                if (loadMoreCommand != value)
+                {
+                    loadMoreCommand = value;
+                    RaisePropertyChanged("LoadMoreCommand");
+                }
+            }
+        }
+
+        bool isRefreshing = false;
+        public bool IsRefreshing
+        {
+            get => isRefreshing;
+            set
+            {
+                SetAndRaise(ref isRefreshing , value);
+            }
+        }
+
+        private int Page { get; set; } = 1;
+
+        bool _canLoadMore = true;
+        public bool CanLoadMore
+        {
+            get
+            {
+                return _canLoadMore;
+            }
+            set
+            {
+                SetAndRaise(property: ref _canLoadMore , value);
+            }
+        }
 
         private bool _isDrawerOpen;
         public bool IsDrawerOpen
@@ -37,17 +78,11 @@ namespace ESATouristGuide.ViewModels
             set
             {
                 SetAndRaise(ref _isLoaded , value);
-                //if (value == true)
-                //{
-                //    Load();
-                //}
             }
         }
 
 
         public ICommand OpenDrawerCommand { get; set; }
-
-
         public ICommand NavToDetailsCommand { get; set; }
         public ICommand ApplyFiltersChangeCommand { get; set; }
 
@@ -61,58 +96,56 @@ namespace ESATouristGuide.ViewModels
             set
             {
                 SetAndRaise(ref _categories , value);
-                SelectedCategories = Categories.Where(x => x.IsSelected == true).ToList();
+                SelectedCategories = Categories.Where(x => x.IsSelected == true).Select(x => x.Id).ToList();
             }
         }
 
-        private List<Category> _selectedCategories;
-        public List<Category> SelectedCategories
+        private List<int> _selectedCategories;
+        public List<int> SelectedCategories
         {
             get => _selectedCategories;
             set
             {
                 SetAndRaise(ref _selectedCategories , value);
-                if (!(POIs is null))
-                {
-                    Filtered = POIs.Where(x => SelectedCategories.Where(sc => sc.IsSelected == true).Contains(x.Category));
-                }
             }
         }
 
-        private ObservableRangeCollection<POI> _filteredResults;
-        public ObservableRangeCollection<POI> FilteredResults
+        private ObservableRangeCollection<POISlim> _filteredResults;
+        public ObservableRangeCollection<POISlim> FilteredResults
         {
             get => _filteredResults;
-            set => SetAndRaise(ref _filteredResults , value);
-        }
-
-        private IEnumerable<POI> _filtered;
-        public IEnumerable<POI> Filtered
-        {
-            get => _filtered;
             set
             {
-                SetAndRaise(ref _filtered , value);
-                FilteredResults = new ObservableRangeCollection<POI>(_filtered.ToList());
-                RaisePropertyChanged(nameof(IsEmptyList));
+                SetAndRaise(ref _filteredResults , value);
+                //RaisePropertyChanged(nameof(IsEmptyList));
             }
-            //FilteredResults = new ObservableRangeCollection<City>(SelectedCategories.Where(x => x.IsSelected == true).ToList());
         }
 
-        public bool IsEmptyList { get => FilteredResults.Count == 0; }
-        #endregion
-
-        private IGreekCitiesService GreekCitiesService { get; set; }
+        int _itemsCount;
+        public int ItemsCount
+        {
+            get => _itemsCount;
+            set
+            {
+                SetAndRaise(ref _itemsCount , value);
+                RaisePropertyChanged(nameof(IsEmptyList));
+            }
+        }
+        private IContentService _contentService { get; set; }
 
         private IUserLocationService _userLocationService;
 
+        public bool IsEmptyList
+        {
+            get { return ItemsCount == 0; }
+        }
+        #endregion
+
         //private IWeatherService WeatherService { get; set; }
         private CancellationToken _ct = new CancellationToken();
-        private ObservableRangeCollection<POI> _pois;
-
-        public ObservableRangeCollection<POI> POIs { get => _pois; set { SetAndRaise(ref _pois , value); } }
-
         public TaskLoaderNotifier LoaderNotifier { get; set; } = new TaskLoaderNotifier();
+
+        public int MaxPage { get; set; } = 0;
         #endregion
 
         public CollectionViewViewModel()
@@ -130,45 +163,100 @@ namespace ESATouristGuide.ViewModels
 
             if (Settings.Position is null)
             {
-                await _userLocationService.GetUserLocationAsync(_ct);
+                await _userLocationService.GetUserLocationAsync(_ct).ConfigureAwait(false);
             }
 
-            POIs = await GreekCitiesService.GetGreekCities();
-
-
-            //var a = await GreekCitiesService.GetPagedListItem(0 , new int[5] , page: 1); 
-
-
-            PopulateCitiesList();
-
             Categories = new List<Category>(Models.Categories.CategoriesList);
+            CanLoadMore = true;
+
+            var data = _contentService.GetPagedListItem(1 , page: Page , category: SelectedCategories.ToArray());
+
+            MaxPage = data.TotalPages;
+            ItemsCount = data.TotalItems;
+
+            var intermediary = FilteredResults;
+            FilteredResults.Clear();
+
+            foreach (var item in data.Data)
+            {
+                intermediary.Add(item);
+            }
+
+            FilteredResults = new ObservableRangeCollection<POISlim>(intermediary);
+
+            Page++;
+
+            MainThread.BeginInvokeOnMainThread(() => IsRefreshing = false);
 
             await Task.Delay(2000);
 
             IsLoaded = true;
         }
 
+        public void ExecuteLoadMoreCommand()
+        {
+
+            if (SelectedCategories.Any() && Page <= MaxPage)
+            {
+                CanLoadMore = true;
+            }
+            else
+            {
+                CanLoadMore = false;
+            }
+
+            if (CanLoadMore)
+            {
+                var data = _contentService.GetPagedListItem(1 , page: Page , category: SelectedCategories.ToArray());
+
+                MaxPage = data.TotalPages;
+                ItemsCount = data.TotalItems;
+
+                foreach (var item in data.Data)
+                {
+                    FilteredResults.Add(item);
+                }
+
+                Page++;
+            }
+
+
+            if (!SelectedCategories.Any())
+            {
+                ItemsCount = 0;
+            }
+
+            IsRefreshing = false;
+        }
+
         private Task ApplyFiltersChange()
         {
-            SelectedCategories = Categories.Where(x => x.IsSelected == true).ToList();
+            CanLoadMore = true;
+            SelectedCategories = Categories.Where(x => x.IsSelected).Select(x => x.Id).ToList();
+            FilteredResults = new ObservableRangeCollection<POISlim>();
+            Page = 1;
             return Task.FromResult(Categories);
         }
-        private async Task NavigateToDetails(POI poi) { await poi.NavigateToDetailsAsync(); }
+        private async Task NavigateToDetails(POISlim poi)
+        {
+            await poi.NavigateToDetailsAsync();
+        }
 
         public override void Load()
         {
-
             LoaderNotifier.Load(_ => InitializationTask());
-
         }
 
         private void PropertiesInit()
         {
             OpenDrawerCommand = new AsyncCommand(OpenDrawer);
             _userLocationService = new UserLocationService();
-            GreekCitiesService = new GreekCitiesService();
-            NavToDetailsCommand = new AsyncCommand<POI>(NavigateToDetails);
+            _contentService = new ContentService();
+            NavToDetailsCommand = new AsyncCommand<POISlim>(NavigateToDetails);
             ApplyFiltersChangeCommand = new AsyncCommand(ApplyFiltersChange);
+            LoadMoreCommand = new Xamarin.Forms.Command(ExecuteLoadMoreCommand);
+            FilteredResults = new ObservableRangeCollection<POISlim>();
+            SelectedCategories = new List<int>();
         }
 
         private Task OpenDrawer()
@@ -177,31 +265,5 @@ namespace ESATouristGuide.ViewModels
             return Task.FromResult(IsDrawerOpen);
         }
 
-        private void PopulateCitiesList()
-        {
-            var i = 0;
-            var categoryIndex = 0;
-            try
-            {
-                foreach (var city in POIs)
-                {
-                    city.ImageUrl = new Uri(string.Format("https://picsum.photos/720/480?random={0}" , i));
-
-                    if (categoryIndex > 7)
-                    {
-                        categoryIndex = 0;
-                    }
-
-                    city.Category = Models.Categories.CategoriesList[categoryIndex];
-                    categoryIndex++;
-
-                    i++;
-                }
-            }
-            catch (Exception ex)
-            {
-                var st = ex.Message;
-            }
-        }
     }
 }

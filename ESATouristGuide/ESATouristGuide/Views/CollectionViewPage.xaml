@@ -380,10 +380,10 @@
                                                           Light={StaticResource Background}}"
                         FilterExpression="{Binding}"
                         ItemSpacing="2"
-                        ItemsSource="{Binding FilteredResults}">
+                        ItemsSource="{Binding  FilteredResults}">
 
                         <dxcv:DXCollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:POI">
+                            <DataTemplate x:DataType="models:POISlim">
                                 <Frame
                                     Margin="8"
                                     Padding="0"
@@ -407,8 +407,8 @@
                                         POIDistance="{Binding DistanceFromUser}"
                                         POIImage="{Binding ImageUrl}"
                                         POIShowDistance="{Binding ShowDistance}"
-                                        POIName="{Binding Name}"
-                                        POIRegion="{Binding Region}" />
+                                        POIName="{Binding Title}"
+                                        POIRegion="{Binding Category}" />
                                 </Frame>
                             </DataTemplate>
                         </dxcv:DXCollectionView.ItemTemplate>

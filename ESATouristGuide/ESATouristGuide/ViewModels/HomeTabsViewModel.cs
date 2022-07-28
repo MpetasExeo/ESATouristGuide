@@ -8,15 +8,17 @@ namespace ESATouristGuide.ViewModels
 {
     public class HomeTabsViewModel : BaseViewModel
     {
-        private int _selectedViewModelIndex = 2;
+        private int _selectedViewModelIndex = 2 ;
 
         public HomeTabsViewModel()
         {
             CollectionViewViewModel = new CollectionViewViewModel();
-            CollectionViewViewModelModel = new CollectionViewViewModel();
+            HomeViewViewModel = new HomeViewViewModel();
             GoogleMapsViewModel = new GoogleMapsViewModel();
             FavoritesViewModel = new FavoritesViewModel();
             MiscViewModel = new MiscViewModel();
+
+            Load();
         }
 
         public TaskLoaderNotifier LoaderNotifier { get; set; } = new TaskLoaderNotifier();
@@ -37,7 +39,7 @@ namespace ESATouristGuide.ViewModels
                     GoogleMapsViewModel.Load();
                     break;
                 case 2:
-                    CollectionViewViewModel.Load();
+                    //HomeViewViewModel.Load();
                     break;
                 case 3:
                     FavoritesViewModel.Load();
@@ -46,7 +48,7 @@ namespace ESATouristGuide.ViewModels
                     MiscViewModel.Load();
                     break;
                 default:
-                    HomePageViewModel.Load();
+                    //HomeViewViewModel.Load();
                     break;
             }
         }
@@ -54,16 +56,15 @@ namespace ESATouristGuide.ViewModels
         private async Task InitializationTask()
         {
             await Task.Delay(500);
+            HomeViewViewModel.Load();
         }
-
-
 
         public FavoritesViewModel FavoritesViewModel { get; }
         public HomePageViewModel HomePageViewModel { get; }
 
         public GoogleMapsViewModel GoogleMapsViewModel { get; set; }
 
-        public CollectionViewViewModel CollectionViewViewModelModel { get; }
+        public HomeViewViewModel HomeViewViewModel { get; }
 
         public CollectionViewViewModel CollectionViewViewModel { get; }
         public MiscViewModel MiscViewModel { get; }

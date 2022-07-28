@@ -33,7 +33,7 @@ namespace ESATouristGuide.Database
         {
 
             await Init();
-            return await _db.Table<POIDatabaseItem>().Where(i => i.ID == id).FirstOrDefaultAsync();
+            return await _db.Table<POIDatabaseItem>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<int> GetItemIdAsync(POIDatabaseItem item)
@@ -42,11 +42,11 @@ namespace ESATouristGuide.Database
 
             // TODO αλλαγή κριτιρίων ύπαρξης
 
-            var a = await _db.Table<POIDatabaseItem>().Where(i => i.Name == item.Name).FirstOrDefaultAsync();
+            var a = await _db.Table<POIDatabaseItem>().Where(i => i.Title == item.Title).FirstOrDefaultAsync();
 
             if (!(a is null))
             {
-                return a.ID;
+                return a.Id;
             }
 
             return -1;

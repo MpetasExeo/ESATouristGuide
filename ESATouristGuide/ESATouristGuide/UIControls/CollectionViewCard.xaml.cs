@@ -78,10 +78,12 @@ namespace ESATouristGuide.UIControls
             if ((bool)newValue != (bool)oldValue)
             {
                 card.POIDistanceIndicatorLabel.IsVisible = (bool)newValue;
+                card.POIDistanceFromUserLabel.IsVisible = (bool)newValue;
             }
             else
             {
-                card.POINameLabel.IsVisible = (bool)oldValue;
+                card.POIDistanceIndicatorLabel.IsVisible = (bool)oldValue;
+                card.POIDistanceFromUserLabel.IsVisible = (bool)oldValue;
             }
         }
 

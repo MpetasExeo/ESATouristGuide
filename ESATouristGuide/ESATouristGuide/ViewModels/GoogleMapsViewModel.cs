@@ -29,12 +29,11 @@ namespace ESATouristGuide.ViewModels
     {
         #region Properties
         public IGreekCitiesService GreekCitiesService { get; set; }
+        public IContentService ContentService { get; set; }
         public IWeatherService WeatherService { get; set; }
         public ICommand GetCitiesCommand { get; set; }
         public Map GoogleMap { get; set; } = new Map();
         public ObservableRangeCollection<Pin> Pins { get; set; } = new ObservableRangeCollection<Pin>();
-
-
         public ICommand NavToDetailsCommand { get; set; }
 
         private bool mapLoaded;
@@ -55,7 +54,7 @@ namespace ESATouristGuide.ViewModels
             set
             {
                 SetAndRaise(ref constructorFinished , value);
-                Task.Run(() => Load());
+                //Task.Run(() => Load());
             }
         }
 
@@ -92,8 +91,8 @@ namespace ESATouristGuide.ViewModels
             }
         }
 
-        private POI selectedPlace;
-        public POI SelectedPlace
+        private POISlim selectedPlace;
+        public POISlim SelectedPlace
         {
             get => selectedPlace;
             set
@@ -103,15 +102,15 @@ namespace ESATouristGuide.ViewModels
         }
 
         private readonly Temperatures selectedPlaceTemperature;
-        public Temperatures SelectedPlaceTemperature
-        {
-            get => selectedPlaceTemperature;
-            set
-            {
-                SelectedPlace.Temperatures = value;
-                RaisePropertyChanged(nameof(SelectedPlace));
-            }
-        }
+        //public Temperatures SelectedPlaceTemperature
+        //{
+        //    get => selectedPlaceTemperature;
+        //    set
+        //    {
+        //        SelectedPlace.Temperatures = value;
+        //        RaisePropertyChanged(nameof(SelectedPlace));
+        //    }
+        //}
         public ObservableRangeCollection<POI> POIS { get; set; }
         private LayoutState _temperaturesState;
         public LayoutState TemperaturesState
@@ -129,7 +128,7 @@ namespace ESATouristGuide.ViewModels
             ConstructorFinished = true;
         }
 
-        private async Task NavigateToDetails(POI poi)
+        private async Task NavigateToDetails(POISlim poi)
         {
             await poi.NavigateToDetailsAsync();
         }
@@ -208,7 +207,7 @@ namespace ESATouristGuide.ViewModels
         private void UICommandsInit()
         {
             GoogleMap.PinClicked += GoogleMap_PinClicked;
-            NavToDetailsCommand = new AsyncCommand<POI>(NavigateToDetails);
+            NavToDetailsCommand = new AsyncCommand<POISlim>(NavigateToDetails);
             OpenFiltersDrawerCommand = new Command(OpenFiltersDrawer);
         }
 
@@ -239,6 +238,7 @@ namespace ESATouristGuide.ViewModels
         {
             GreekCitiesService = new GreekCitiesService();
             WeatherService = new WeatherService();
+            ContentService = new ContentService();
             Categories = Models.Categories.CategoriesList;
         }
 
@@ -272,7 +272,7 @@ namespace ESATouristGuide.ViewModels
             Location pos = new Location(lat , lon);
             CancellationToken ct = new CancellationToken();
 
-            SelectedPlaceTemperature = await WeatherService.GetCurrentWeatherAsync(pos , ct);
+            //SelectedPlaceTemperature = await WeatherService.GetCurrentWeatherAsync(pos , ct);
 
             IsBusy = false;
             TemperaturesState = LayoutState.None;
@@ -311,7 +311,8 @@ namespace ESATouristGuide.ViewModels
             TemperaturesState = LayoutState.Loading;
             IsBusy = true;
 
-            SelectedPlace = POIS.Where(s => s.Latitude == lat).Where(s => s.Longitude == lon).FirstOrDefault();
+            SelectedPlace =
+                POIsList.Where(s => s.Latitude == lat).Where(s => s.Longitude == lon).FirstOrDefault();
 
             if (!(SelectedPlace is null))
             {
@@ -319,26 +320,55 @@ namespace ESATouristGuide.ViewModels
             }
 
             GetSelectedPlaceTemperature(lat , lon);
-        }
 
+        }
         #endregion
+
+
+        List<POISlim> _pOIsList;
+        public List<POISlim> POIsList
+        {
+            get => _pOIsList;
+            set => SetAndRaise(ref _pOIsList , value);
+        }
 
         /// <summary>
         /// Calls the CitiesService, populates <see cref="Pins">Pins list</see> and creates a <see cref="Pin">Pin</see> for each item in the list
         /// </summary>
         private async Task GetCitiesAsync()
         {
-            POIS = await GreekCitiesService.GetGreekCities().ConfigureAwait(false);
+            //POIS = await GreekCitiesService.GetGreekCities().ConfigureAwait(false);
 
-            foreach (var poi in POIS)
+            int[] array = {1,2,3,4,5,6,7,8,9};
+
+            var data = ContentService.GetPagedListItem(0 , array , page: 1);
+
+            var lastPage = data.TotalPages;
+
+            POIsList = data.Data.ToList();
+
+            for (int i = 1; i < lastPage; i++)
+            {
+                var tempData = ContentService.GetPagedListItem(0 , array , page: 1).Data.ToList();
+
+                foreach (var item in tempData)
+                {
+                    if (item.Latitude != null && item.Longitude != null)
+                    {
+                        POIsList.Add(item);
+                    }
+                }
+            }
+
+            foreach (var poi in POIsList)
             {
                 var lat = poi.Latitude;
                 var lng = poi.Longitude;
 
                 Pin pin = new Pin()
                 {
-                    Position = new Position(lat , lng) ,
-                    Label = poi.Name ,
+                    Position = new Position((double)lat , (double)lng) ,
+                    Label = poi.Title ,
                     Type = PinType.Place ,
                     Icon = BitmapDescriptorFactory.FromBundle("exeo_logo.png")
                 };
