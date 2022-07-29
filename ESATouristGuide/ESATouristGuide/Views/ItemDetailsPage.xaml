@@ -186,6 +186,7 @@
                 <Frame
                     x:Name="Carousel"
                     Grid.Row="0"
+                    Padding="0"
                     HorizontalOptions="FillAndExpand"
                     TranslationY="{Binding RelativeScrollY, Source={x:Reference Scroll}, Converter={StaticResource ScrollValueConverter}, ConverterParameter='-5;0;200;false;0'}">
                     <Frame.Behaviors>
@@ -201,7 +202,6 @@
                                 Aspect="AspectFill"
                                 HorizontalOptions="FillAndExpand"
                                 Source="{Binding SelectedPOI.ImageUrl}"
-                                VerticalOptions="FillAndExpand"
                                 HeightRequest="420" />
                 </Frame>
 
