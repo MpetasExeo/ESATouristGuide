@@ -95,7 +95,7 @@
 
 
             <ScrollView>
-                <Grid ColumnDefinitions="*" RowDefinitions="300,100,260,100,260,100,260,60">
+                <Grid ColumnDefinitions="*" RowDefinitions="300,65,260,65,260,65,260,60">
 
                     <ff:CachedImage
                         Grid.Row="0"
@@ -125,7 +125,7 @@
                             Text="Τι να κάνετε"
                             TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                             VerticalOptions="Start" />
-                        <Label
+                        <!--<Label
                             Grid.Row="1"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
@@ -167,7 +167,7 @@
                                 Text="Top 10"
                                 VerticalOptions="Center" />
 
-                        </dxe:ChoiceChipGroup>
+                        </dxe:ChoiceChipGroup>-->
 
                     </Grid>
 
@@ -242,7 +242,7 @@
                             Text="Τι να δείτε"
                             TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                             VerticalOptions="Start" />
-                        <Label
+                        <!--<Label
                             Grid.Row="1"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
@@ -284,21 +284,16 @@
                                 Text="Top 10"
                                 VerticalOptions="Center" />
 
-                            <!--
+                            -->
+                        <!--
                             IsSelected="{Binding BasicCategoriesEnabled}"
                             TapCommand="{Binding BasicCategoriesSelectedCommand}"
                             IsVisible="{Binding SecondaryOptionsEnabled}"
                             TapCommand="{Binding SecondaryCategoriesSelectedCommand}"
                         -->
+                        <!--
 
-                        </dxe:ChoiceChipGroup>
-
-
-
-
-
-
-
+                        </dxe:ChoiceChipGroup>-->
                     </Grid>
 
                     <dxcv:DXCollectionView
@@ -375,7 +370,7 @@
                             Text="Χρήσιμα"
                             TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}"
                             VerticalOptions="Start" />
-                        <Label
+                        <!--<Label
                             Grid.Row="1"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
@@ -417,14 +412,14 @@
                                 Text="Top 10"
                                 VerticalOptions="Center" />
 
-                            <!--
+                            --><!--
                             IsSelected="{Binding BasicCategoriesEnabled}"
                             TapCommand="{Binding BasicCategoriesSelectedCommand}"
                             IsVisible="{Binding SecondaryOptionsEnabled}"
                             TapCommand="{Binding SecondaryCategoriesSelectedCommand}"
-                        -->
+                        --><!--
 
-                        </dxe:ChoiceChipGroup>
+                        </dxe:ChoiceChipGroup>-->
 
 
 
@@ -533,10 +528,12 @@
                             </DataTemplate>
                         </dxcv:DXCollectionView.ItemTemplate>
 
-                        --><!--  Sort items.  -->
-                        <!--<dxcv:DXCollectionView.SortDescriptions>
+                        -->
+                    <!--  Sort items.  -->
+                    <!--<dxcv:DXCollectionView.SortDescriptions>
                             <dxcv:SortDescription FieldName="DistanceFromUser" SortOrder="Ascending" />
-                        </dxcv:DXCollectionView.SortDescriptions>--><!--
+                        </dxcv:DXCollectionView.SortDescriptions>-->
+                    <!--
 
                     </dxcv:DXCollectionView>-->
                     <!--#endregion-->
@@ -603,12 +600,14 @@
                                 Text="Top 10"
                                 VerticalOptions="Center" />
 
-                            --><!--
+                            -->
+                    <!--
                             IsSelected="{Binding BasicCategoriesEnabled}"
                             TapCommand="{Binding BasicCategoriesSelectedCommand}"
                             IsVisible="{Binding SecondaryOptionsEnabled}"
                             TapCommand="{Binding SecondaryCategoriesSelectedCommand}"
-                        --><!--
+                        -->
+                    <!--
 
                         </dxe:ChoiceChipGroup>
 

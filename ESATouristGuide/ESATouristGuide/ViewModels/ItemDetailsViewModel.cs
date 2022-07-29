@@ -91,9 +91,13 @@ namespace ESATouristGuide.ViewModels
             //LoadImages();
             PropertiesInit();
             SelectedPOI = poi;
-            CityPosition = new Location((double)poi.Latitude , (double)poi.Longitude);
-
+            if (SelectedPOI.Latitude != null && SelectedPOI.Longitude != null)
+            {
+                CityPosition = new Location((double)poi.Latitude , (double)poi.Longitude);
+            }
             
+
+
 
             //Load();
         }
@@ -135,6 +139,12 @@ namespace ESATouristGuide.ViewModels
             get => _poi;
             set => SetAndRaise(ref _poi , value);
         }
+        bool _showInfoPanel = true;
+        public bool ShowInfoPanel
+        {
+            get => _showInfoPanel;
+            set => SetAndRaise(ref _showInfoPanel , value);
+        }
 
         public override void Load() { LoaderNotifier.Load(_ => InitializationTask()); }
 
@@ -161,10 +171,15 @@ namespace ESATouristGuide.ViewModels
 
             //var userLocation = await UserLocationService.GetUserLocationAsync(ct);
 
-            Temperatures = await WeatherService.GetCurrentWeatherAsync(CityPosition , ct);
-
-            Distances = await DistancesService.GetDistancesFromUserAsync(CityPosition , Settings.Position);
-
+            if (SelectedPOI.Latitude != null && SelectedPOI.Longitude != null)
+            {
+                Temperatures = await WeatherService.GetCurrentWeatherAsync(CityPosition , ct);
+                Distances = await DistancesService.GetDistancesFromUserAsync(CityPosition , Settings.Position);
+            }
+            else
+            {
+                ShowInfoPanel = false;
+            }
             IsBusy = false;
 
             MainState = LayoutState.None;

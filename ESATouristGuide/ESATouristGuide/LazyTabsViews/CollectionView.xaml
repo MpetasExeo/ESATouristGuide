@@ -389,8 +389,9 @@
                         IsLoadMoreEnabled="{Binding CanLoadMore}"
                         LoadMoreCommand="{Binding LoadMoreCommand}"
                         Grid.ColumnSpan="3"
+                        ItemSize="240"
                         BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
-                                                          Light={StaticResource DarkBackground}}"
+                                                          Light={StaticResource Background}}"
                         ItemSpacing="2"
                         ItemsSource="{Binding FilteredResults}">
 

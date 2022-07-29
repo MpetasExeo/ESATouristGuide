@@ -8,7 +8,7 @@ namespace ESATouristGuide.ViewModels
 {
     public class HomeTabsViewModel : BaseViewModel
     {
-        private int _selectedViewModelIndex = 2 ;
+        private int _selectedViewModelIndex = 0;
 
         public HomeTabsViewModel()
         {
@@ -17,8 +17,6 @@ namespace ESATouristGuide.ViewModels
             GoogleMapsViewModel = new GoogleMapsViewModel();
             FavoritesViewModel = new FavoritesViewModel();
             MiscViewModel = new MiscViewModel();
-
-            Load();
         }
 
         public TaskLoaderNotifier LoaderNotifier { get; set; } = new TaskLoaderNotifier();
@@ -33,13 +31,13 @@ namespace ESATouristGuide.ViewModels
             switch (SelectedViewModelIndex)
             {
                 case 0:
-                    CollectionViewViewModel.Load();
+                    HomeViewViewModel.Load();
                     break;
                 case 1:
                     GoogleMapsViewModel.Load();
                     break;
                 case 2:
-                    //HomeViewViewModel.Load();
+                    CollectionViewViewModel.Load();
                     break;
                 case 3:
                     FavoritesViewModel.Load();
@@ -55,8 +53,8 @@ namespace ESATouristGuide.ViewModels
 
         private async Task InitializationTask()
         {
-            await Task.Delay(500);
-            HomeViewViewModel.Load();
+            await Task.Delay(50);
+            //HomeViewViewModel.Load();
         }
 
         public FavoritesViewModel FavoritesViewModel { get; }

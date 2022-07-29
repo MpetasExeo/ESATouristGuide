@@ -161,6 +161,7 @@
                         Grid.RowSpan="2"
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
+                        ItemSize="240"
                         BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
                                                           Light={StaticResource Background}}"
                         ItemSpacing="2"

@@ -202,7 +202,7 @@
                                 HorizontalOptions="FillAndExpand"
                                 Source="{Binding SelectedPOI.ImageUrl}"
                                 VerticalOptions="FillAndExpand"
-                                WidthRequest="420" />
+                                HeightRequest="420" />
                 </Frame>
 
 
@@ -257,7 +257,7 @@
                     <StackLayout Margin="15,333,15,15" Spacing="20">
 
                         <!--  THIRD SECTION  -->
-                        <Frame
+                        <Frame  IsVisible="{Binding ShowInfoPanel}" 
                             Padding="0"
                             HasShadow="True"
                             xct:ShadowEffect.Color="{AppThemeBinding Dark={StaticResource Background},
@@ -295,7 +295,7 @@
                             </Frame.Behaviors>
 
 
-                            <Grid xct:StateLayout.AnimateStateChanges="True" xct:StateLayout.CurrentState="{Binding MainState}">
+                            <Grid IsVisible="{Binding ShowInfoPanel}" xct:StateLayout.AnimateStateChanges="True" xct:StateLayout.CurrentState="{Binding MainState}">
                                 <xct:StateLayout.StateViews>
                                     <xct:StateView StateKey="Loading">
                                         <StackLayout x:Name="CurrentTemp">

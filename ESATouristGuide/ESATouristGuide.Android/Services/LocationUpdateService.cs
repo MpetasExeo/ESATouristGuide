@@ -30,7 +30,7 @@ namespace ESATouristGuide.Droid.Services
             locationManager = (LocationManager)Forms.Context.GetSystemService(Context.LocationService);
 #pragma warning restore CS0618 // Type or member is obsolete
             locationManager.RequestLocationUpdates(
-                provider: LocationManager.NetworkProvider ,
+                provider: LocationManager.GpsProvider ,
                 minTimeMs: 20000 ,//millisec
                 minDistanceM: 250 ,//metres
                 listener: this);

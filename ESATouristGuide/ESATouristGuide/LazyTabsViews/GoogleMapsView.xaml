@@ -19,6 +19,8 @@
     xmlns:vm="clr-namespace:ESATouristGuide.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Shell.NavBarIsVisible="False"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                          Light={StaticResource Background}}"
     x:DataType="vm:GoogleMapsViewModel">
 
     <ContentView.BindingContext>
@@ -56,11 +58,13 @@
         </customViews:TaskLoaderView.LoadingView>
 
         <dxn:DrawerView
-            BackgroundColor="#000000"
+            BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground},
+                                                          Light={StaticResource Background}}"
             DrawerBackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}"
            DrawerContentMinHeight="326"
             DrawerFooterHeight="0"
             DrawerMinHeight="400"
+            
             DrawerPosition="Bottom"
             IsDrawerOpened="{Binding IsDrawerOpen, Mode=TwoWay}"
             IsDrawerShadowVisible="True"
@@ -688,7 +692,7 @@
                         </Frame>-->
                         <BoxView FlexLayout.Grow="1" />
 
-                        <Frame
+                        <!--<Frame
                             BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark}, Light={StaticResource TransparentBackground}}"
                             CornerRadius="12"
                             FlexLayout.AlignSelf="Center"
@@ -712,7 +716,7 @@
                                 TextColor="#E2E2E2"
                                 VerticalOptions="Center"
                                 VerticalTextAlignment="Center" />
-                        </Frame>
+                        </Frame>-->
 
                     </FlexLayout>
 

@@ -349,7 +349,7 @@ namespace ESATouristGuide.ViewModels
 
             for (int i = 1; i < lastPage; i++)
             {
-                var tempData = ContentService.GetPagedListItem(0 , array , page: 1).Data.ToList();
+                var tempData = ContentService.GetPagedListItem(0 , array , page: i).Data.ToList();
 
                 foreach (var item in tempData)
                 {
@@ -370,7 +370,7 @@ namespace ESATouristGuide.ViewModels
                     Position = new Position((double)lat , (double)lng) ,
                     Label = poi.Title ,
                     Type = PinType.Place ,
-                    Icon = BitmapDescriptorFactory.FromBundle("exeo_logo.png")
+                    Icon = BitmapDescriptorFactory.FromBundle(poi.CategoryId.ToString())
                 };
 
                 Pins.Add(pin);

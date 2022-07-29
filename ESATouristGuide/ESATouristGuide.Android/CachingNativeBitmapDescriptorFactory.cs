@@ -22,14 +22,26 @@ namespace ESATouristGuide.Droid
                 var iconId = 0;
                 switch (descriptor.Id)
                 {
-                    case "Πολιτισμός":
-                        iconId = Resource.Drawable.place;
+                    case "1":
+                        iconId = Resource.Drawable.top;
                         break;
-                    case "Γενική Ανακοίνωση":
-                        iconId = Resource.Drawable.place;
+                    case "2":
+                        iconId = Resource.Drawable.monument;
                         break;
-                    case "Έκτακτη Ειδοποίηση":
-                        iconId = Resource.Drawable.place;
+                    case "3":
+                        iconId = Resource.Drawable.museum;
+                        break;
+                    case "4":
+                        iconId = Resource.Drawable.beach;
+                        break;
+                    case "6":
+                        iconId = Resource.Drawable.activities;
+                        break;
+                    case "7":
+                        iconId = Resource.Drawable.gastronomy;
+                        break;
+                    case "8":
+                        iconId = Resource.Drawable.@event;
                         break;
                     default:
                         iconId = Resource.Drawable.place;

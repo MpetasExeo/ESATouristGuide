@@ -55,9 +55,11 @@
                 Grid.RowSpan="2"
                 Animate="True"
                 SelectedIndex="{Binding SelectedViewModelIndex, Mode=TwoWay}">
-                <sho:LazyView x:TypeArguments="views:CollectionView" BindingContext="{Binding CollectionViewViewModel}"/>
-                <sho:LazyView x:TypeArguments="views:GoogleMapsView" BindingContext="{Binding GoogleMapsViewModel}" />
+
                 <sho:LazyView x:TypeArguments="views:HomeView" BindingContext="{Binding HomeViewViewModel}" />
+                <sho:LazyView x:TypeArguments="views:GoogleMapsView" BindingContext="{Binding GoogleMapsViewModel}" />
+
+                <sho:LazyView x:TypeArguments="views:CollectionView" BindingContext="{Binding CollectionViewViewModel}"/>
                 <sho:LazyView x:TypeArguments="views:FavoritesView" BindingContext="{Binding FavoritesViewModel}" />
                 <sho:LazyView x:TypeArguments="views:MiscView" BindingContext="{Binding MiscViewModel}"/>
 
@@ -80,9 +82,11 @@
                 <tabs:TabHostView.Tabs>
 
                     <tabs:MaterialUnderlinedTabItem
+                        x:Name="TabButton"
                         FontFamily="FASolid"
                         IconOptions="TextOnly"
-                        Label="{x:Static fontAwesome:FontAwesomeIcons.ListUl}"
+                        IsVisible="True"
+                        Label="{x:Static fontAwesome:FontAwesomeIcons.Home}"
                         LabelSize="18"
                         Style="{StaticResource BottomTabStyle}" />
 
@@ -94,11 +98,9 @@
                         Style="{StaticResource BottomTabStyle}" />
 
                     <tabs:MaterialUnderlinedTabItem
-                        x:Name="TabButton"
                         FontFamily="FASolid"
                         IconOptions="TextOnly"
-                        IsVisible="True"
-                        Label="{x:Static fontAwesome:FontAwesomeIcons.Home}"
+                        Label="{x:Static fontAwesome:FontAwesomeIcons.ListUl}"
                         LabelSize="18"
                         Style="{StaticResource BottomTabStyle}" />
 
