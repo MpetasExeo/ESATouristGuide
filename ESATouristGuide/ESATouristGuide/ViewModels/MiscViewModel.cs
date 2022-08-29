@@ -1,4 +1,5 @@
-﻿using ESATouristGuide.Models;
+﻿using ESATouristGuide.Interfaces;
+using ESATouristGuide.Models;
 
 using MvvmHelpers.Commands;
 
@@ -29,7 +30,7 @@ namespace ESATouristGuide.ViewModels
         #endregion
         private async Task InitializationTask()
         {
-            await Task.Delay(500);
+            await Task.Delay(0);
         }
 
         public override void Load()

@@ -1,8 +1,13 @@
 ﻿using ESATouristGuide.Helpers;
 using ESATouristGuide.Interfaces;
 using ESATouristGuide.Models;
+using ESATouristGuide.Services;
 using ESATouristGuide.Views;
 
+using System.Threading;
+using System.Threading.Tasks;
+
+using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -31,6 +36,7 @@ namespace ESATouristGuide
                 MainPage = new AppShell();
             }
 
+            
 
             LocationUpdateService.LocationChanged += LocationUpdateService_LocationChanged;
         }
@@ -46,6 +52,7 @@ namespace ESATouristGuide
 
         protected override void OnStart()
         {
+            VersionTracking.Track();
             try
             {
 
@@ -76,7 +83,7 @@ namespace ESATouristGuide
             {
                 var st = ex.Message;
             }
-            
+
         }
 
         private void App_RequestedThemeChanged(object sender , AppThemeChangedEventArgs e)

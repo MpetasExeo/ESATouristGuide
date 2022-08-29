@@ -21,9 +21,9 @@
     x:DataType="vm:GoogleMapsViewModel"
     Shell.NavBarIsVisible="False">
 
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <vm:GoogleMapsViewModel />
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
 
 
     <customViews:TaskLoaderView

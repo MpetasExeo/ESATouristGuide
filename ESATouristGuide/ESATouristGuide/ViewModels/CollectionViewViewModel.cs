@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace ESATouristGuide.ViewModels
 {
@@ -82,6 +81,7 @@ namespace ESATouristGuide.ViewModels
         }
 
 
+        private CancellationToken _ct = new CancellationToken();
         public ICommand OpenDrawerCommand { get; set; }
         public ICommand NavToDetailsCommand { get; set; }
         public ICommand ApplyFiltersChangeCommand { get; set; }
@@ -142,7 +142,6 @@ namespace ESATouristGuide.ViewModels
         #endregion
 
         //private IWeatherService WeatherService { get; set; }
-        private CancellationToken _ct = new CancellationToken();
         public TaskLoaderNotifier LoaderNotifier { get; set; } = new TaskLoaderNotifier();
 
         public int MaxPage { get; set; } = 0;
@@ -157,7 +156,7 @@ namespace ESATouristGuide.ViewModels
         {
             if (IsLoaded)
             {
-                await Task.Delay(2000);
+                //await Task.Delay(2000);
                 return;
             }
 

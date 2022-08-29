@@ -16,10 +16,10 @@
         <ResourceDictionary>
 
             <Style x:Key="BottomTabStyle" TargetType="tabs:MaterialUnderlinedTabItem">
-                <Setter Property="SelectedTabColor" Value="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Accent}}" />
-                <Setter Property="UnselectedLabelColor" Value="{AppThemeBinding Dark={StaticResource DarkPrimary}, Light={StaticResource Primary}}" />
-                <Setter Property="UnderlineHeight" Value="2" />
-                <Setter Property="UnderlineHeight" Value="2" />
+                <Setter Property="SelectedTabColor" Value="{AppThemeBinding Dark={StaticResource DarkAccent}, Light={StaticResource Primary}}" />
+                <Setter Property="UnselectedLabelColor" Value="{AppThemeBinding Dark=#9695d7ff, Light=#967a98e2}" />
+                <Setter Property="UnderlineHeight" Value="0" />
+                <Setter Property="UnderlineHeight" Value="0" />
                 <Setter Property="LabelSize" Value="32" />
             </Style>
 
@@ -68,7 +68,9 @@
             <tabs:TabHostView
                 Grid.Row="1"
                 Margin="0,0,0,12"
-                BackgroundColor="#F5F3F0"
+                BackgroundColor="{AppThemeBinding Dark={StaticResource PrimaryOpacityDark},Light={StaticResource PrimaryOpacity}}"
+                SegmentedOutlineColor="{AppThemeBinding Dark=#3295d7ff, Light=#327a98e2}"
+                SegmentedHasSeparator="False"
                 CornerRadius="30"
                 HeightRequest="36"
                 HorizontalOptions="Center"

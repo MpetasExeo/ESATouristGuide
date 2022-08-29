@@ -88,7 +88,7 @@ namespace ESATouristGuide.Services
             {
                 try
                 {
-                    Device.BeginInvokeOnMainThread(async () => await Permissions.RequestAsync<Permissions.LocationWhenInUse>().ConfigureAwait(true));
+                    //Device.BeginInvokeOnMainThread(async () => await Permissions.RequestAsync<Permissions.LocationWhenInUse>().ConfigureAwait(true));
                     return DummyPosition;
                 }
                 catch (Exception)

@@ -204,6 +204,50 @@
                         </dxcv:DXCollectionView.SortDescriptions>-->
                     </dxcv:DXCollectionView>
 
+
+
+                    <StackLayout Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                     IsVisible="{Binding IsEmptyList}"
+                        Grid.ColumnSpan="3">
+
+
+                        <Frame     
+                            TranslationY="-60"
+                        HeightRequest="240"
+                            WidthRequest="240"
+                            CornerRadius="240"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark},Light={StaticResource TransparentBackground}}"
+                        >
+
+                            <lottie:AnimationView
+
+                                x:Name="EmptyListLottie"
+                        Animation="empty.json"
+                        AutoPlay="True"
+                       AbsoluteLayout.LayoutBounds="0.5, 0.5, 148, 148"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                        HorizontalOptions="FillAndExpand"
+                        RepeatMode="Infinite"
+                        VerticalOptions="Fill" />
+
+                        </Frame>
+                        <Label
+                                      
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        HorizontalOptions="Fill"
+                                        HorizontalTextAlignment="Center"
+                            TextColor="{AppThemeBinding Dark={StaticResource DarkPrimary},
+                                                                                 Light={StaticResource Primary}}"
+                                        Text="No results matched your filter."
+                                        VerticalOptions="Start" />
+
+                    </StackLayout>
+
                     <!--<FlexLayout
                         Grid.Column="0"
                         AlignContent="Center"

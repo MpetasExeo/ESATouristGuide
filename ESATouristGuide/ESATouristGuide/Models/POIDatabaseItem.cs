@@ -6,7 +6,7 @@ namespace ESATouristGuide.Models
 {
     public class POIDatabaseItem
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public int Id { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

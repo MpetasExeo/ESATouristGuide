@@ -19,6 +19,7 @@ using ESATouristGuide.Helpers;
 
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Essentials;
+using System.Diagnostics;
 
 namespace ESATouristGuide.ViewModels
 {
@@ -86,29 +87,32 @@ namespace ESATouristGuide.ViewModels
         }
         #endregion
 
+        static readonly Stopwatch timer = new Stopwatch();
+
         public ItemDetailsViewModel(POI poi)
         {
             //LoadImages();
             PropertiesInit();
+            timer.Restart();
             SelectedPOI = poi;
             if (SelectedPOI.Latitude != null && SelectedPOI.Longitude != null)
             {
                 CityPosition = new Location((double)poi.Latitude , (double)poi.Longitude);
             }
-            
-
-
-
-            //Load();
+            timer.Stop();
+            var time = timer.Elapsed;
         }
 
         private void PropertiesInit()
         {
             //UserLocationService = new UserLocationService();
+            timer.Start();
             Database = new POIRepository();
             WeatherService = new WeatherService();
             DistancesService = new DistancesService();
             AddToFavouritesCommand = new AsyncCommand(AddToFavourites);
+            timer.Stop();
+            var time = timer.Elapsed;
         }
 
         private async Task AddToFavourites()
@@ -162,8 +166,8 @@ namespace ESATouristGuide.ViewModels
             var d = StripHTML(SelectedPOI.Content);
             SelectedPOI.Content = d;
             RaisePropertyChanged(nameof(SelectedPOI));
-            Poi.Id = await Database.GetItemIdAsync(Poi);
-            IsFavorite = Poi.Id != -1;
+            //Poi.Id = await Database.GetItemIdAsync(Poi);
+            IsFavorite = await Database.GetItemIdAsync(Poi) != -1;
 
             MainState = LayoutState.Loading;
 

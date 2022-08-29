@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Web;
 
 namespace ESATouristGuide.Services
@@ -17,7 +16,7 @@ namespace ESATouristGuide.Services
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://esa.exeo.site/");
+                client.BaseAddress = new Uri(Constants.APIConnectionBaseAddress);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -42,7 +41,7 @@ namespace ESATouristGuide.Services
 
                 string lang = Settings.TwoLetterLocaleCode[Settings.Language];
 
-                HttpResponseMessage response = client.GetAsync(string.Format("api/Contents/paged/?{0}" ,  sqs)).Result;
+                HttpResponseMessage response = client.GetAsync(string.Format("api/Contents/paged/?{0}" , sqs)).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -58,7 +57,7 @@ namespace ESATouristGuide.Services
             {
                 try
                 {
-                    client.BaseAddress = new Uri("https://esa.exeo.site/");
+                    client.BaseAddress = new Uri(Constants.APIConnectionBaseAddress);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
@@ -78,42 +77,9 @@ namespace ESATouristGuide.Services
                 }
             }
 
-            return null; //new ElementDetails { Related = new List<ElementSlim>(), Images = new List<ResourceSlim>(), Videos = new List<ResourceSlim>(), TabId = -1, Links = new List<ResourceSlim>() };
+            return null;
         }
 
-        //public List<ARItem> GetArItems(Position userLocation , double distance)
-        //{
-        //    using (HttpClient client = new HttpClient())
-        //    {
-        //        try
-        //        {
-        //            client.BaseAddress = new Uri("https://dmoapi.visit-centralmacedonia.gr");
-        //            client.DefaultRequestHeaders.Accept.Clear();
-        //            client.DefaultRequestHeaders.Accept.Add(
-        //                new MediaTypeWithQualityHeaderValue("application/json"));
-
-        //            string lang = Settings.TwoLetterLocaleCode[Settings.Language];
-
-        //            var culture = new CultureInfo("en-US");
-
-        //            var str = string.Format("api/Pois/ar/{0}/{1}/{2}/{3}" , lang , userLocation.Latitude.ToString(culture) , userLocation.Longitude.ToString(culture) , distance.ToString(culture));
-
-        //            HttpResponseMessage response = client.GetAsync(str).Result;
-
-        //            if (response.IsSuccessStatusCode)
-        //            {
-        //                return Newtonsoft.Json.JsonConvert.DeserializeObject<List<ARItem>>(response.Content.ReadAsStringAsync().Result);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            var st = ex.Message;
-        //            return null;
-        //        }
-        //    }
-
-        //    return null; //new ElementDetails { Related = new List<ElementSlim>(), Images = new List<ResourceSlim>(), Videos = new List<ResourceSlim>(), TabId = -1, Links = new List<ResourceSlim>() };
-        //}
 
     }
 }

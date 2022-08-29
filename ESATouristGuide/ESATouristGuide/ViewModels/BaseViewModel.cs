@@ -1,4 +1,6 @@
 ﻿
+using ESATouristGuide.Interfaces;
+
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
@@ -42,9 +44,20 @@ namespace ESATouristGuide.ViewModels
 
         public ICommand BackCommand { get; set; }
 
+
+        protected IContentService ContentService { get; }
+
+        public BaseViewModel(IContentService contentService)
+        {
+            ContentService = contentService;
+            BackCommand = new Command((x) =>
+            {
+                Shell.Current.SendBackButtonPressed();
+            });
+        }
+
         public BaseViewModel()
         {
-
             BackCommand = new Command((x) =>
             {
                 Shell.Current.SendBackButtonPressed();

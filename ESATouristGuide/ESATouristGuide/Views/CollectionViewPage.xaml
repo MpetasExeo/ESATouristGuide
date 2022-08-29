@@ -68,9 +68,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <vm:CollectionViewViewModel />
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
 
     <customViews:TaskLoaderView
         x:Name="RelativeParent"

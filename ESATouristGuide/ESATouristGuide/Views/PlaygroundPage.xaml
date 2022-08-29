@@ -61,9 +61,9 @@
         </Style>
     </ContentPage.Resources>
 
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <vm:CollectionViewViewModel />
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
 
     <ContentPage.Content>
 

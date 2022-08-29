@@ -7,6 +7,16 @@ namespace ESATouristGuide
     {
         public static readonly string GoogleApiKey = "AIzaSyAbe9MnGMU3M9DP3BHmSYqkKpW8qRSNePU";
 
+        public static readonly string APIConnectionBaseAddress= "https://esa.exeo.site/";
+
+
+        // {AssemblyName}.Json.{FileName}.json
+        public static readonly string LightThemeMapPath = "ESATouristGuide.Json.travelstyle.json";
+        public static readonly string DarkThemeMapPath = "ESATouristGuide.Json.darkstyle.json";
+
+        public static readonly string GoogleMapsBaseAddress = "https://maps.googleapis.com";
+        public static readonly string WeatherApiBaseAddress = "https://api.openweathermap.org";
+
         public const string DB_Name = "esapoisdb3.db3";
 
         public const SQLite.SQLiteOpenFlags Flags =

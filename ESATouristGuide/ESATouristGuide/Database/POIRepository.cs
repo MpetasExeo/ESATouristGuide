@@ -42,7 +42,7 @@ namespace ESATouristGuide.Database
 
             // TODO αλλαγή κριτιρίων ύπαρξης
 
-            var a = await _db.Table<POIDatabaseItem>().Where(i => i.Title == item.Title).FirstOrDefaultAsync();
+            var a = await _db.Table<POIDatabaseItem>().Where(i => i.Id == item.Id).FirstOrDefaultAsync();
 
             if (!(a is null))
             {

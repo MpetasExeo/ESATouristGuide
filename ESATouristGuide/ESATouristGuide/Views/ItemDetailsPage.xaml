@@ -821,13 +821,13 @@
                             xct:TouchEffect.PressedAnimationDuration="340"
                             xct:TouchEffect.PressedAnimationEasing="SinInOut"
                             xct:TouchEffect.PressedOpacity="0.85"
-                            BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark},
+                            BackgroundColor="{AppThemeBinding Dark=#a815181F,
                                                               Light={StaticResource TransparentBackground}}"
-                            CornerRadius="12"
+                             CornerRadius="18"
                             FlexLayout.AlignSelf="Center"
                             FlexLayout.Shrink="0"
-                            HeightRequest="48"
-                            WidthRequest="48">
+                            HeightRequest="36"
+                            WidthRequest="36">
                 <Label
                                 Padding="0"
                                 BackgroundColor="Transparent"
@@ -849,13 +849,13 @@
                             xct:TouchEffect.PressedAnimationDuration="340"
                             xct:TouchEffect.PressedAnimationEasing="SinInOut"
                             xct:TouchEffect.PressedOpacity="0.85"
-                            BackgroundColor="{AppThemeBinding Dark={StaticResource TransparentBackgroundDark},
+                            BackgroundColor="{AppThemeBinding Dark=#a815181F,
                                                               Light={StaticResource TransparentBackground}}"
-                            CornerRadius="12"
+                            CornerRadius="18"
                             FlexLayout.AlignSelf="Center"
                             FlexLayout.Shrink="0"
-                            HeightRequest="48"
-                            WidthRequest="48">
+                            HeightRequest="36"
+                            WidthRequest="36">
                 <Label
                                 Padding="0"
                                 BackgroundColor="Transparent"

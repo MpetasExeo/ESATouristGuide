@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace ESATouristGuide.ViewModels
 {
@@ -249,7 +248,7 @@ namespace ESATouristGuide.ViewModels
         {
             if (IsLoaded)
             {
-                await Task.Delay(2000);
+                //await Task.Delay(2000);
                 return;
             }
 
@@ -261,47 +260,19 @@ namespace ESATouristGuide.ViewModels
             Categories = new List<Category>(Models.Categories.CategoriesList);
 
             //var experiencesArray = new int[3] { 1 , 2 , 3 };
-
             //InitializeCollection(CanLoadMoreExperiences , experiencesArray , MaxPageExperience , Experiences , ExperiencesPage , IsRefreshingExperiences);
-
             //InitializeCollection(CanLoadMoreHighlights , highlightsArray , MaxPageHighlights , Highlights , HighlightsPage , IsRefreshingHighlights);
-
             //InitializeCollection(CanLoadMoreUseful , usefulArray , MaxPageUseful , Useful , UsefulPage , IsRefreshingUseful);
-
-
 
             await Task.Delay(2000);
 
             IsLoaded = true;
         }
 
-        private void InitializeCollection(bool loadMore , int[] categories , int numberOfPages , ObservableRangeCollection<POISlim> collection , int pageCounter , bool isRefreshing)
-        {
-            loadMore = true;
-
-            var data = _contentService.GetPagedListItem(1 , page: pageCounter , category: categories);
-
-            numberOfPages = data.TotalPages;
-            //ItemsCount = data.TotalItems;
-
-            var intermediary = collection;
-            collection.Clear();
-
-            foreach (var item in data.Data)
-            {
-                intermediary.Add(item);
-            }
-
-            collection = new ObservableRangeCollection<POISlim>(intermediary);
-            pageCounter++;
-
-            MainThread.BeginInvokeOnMainThread(() => isRefreshing = false);
-        }
-
         public void ExecuteLoadMoreExperiencesCommand()
         {
 
-            if ( ExperiencesPage <= MaxPageExperience)
+            if (ExperiencesPage <= MaxPageExperience)
             {
                 CanLoadMoreExperiences = true;
             }

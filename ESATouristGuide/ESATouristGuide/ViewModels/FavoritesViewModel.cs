@@ -11,6 +11,7 @@ using MvvmHelpers.Interfaces;
 using Sharpnado.TaskLoaderView;
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -41,15 +42,19 @@ namespace ESATouristGuide.ViewModels
 
         private async Task InitializationTask()
         {
-
+            Database = new POIRepository();
+            FavouritesResult.Clear();// = new ObservableRangeCollection<POIDatabaseItem>();
             Favourites = new ObservableRangeCollection<POIDatabaseItem>(await Database.GetFavoritesAsync());
-
+            ItemsCount = Favourites.Count;
 
             foreach (var item in Favourites)
             {
                 try
                 {
-                    FavouritesResult.Add(item.Clone<POIDatabaseItem , POI>());
+                    //if (Favourites.Where(i=>i.Id == item.Id).FirstOrDefault() is null)
+                    //{
+                        FavouritesResult.Add(item.Clone<POIDatabaseItem , POI>());
+                    //}
                 }
                 catch (Exception)
                 {
@@ -57,9 +62,22 @@ namespace ESATouristGuide.ViewModels
                     throw;
                 }
             }
+        }
 
-            await Task.Delay(1000);
-            //await GreekCitiesService.GetGreekCities();
+        int _itemsCount;
+        public int ItemsCount
+        {
+            get => _itemsCount;
+            set
+            {
+                SetAndRaise(ref _itemsCount , value);
+                RaisePropertyChanged(nameof(IsEmptyList));
+            }
+        }
+
+        public bool IsEmptyList
+        {
+            get { return ItemsCount == 0; }
         }
 
         public override void Load() { LoaderNotifier.Load(_ => InitializationTask()); }
@@ -75,10 +93,7 @@ namespace ESATouristGuide.ViewModels
             OpenDrawerCommand = new Command(OpenDrawer);
             _userLocationService = new UserLocationService();
             NavToDetailsCommand = new AsyncCommand<POI>(NavigateToDetails);
-            //ApplyFiltersChangeCommand = new AsyncCommand(ApplyFiltersChange);
         }
-
-        //public List<Category> Categories { get; set; } =/*= Models.Categories.CategoriesList;*/
 
         private bool _isDrawerOpen;
 

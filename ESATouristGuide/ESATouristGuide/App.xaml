@@ -42,11 +42,11 @@
             <Color x:Key="MenuSelected">#00347b</Color>
             <Color x:Key="MenuSelectedDark">#202020</Color>
 
-            <Color x:Key="TransparentBackground">#5f0078cb</Color>
-            <Color x:Key="TransparentBackgroundDark">#5f0493CC</Color>
+            <Color x:Key="TransparentBackground">#6B0077CC</Color>
+            <Color x:Key="TransparentBackgroundDark">#6b0493CC</Color>
 
-            <Color x:Key="PrimaryOpacityDark">#a81d1f21</Color>
-            <Color x:Key="PrimaryOpacity">#a8ffffff</Color>
+            <Color x:Key="PrimaryOpacityDark">#DF15181F</Color>
+            <Color x:Key="PrimaryOpacity">#dfffffff</Color>
 
             <Color x:Key="MenuIcon">#568add</Color>
             <Color x:Key="MenuIconDark">#8cbaff</Color>

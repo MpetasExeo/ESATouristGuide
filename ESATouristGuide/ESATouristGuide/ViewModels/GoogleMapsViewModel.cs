@@ -29,7 +29,7 @@ namespace ESATouristGuide.ViewModels
     {
         #region Properties
         public IGreekCitiesService GreekCitiesService { get; set; }
-        public IContentService ContentService { get; set; }
+        public IContentService _contentService { get; set; }
         public IWeatherService WeatherService { get; set; }
         public ICommand GetCitiesCommand { get; set; }
         public Map GoogleMap { get; set; } = new Map();
@@ -100,8 +100,6 @@ namespace ESATouristGuide.ViewModels
                 SetAndRaise(ref selectedPlace , value);
             }
         }
-
-        private readonly Temperatures selectedPlaceTemperature;
         //public Temperatures SelectedPlaceTemperature
         //{
         //    get => selectedPlaceTemperature;
@@ -152,7 +150,7 @@ namespace ESATouristGuide.ViewModels
             await Task.WhenAll(tasks).ConfigureAwait(true);
 
 
-            await Task.Delay(2000);
+            //await Task.Delay(2000);
 
             //ο χάρτης φόρτωσε
             MapLoaded = true;
@@ -238,7 +236,6 @@ namespace ESATouristGuide.ViewModels
         {
             GreekCitiesService = new GreekCitiesService();
             WeatherService = new WeatherService();
-            ContentService = new ContentService();
             Categories = Models.Categories.CategoriesList;
         }
 
@@ -335,30 +332,29 @@ namespace ESATouristGuide.ViewModels
         /// <summary>
         /// Calls the CitiesService, populates <see cref="Pins">Pins list</see> and creates a <see cref="Pin">Pin</see> for each item in the list
         /// </summary>
-        private async Task GetCitiesAsync()
+        private Task GetCitiesAsync()
         {
             //POIS = await GreekCitiesService.GetGreekCities().ConfigureAwait(false);
 
-            int[] array = {1,2,3,4,5,6,7,8,9};
+            int[] array = { 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 };
 
-            var data = ContentService.GetPagedListItem(0 , array , page: 1);
+
+            var data = _contentService.GetPagedListItem(0 , array , page: 1);
 
             var lastPage = data.TotalPages;
 
             POIsList = data.Data.ToList();
 
-            for (int i = 1; i < lastPage; i++)
+            for (var i = 1; i < lastPage; i++)
             {
-                var tempData = ContentService.GetPagedListItem(0 , array , page: i).Data.ToList();
+                var tempData = _contentService.GetPagedListItem(0 , array , page: i).Data.ToList();
 
                 foreach (var item in tempData)
-                {
                     if (item.Latitude != null && item.Longitude != null)
-                    {
                         POIsList.Add(item);
-                    }
-                }
             }
+
+
 
             foreach (var poi in POIsList)
             {
@@ -377,6 +373,7 @@ namespace ESATouristGuide.ViewModels
             }
 
             ThreadPool.QueueUserWorkItem(o => AddPinsToMap());
+            return Task.CompletedTask;
         }
 
         /// <summary>

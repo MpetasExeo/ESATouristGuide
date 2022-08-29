@@ -23,9 +23,9 @@
                                                           Light={StaticResource Background}}"
     x:DataType="vm:GoogleMapsViewModel">
 
-    <ContentView.BindingContext>
+    <!--<ContentView.BindingContext>
         <vm:GoogleMapsViewModel />
-    </ContentView.BindingContext>
+    </ContentView.BindingContext>-->
 
 
     <customViews:TaskLoaderView

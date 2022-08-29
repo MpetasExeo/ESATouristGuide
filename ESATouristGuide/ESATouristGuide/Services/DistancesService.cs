@@ -47,7 +47,7 @@ namespace ESATouristGuide.Services
             _httpClient = new HttpClient()
             {
                 /* Διαμορφώνω το request*/
-                BaseAddress = new Uri("https://maps.googleapis.com")
+                BaseAddress = new Uri(Constants.GoogleMapsBaseAddress)
             };
             var response = await _httpClient.GetAsync($"/maps/api/distancematrix/json?{parameters}")
                 .ConfigureAwait(true);
@@ -106,6 +106,7 @@ namespace ESATouristGuide.Services
             //αν δεν βρέθηκε απόσταση ==> δείξε "NA"
             distances.Distance = AppResources.TimeSpanError;
         }
+
 
         public string TimeSpanFormatting(int days , int hours , int minutes)
         {

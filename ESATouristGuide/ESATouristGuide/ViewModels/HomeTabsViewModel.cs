@@ -1,14 +1,18 @@
-﻿using ESATouristGuide.Services;
+﻿using ESATouristGuide.Interfaces;
+using ESATouristGuide.Services;
 
 using Sharpnado.TaskLoaderView;
 
 using System.Threading.Tasks;
+
+using Xamarin.Essentials;
 
 namespace ESATouristGuide.ViewModels
 {
     public class HomeTabsViewModel : BaseViewModel
     {
         private int _selectedViewModelIndex = 0;
+
 
         public HomeTabsViewModel()
         {
@@ -17,6 +21,7 @@ namespace ESATouristGuide.ViewModels
             GoogleMapsViewModel = new GoogleMapsViewModel();
             FavoritesViewModel = new FavoritesViewModel();
             MiscViewModel = new MiscViewModel();
+
         }
 
         public TaskLoaderNotifier LoaderNotifier { get; set; } = new TaskLoaderNotifier();

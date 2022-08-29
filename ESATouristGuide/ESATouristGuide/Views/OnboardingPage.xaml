@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ESATouristGuide.Views.OnboardingPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:model="clr-namespace:ESATouristGuide.Models"
+    xmlns:vm="clr-namespace:ESATouristGuide.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:OnboardingViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource Background}}" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="68" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <CarouselView
+                x:Name="onBoardingCarousel"
+                Grid.Row="0"
+                IsScrollAnimated="True"
+                IsSwipeEnabled="False"
+                Grid.ColumnSpan="3"
+                BackgroundColor="Transparent"
+                IndicatorView="IndicatorView"
+                ItemsSource="{Binding Items}"
+                Position="{Binding Position}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="model:OnboardingModel">
+                        <ContentView>
+                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="96" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="128" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Frame Padding="0" HasShadow="True" Margin="0" Grid.Row="1" WidthRequest="300" HeightRequest="300" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="150" BackgroundColor="{StaticResource DarkAccent}">
+                                    <ffimageloadingsvg:SvgCachedImage
+                                        Aspect="AspectFit"
+                                        CacheType="Memory"
+                                        WidthRequest="185.41"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding ImageUrl}"
+                                         />
+                                </Frame>
+
+                                <Label
+                                    Grid.Row="0"
+                                    FontAttributes="Bold"
+                                    FontSize="Title"
+                                    TextColor="{StaticResource Primary}"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Title}"
+                                    VerticalOptions="Center" />
+
+                                <Label
+                                    Grid.Row="2"
+                                    Margin="20,0"
+                                    TextColor="{StaticResource Accent}"
+                                    FontSize="Body"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Content}" />
+                            </Grid>
+                        </ContentView>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <IndicatorView
+                x:Name="IndicatorView"
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                IndicatorColor="{StaticResource TransparentBackground}"
+                IndicatorSize="7"
+                IndicatorsShape="Circle"
+                SelectedIndicatorColor="{StaticResource DarkAccent}"
+                VerticalOptions="Center" />
+
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                BackgroundColor="Transparent"
+                Command="{Binding SkipCommand}"
+                FontSize="Small"
+                HorizontalOptions="Center"
+                Text="{Binding SkipButtonText}"
+                TextColor="{StaticResource Accent}"
+                VerticalOptions="Center" />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
