@@ -88,7 +88,11 @@ namespace ESATouristGuide.Services
             {
                 try
                 {
-                    //Device.BeginInvokeOnMainThread(async () => await Permissions.RequestAsync<Permissions.LocationWhenInUse>().ConfigureAwait(true));
+                    var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+                    if (status != PermissionStatus.Granted)
+                    {
+                        var req = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+                    }
                     return DummyPosition;
                 }
                 catch (Exception)

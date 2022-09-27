@@ -50,12 +50,16 @@ namespace ESATouristGuide
 
 
 
-        protected override void OnStart()
+        protected async override void OnStart()
         {
             VersionTracking.Track();
             try
             {
-
+                var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+                if (status != PermissionStatus.Granted)
+                {
+                    var req = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+                }
                 OnResume();
             }
             catch (System.Exception ex)

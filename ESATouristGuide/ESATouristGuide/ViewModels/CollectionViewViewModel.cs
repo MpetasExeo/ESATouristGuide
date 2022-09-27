@@ -195,7 +195,7 @@ namespace ESATouristGuide.ViewModels
         public void ExecuteLoadMoreCommand()
         {
 
-            if (SelectedCategories.Any() && Page <= MaxPage)
+            if (SelectedCategories.Any() && (Page <= MaxPage || MaxPage==0))
             {
                 CanLoadMore = true;
             }
@@ -234,6 +234,9 @@ namespace ESATouristGuide.ViewModels
             SelectedCategories = Categories.Where(x => x.IsSelected).Select(x => x.Id).ToList();
             FilteredResults = new ObservableRangeCollection<POISlim>();
             Page = 1;
+
+            ExecuteLoadMoreCommand();
+
             return Task.FromResult(Categories);
         }
         private async Task NavigateToDetails(POISlim poi)

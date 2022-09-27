@@ -43,7 +43,7 @@ namespace ESATouristGuide.ViewModels
             set
             {
                 SetAndRaise(ref mapLoaded , value);
-                Task.Run(async () => await AfterInitializationTask());
+                
             }
         }
 
@@ -154,6 +154,7 @@ namespace ESATouristGuide.ViewModels
 
             //ο χάρτης φόρτωσε
             MapLoaded = true;
+            await AfterInitializationTask();
         }
 
         private void DefineMapStyle()
@@ -187,14 +188,12 @@ namespace ESATouristGuide.ViewModels
 
         private async Task AfterInitializationTask()
         {
-            List<Task> tasks = new List<Task>
-            {
-                GetCitiesAsync()
-            };
+            await GetCitiesAsync();
+            
 
             UICommandsInit();
 
-            await Task.WhenAll(tasks);
+            //await Task.WhenAll(tasks);
         }
 
         public override void Load()
@@ -235,6 +234,7 @@ namespace ESATouristGuide.ViewModels
         private void ServicesAndPropertiesInit()
         {
             GreekCitiesService = new GreekCitiesService();
+            _contentService = new ContentService();
             WeatherService = new WeatherService();
             Categories = Models.Categories.CategoriesList;
         }
@@ -339,7 +339,7 @@ namespace ESATouristGuide.ViewModels
             int[] array = { 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 };
 
 
-            var data = _contentService.GetPagedListItem(0 , array , page: 1);
+            var data = _contentService.GetPagedListItem(1 , page: 1 , category: array);
 
             var lastPage = data.TotalPages;
 

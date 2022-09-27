@@ -71,8 +71,9 @@ namespace ESATouristGuide.Services
                         return Newtonsoft.Json.JsonConvert.DeserializeObject<POI>(response.Content.ReadAsStringAsync().Result);
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
+                    var st = ex.Message;
                     return null;
                 }
             }

@@ -20,6 +20,6 @@ namespace ESATouristGuide.Models
         //public Category Category { get; set; }
         public Temperatures Temperatures { get; set; }
         public List<CategorySlim> Tags { get; set; }
-        public List<Uri> Images { get; set; }
+        //public List<Uri> Images { get; set; }
     }
 }

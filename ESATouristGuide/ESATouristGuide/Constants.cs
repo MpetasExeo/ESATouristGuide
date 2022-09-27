@@ -7,7 +7,7 @@ namespace ESATouristGuide
     {
         public static readonly string GoogleApiKey = "AIzaSyAbe9MnGMU3M9DP3BHmSYqkKpW8qRSNePU";
 
-        public static readonly string APIConnectionBaseAddress= "https://esa.exeo.site/";
+        public static readonly string APIConnectionBaseAddress= "https://e-guide.esa.com.gr/";
 
 
         // {AssemblyName}.Json.{FileName}.json

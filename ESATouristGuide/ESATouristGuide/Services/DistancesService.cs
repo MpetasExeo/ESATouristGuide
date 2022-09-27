@@ -20,10 +20,16 @@ namespace ESATouristGuide.Services
         public async Task<Distances> GetDistancesFromUserAsync(Location PlaceLocation , Location UserPosition)
         {
             // default values
-            Distances distances = new Distances { DrivingDuration = AppResources.TimeSpanError , Distance = AppResources.TimeSpanError , WalkingDuration = AppResources.TimeSpanError };
+            Distances distances = new Distances
+            {
+                DrivingDuration = AppResources.TimeSpanError ,
+                Distance = AppResources.TimeSpanError ,
+                WalkingDuration = AppResources.TimeSpanError
+            };
 
             // αν δεν έχει ίντερνετ || UserPosition == dummyPosition ==> return default values
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet || UserPosition == new Location(40.5000001 , 22.9500001))
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet ||
+                UserPosition == new Location(40.5000001 , 22.9500001))
             {
                 return distances;
             }
@@ -36,13 +42,14 @@ namespace ESATouristGuide.Services
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
             GoogleApiResponse result;
 
-            var parameters = string.Format("destinations={0},{1}&origins={2},{3}&mode={4}&key={5}" ,
-                                    PlaceLocation.Latitude.ToString(culture) ,
-                                    PlaceLocation.Longitude.ToString(culture) ,
-                                    UserPosition.Latitude.ToString(culture) ,
-                                    UserPosition.Longitude.ToString(culture) ,
-                                    mode ,
-                                    Constants.GoogleApiKey);
+            var parameters = string.Format(
+                "destinations={0},{1}&origins={2},{3}&mode={4}&key={5}" ,
+                PlaceLocation.Latitude.ToString(culture) ,
+                PlaceLocation.Longitude.ToString(culture) ,
+                UserPosition.Latitude.ToString(culture) ,
+                UserPosition.Longitude.ToString(culture) ,
+                mode ,
+                Constants.GoogleApiKey);
 
             _httpClient = new HttpClient()
             {
@@ -63,7 +70,8 @@ namespace ESATouristGuide.Services
             }
 
             drivingDuration = result.rows[0]
-                .elements[0].duration != null
+                .elements[0].duration !=
+                    null
                 ? TimeSpan.FromSeconds(result.rows[0].elements[0].duration.value)
                 : TimeSpan.FromSeconds(-1);
 
@@ -71,8 +79,7 @@ namespace ESATouristGuide.Services
 
             parameters = $"destinations={PlaceLocation.Latitude.ToString(culture)},{PlaceLocation.Longitude.ToString(culture)}&origins={UserPosition.Latitude.ToString(culture)},{UserPosition.Longitude.ToString(culture)}&mode={mode}&key={Constants.GoogleApiKey}";
 
-            response = await _httpClient.GetAsync($"/maps/api/distancematrix/json?{parameters}")
-                                        .ConfigureAwait(true);
+            response = await _httpClient.GetAsync($"/maps/api/distancematrix/json?{parameters}").ConfigureAwait(true);
 
             _ = response.EnsureSuccessStatusCode();
 
@@ -87,9 +94,16 @@ namespace ESATouristGuide.Services
             DurationFormatting(distances , drivingDuration , walkingDuration , dist);
 
             return distances;
-
         }
 
+
+        /// <summary>
+        /// Μορφοποιεί τα strings των αποστάσεων.<typeparamref name="distances"/> <see cref="distances">Link text</see>
+        /// </summary>
+        /// <param name="distances"></param>
+        /// <param name="driving">χρόνος με αμάξι</param>
+        /// <param name="walking">χρόνος με τα πόδια</param>
+        /// <param name="distance">μήκος συντομότερης διαδρομής</param>
         public void DurationFormatting(Distances distances , TimeSpan driving , TimeSpan walking , float distance)
         {
             // formatting durations
@@ -130,6 +144,5 @@ namespace ESATouristGuide.Services
             // αν απόσταση έχει λεπτά 
             return minutes >= 0 ? $"{minutes}{AppResources.Minutes}" : Format;
         }
-
     }
 }
